@@ -1,0 +1,64 @@
+/*头部*/
+.freego_header{
+    height: 50px;
+    width: 100%;
+}
+.freego_header > .head_logo{
+    width: 207px;
+    height: 60px;
+    background: url(../images/li/index/head_logo.jpg) no-repeat center;
+    float: left;
+    margin-left: 130px;
+}
+.freego_header > .head_nav {
+    float: left;
+}
+.freego_header > .head_nav > li{
+    font-size: 12px;
+    text-align: center;
+    float: left;
+    width: 100px;
+    height: 60px;
+}
+.freego_header > .head_nav > li > a{
+    text-decoration: none;
+    line-height: 60px;
+    font-size: 16px;
+    color: #0f0f0f;
+}
+.freego_header > .login_status{
+    width: 220px;
+    height: 60px;
+    float: right;
+    margin-right: 200px;
+}
+.freego_header > .login_status > div > a{
+    font-size: 13px;
+    color: #0f0f0f;
+    line-height: 60px;
+    margin: 0 5px;
+}
+.freego_header > .login_status > .login_out{
+    width: 100px;
+}
+.freego_header > .login_status > .login_in{
+    width: 120px;
+}
+/*轮播图CSS*/
+#freego_banner{
+    width: 100%;
+    height: 500px;
+}
+.banner_picture{
+    width:100%;
+    height:500px;
+    object-fit: cover;
+    flex: 1;
+}
+.carousel-inner>.item>a>img,.carousel-inner>.item>img,.img-responsive,.thumbnail a>img,.thumbnail>img{
+    display:block;
+    max-width:100%;
+    height:500px;
+}
+.show-title
+
