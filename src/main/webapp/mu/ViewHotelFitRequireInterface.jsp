@@ -99,8 +99,12 @@
     </form>
 
     <iframe name="my-iframe" id="baiduMap" src="/mu/baiduMapTest.jsp" frameborder="0" width="400px" height="200px" scrolling="no"></iframe>
-    <div >
+    <div class="row"><%--栅格--%>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
 
+        </div>
+        <div class="col-md-3"></div>
     </div>
 </body>
 </html>

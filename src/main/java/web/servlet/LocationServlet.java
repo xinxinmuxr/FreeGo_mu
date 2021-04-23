@@ -99,8 +99,8 @@ public class LocationServlet extends HttpServlet {
                 //酒店id 对应下面可以入住的房间
                 Map<Integer,List<RoomInfo>> MapRoomList = new HashMap<Integer, List<RoomInfo>>();
                 MapRoomList = hotelInfoImpl.queryHotelofRoomByHotelId(hotelList,ruzhuDate,likaiDate);
-                session.setAttribute("MapRoomList",MapRoomList);
-                session.setAttribute("hotelList",hotelList);
+                session.setAttribute("MapRoomList",MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
+                session.setAttribute("hotelList",hotelList);       //符合输入的酒店列表
                 request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request,response);
             }
 
