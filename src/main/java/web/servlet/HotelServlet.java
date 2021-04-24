@@ -57,3 +57,4 @@ public class HotelServlet extends HttpServlet {
         return hotel;
     }
 }
+

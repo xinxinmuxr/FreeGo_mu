@@ -20,13 +20,14 @@ public class HotelInfo {
     private float lng;              //经度
     private float lat;              //维度
     private float overallScore;     //酒店评分
-    private String openTime;          //建成时间
-    private String fitmentTime;       //翻修时间
-    private String brand;            //酒店品牌
+    private String openTime;        //建成时间
+    private String fitmentTime;     //翻修时间
+    private String brand;           //酒店品牌
     private int level;              //酒店星级
     private int hot;                //酒店热度
     private String sketch;          //酒店描述
     private Boolean flag;           //酒店状态(是否删除)
+    private String overPicture;    //封面路径
 
     public HotelInfo() {}
     public HotelInfo(int hotelId){
@@ -52,6 +53,39 @@ public class HotelInfo {
         this.hot = hot;
         this.sketch = sketch;
         this.flag = flag;
+    }
+
+    public HotelInfo(int hotelId, String hotelName, String hotelAddress, String hotelTele, String country,
+                     String province, String downtown, String county, float lng, float lat, float overallScore,
+                     String openTime, String fitmentTime, String brand, int level, int hot, String sketch, Boolean flag,
+                     String overPicture) {
+        this.hotelId = hotelId;
+        this.hotelName = hotelName;
+        this.hotelAddress = hotelAddress;
+        this.hotelTele = hotelTele;
+        this.country = country;
+        this.province = province;
+        this.downtown = downtown;
+        this.county = county;
+        this.lng = lng;
+        this.lat = lat;
+        this.overallScore = overallScore;
+        this.openTime = openTime;
+        this.fitmentTime = fitmentTime;
+        this.brand = brand;
+        this.level = level;
+        this.hot = hot;
+        this.sketch = sketch;
+        this.flag = flag;
+        this.overPicture = overPicture;
+    }
+
+    public String getOverPicture() {
+        return overPicture;
+    }
+
+    public void setOverPicture(String overPicture) {
+        this.overPicture = overPicture;
     }
 
     public int getHotelId() {
@@ -200,25 +234,26 @@ public class HotelInfo {
 
     @Override
     public String toString() {
-        return "酒店信息{" +
-                "酒店id=" + hotelId +
-                ", 酒店名称='" + hotelName + '\'' +
-                ", 酒店地址='" + hotelAddress + '\'' +
-                ", 酒店电话='" + hotelTele + '\'' +
-                ", 国家='" + country + '\'' +
-                ", 省份='" + province + '\'' +
-                ", 城市='" + downtown + '\'' +
-                ", 县/区='" + county + '\'' +
-                ", 经度=" + lng +
-                ", 维度=" + lat +
-                ", 酒店评分=" + overallScore +
-                ", 建成时间=" + openTime +
-                ", 翻修时间=" + fitmentTime +
-                ", 酒店品牌=" + brand +
-                ", 酒店星级=" + level +
-                ", 酒店热度=" + hot +
-                ", 酒店描述='" + sketch + '\'' +
-                ", 酒店状态(是否删除)=" + flag +
+        return "HotelInfo{" +
+                "hotelId=" + hotelId +
+                ", hotelName='" + hotelName + '\'' +
+                ", hotelAddress='" + hotelAddress + '\'' +
+                ", hotelTele='" + hotelTele + '\'' +
+                ", country='" + country + '\'' +
+                ", province='" + province + '\'' +
+                ", downtown='" + downtown + '\'' +
+                ", county='" + county + '\'' +
+                ", lng=" + lng +
+                ", lat=" + lat +
+                ", overallScore=" + overallScore +
+                ", openTime='" + openTime + '\'' +
+                ", fitmentTime='" + fitmentTime + '\'' +
+                ", brand='" + brand + '\'' +
+                ", level=" + level +
+                ", hot=" + hot +
+                ", sketch='" + sketch + '\'' +
+                ", flag=" + flag +
+                ", overPicture='" + overPicture + '\'' +
                 '}';
     }
 }

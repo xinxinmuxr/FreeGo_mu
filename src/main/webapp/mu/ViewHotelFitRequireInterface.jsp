@@ -1,4 +1,7 @@
-<%--
+<%@ page import="domain.HotelInfo" %>
+<%@ page import="domain.ScenicInfo" %>
+<%@ page import="domain.LocateInfo" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: hp
   Date: 2021/4/17
@@ -41,7 +44,7 @@
             margin-top: 10px;
         }
         #hotelPlay{
-
+            height: 200px;
         }
     </style>
 
@@ -53,9 +56,19 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" ></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-
+<%List<HotelInfo> hotelInfoList = (List<HotelInfo>)session.getAttribute("hotelList");
+    List<ScenicInfo> scenicInfoList = (List<ScenicInfo>)session.getAttribute("scenicList");
+    List<LocateInfo> locateInfoList = (List<LocateInfo>)session.getAttribute("locateList");
+    String yeChuan = request.getParameter("ye");
+    int ye = 1;
+    if(yeChuan == null){
+        ye = 1;
+    }else{
+        ye = Integer.parseInt(yeChuan);
+    }
+    %>
 <%--接收从ViewHotelMain传递过来的数据--%>
-<% String distination = request.getParameter("distination"); %>
+
     <form class="form-inline" id = "alignCenterOne" method="post">
         <!--出行目的地-->
         <div class="form-group" style="margin-left: 5px;">
@@ -102,9 +115,61 @@
     <div class="row"><%--栅格--%>
         <div class="col-md-3"></div>
         <div class="col-md-6">
+            <%--酒店信息展示--%>
+            <div id="hotelPlay">
+                <img src="/FreegoImg/mu/hotelPicture/overPicture/" alt="">
+            </div>
+            <%//确定分页的数量
+                int limite = 15;
+                int length = hotelInfoList.size() / 15;
+                if(hotelInfoList.size() % 15 != 0){
+                    length++;
+                }%>
 
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                        <a href="LocationServlet?methods=updateFitInterface&ye=<%=ye-1%>" aria-label="Previous">
+                            <%if(ye-1<=1){%>
+                            <span aria-hidden="false">&raquo;</span>
+                            <%}else{%>
+                            <span aria-hidden="true">&raquo;</span>
+                            <%}%>
+                        </a>
+                    </li>
+                    <%if(ye + 5 <= length){
+                        if(ye-2>=1){
+                            for(int i = ye-2;i <= ye+2;i++)
+                            {%>
+                    <li><a href="LocationServlet?methods=updateFitInterface&ye=<%=i%>" onclick=""><%=i%></a></li>
+                    <%}%>
+                    <%}else{%>
+                    <%for (int i = 1;i <= 5;i++){ %>
+                    <li><a href="LocationServlet?methods=updateFitInterface&ye=<%=i%>" onclick=""><%=i%></a></li>
+                    <%}
+                    }
+                    }
+                    else{%>
+
+                    <%for(int i = ye-2;i <= length;i++){%>
+                    <li><a href="LocationServlet?methods=updateFitInterface&ye=<%=i%>"><%=i%></a></li>
+                    <%}
+                    }%>
+                    <%--&ye=<%=i%>--%>
+                    <li>
+                        <a href="LocationServlet?methods=updateFitInterface&ye=<%=ye+1%>" aria-label="Next">
+                            <%if(ye+1>=length){%>
+                            <span aria-hidden="false">&raquo;</span>
+                            <%}else{%>
+                            <span aria-hidden="true">&raquo;</span>
+                            <%}%>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <div class="col-md-3"></div>
     </div>
+
 </body>
 </html>

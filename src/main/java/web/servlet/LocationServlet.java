@@ -44,9 +44,10 @@ public class LocationServlet extends HttpServlet {
     private String locateName;              //位置名称
     private String LongitudeAndLatitude;    //经纬度
     private String introduce;               //介绍
-    private List<HotelInfo> hotelList;      //查询酒店列表
+    private List<HotelInfo> hotelList = new ArrayList<HotelInfo>();      //查询酒店列表
     private List<ScenicInfo> scenicList = new ArrayList<ScenicInfo>();    //景点列表
-    private List<LocateInfo> locateList;    //地点列表
+    private List<LocateInfo> locateList = new ArrayList<LocateInfo>();    //地点列表
+    private Map<Integer,List<RoomInfo>> MapRoomList = new HashMap<Integer, List<RoomInfo>>();  //酒店房间
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //设置request编码格式
@@ -70,7 +71,7 @@ public class LocationServlet extends HttpServlet {
                 session.setAttribute("hotelList",hotelList);
                 session.setAttribute("scenicList",scenicList);
                 session.setAttribute("locateList",locateList);
-                request.getRequestDispatcher("/mu/SelectInputDetailInterface.jsp").forward(request,response);
+                request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request,response);
             }
             else{  //只有酒店信息
                 HttpSession session = request.getSession();
@@ -97,15 +98,29 @@ public class LocationServlet extends HttpServlet {
                 //对所有酒店对应的可用的房间进行接收
                 HotelInfoServiceImpl hotelInfoImpl = new HotelInfoServiceImpl();
                 //酒店id 对应下面可以入住的房间
-                Map<Integer,List<RoomInfo>> MapRoomList = new HashMap<Integer, List<RoomInfo>>();
                 MapRoomList = hotelInfoImpl.queryHotelofRoomByHotelId(hotelList,ruzhuDate,likaiDate);
+                int ye = 1;
                 session.setAttribute("MapRoomList",MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
                 session.setAttribute("hotelList",hotelList);       //符合输入的酒店列表
+                //第几页
                 request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request,response);
             }
-
         }
         //request.getRequestDispatcher("/test.jsp").forward(request,response);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //super.doGet(req, resp);
+        req.setCharacterEncoding("utf-8");
+        String methods = req.getParameter("methods");
+
+        //System.out.print("methods:"+methods+" ye:"+ye);
+        if(methods.equals("updateFitInterface")){  //更新ViewHotelFitRequireInterface中的数据
+            int ye = Integer.parseInt(req.getParameter("ye"));
+            req.setAttribute("ye",ye);
+            req.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(req,resp);
+        }
     }
 
     private String JudgeMethods(String userInput){
@@ -113,7 +128,6 @@ public class LocationServlet extends HttpServlet {
         locateList = queryLocation(userInput);
         /*穆正阳使用周天乐部分*/
         //scenicList = queryScenicInfoBySearch(userInput);
-
     return "";
     }
     /*用户输入查询地点*/

@@ -47,8 +47,7 @@
 <body>
     <%List<HotelInfo> hotelInfoList = (List<HotelInfo>)session.getAttribute("hotelList");
         List<ScenicInfo> scenicInfoList = (List<ScenicInfo>)session.getAttribute("scenicList");
-        List<LocateInfo> locateInfoList = (List<LocateInfo>)session.getAttribute("locateList");
-    %>
+        List<LocateInfo> locateInfoList = (List<LocateInfo>)session.getAttribute("locateList");%>
     <!--第一部分  输入框部分-->
     <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet" >
         <!--出行目的地-->
