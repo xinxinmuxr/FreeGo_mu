@@ -18,7 +18,7 @@
     <script type="text/javascript" src="../lww/js/bootstrap.min.js"></script>
     <%--导入布局js，共享header和footer--%>
     <script type="text/javascript" src="../lww/js/include.js"></script>
-    <script></script>
+    <script ></script>
 
     <%--头部--%>
     <div id="header" xmlns="http://www.w3.org/1999/html">

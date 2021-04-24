@@ -27,38 +27,14 @@ public class HotelInfo {
     private int hot;                //酒店热度
     private String sketch;          //酒店描述
     private Boolean flag;           //酒店状态(是否删除)
-    private String overPicture;    //封面路径
+    private String picturePath;    //封面路径
 
     public HotelInfo() {}
-    public HotelInfo(int hotelId){
-        this.hotelId = hotelId;
-    }
-    public HotelInfo(String hotelName, String hotelAddress, String hotelTele, String country, String province,
-                     String downtown, String county, float lng, float lat, float overallScore, String openTime, String fitmentTime,
-                     String brand, int level, int hot, String sketch, Boolean flag) {
-        this.hotelName = hotelName;
-        this.hotelAddress = hotelAddress;
-        this.hotelTele = hotelTele;
-        this.country = country;
-        this.province = province;
-        this.downtown = downtown;
-        this.county = county;
-        this.lng = lng;
-        this.lat = lat;
-        this.overallScore = overallScore;
-        this.openTime = openTime;
-        this.fitmentTime = fitmentTime;
-        this.brand = brand;
-        this.level = level;
-        this.hot = hot;
-        this.sketch = sketch;
-        this.flag = flag;
-    }
 
     public HotelInfo(int hotelId, String hotelName, String hotelAddress, String hotelTele, String country,
                      String province, String downtown, String county, float lng, float lat, float overallScore,
                      String openTime, String fitmentTime, String brand, int level, int hot, String sketch, Boolean flag,
-                     String overPicture) {
+                     String picturePath) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
@@ -77,15 +53,15 @@ public class HotelInfo {
         this.hot = hot;
         this.sketch = sketch;
         this.flag = flag;
-        this.overPicture = overPicture;
+        this.picturePath = picturePath;
     }
 
-    public String getOverPicture() {
-        return overPicture;
+    public String getPicturePath() {
+        return picturePath;
     }
 
-    public void setOverPicture(String overPicture) {
-        this.overPicture = overPicture;
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 
     public int getHotelId() {
@@ -253,7 +229,7 @@ public class HotelInfo {
                 ", hot=" + hot +
                 ", sketch='" + sketch + '\'' +
                 ", flag=" + flag +
-                ", overPicture='" + overPicture + '\'' +
+                ", overPicture='" + picturePath + '\'' +
                 '}';
     }
 }
