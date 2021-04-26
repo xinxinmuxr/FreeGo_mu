@@ -67,6 +67,7 @@
     </div>
     <script type="application/javascript" src="layui/layui.js"></script>
     <!--第一部分  输入框部分-->
+    <a href="#"></a>
     <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation" >
         <!--出行目的地-->
         <div class="form-group" style="margin-left: 5px;">

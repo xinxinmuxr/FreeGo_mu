@@ -28,6 +28,10 @@
     <script src="../lww/js/getParameter.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/mu/layui/css/layui.css">
     <script type="application/javascript" src="${pageContext.request.contextPath}/mu/layui/layui.js"></script>
+
+    <link href="${pageContext.request.contextPath}/bootstrap-select-1.12.4/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+
+    <script src="/bootstrap-select-1.12.4/dist/js/bootstrap-select.min.js"></script>
     <style>
         body{text-align:center}
         /*最上面三个输入框*/
@@ -177,24 +181,41 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div style="float: left;position: absolute;margin-top: 5px;width: 400px;">
-                        <div style="position: absolute;margin-top: 2px"><h6>区域:</h6></div>
+                        <div style="position: absolute;margin-top: 2px"><h5>区域:</h5></div>
                         <form class="form-inline" style="position: relative;float:left;margin-left: 45px;">
-                            <div class="form-group">
-                                <%if(county == null || county.equals("suoyou")){%>
+                            <%if(county == null || county.equals("suoyou")){%>
+                            <div class="form-group" style="margin-left: 5px;">
                                 <a class="layui-font-orange" href="/HotelServlet?methods=Class&county=suoyou&ye=1">
-                                    <h6>全部</h6></a>
-                                <%}else{%>
-                                <a href="/HotelServlet?methods=Class&county=suoyou&ye=1">
-                                    <h6>全部</h6></a>
-                                <%}%>
-                                <%for (int i = 0;i < countyList.size();i++){%>
-                                <a href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
-                                    <h6><%=countyList.get(i)%>&nbsp;</h6>
-                                </a>
-                                <%if(i % 5 == 0 && i != 0){%>
-                                <br>
-                                <%}}%>
+                                    <h5>全部</h5></a>
                             </div>
+                            <%for (int i = 0;i < countyList.size();i++){%>
+                            <div class="form-group" style="margin-left: 5px;">
+                                <a href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
+                                    <h5><%=countyList.get(i)%></h5>
+                                </a>
+                            </div>
+                            <%}%>
+                            <%}else{%>
+                            <div class="form-group" style="margin-left: 5px;">
+                                <a href="/HotelServlet?methods=Class&county=suoyou&ye=1">
+                                <h5>全部</h5></a>
+                            </div>
+                            <%for (int i = 0;i < countyList.size();i++){
+                                if(county.equals(countyList.get(i))){%>
+                            <div class="form-group" style="margin-left: 5px;">
+                                <a class="layui-font-orange" href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
+                                    <h5><%=countyList.get(i)%></h5>
+                                </a>
+                            </div>
+                            <%}else{%>
+                            <div class="form-group" style="margin-left: 5px;">
+                                <a href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
+                                    <h5><%=countyList.get(i)%></h5>
+                                </a>
+                            </div>
+                            <%}}}%>
+
+
                         </form>
                     </div>
                     <div style="position: relative;margin-left: 420px;">
