@@ -59,7 +59,7 @@
     width: 20px;
     height: 20px;
     background-size: 20px;
-    background-image: url(../../images/li/index/check_box_uncheck.jpeg);
+    background-image: url(../../../../../../../FreeGo-master/src/main/webapp/images/li/index/check_box_uncheck.jpeg);
 }
 .index-search-tab > .clearfix > .tab-select > .tab-text{
     font-size: 17px;
@@ -98,7 +98,7 @@
 .index-search-button > a{
     display: block;
     height: 46px;
-    background-image: url(../../images/li/index/icon_search.jpeg);
+    background-image: url(../../../../../../../FreeGo-master/src/main/webapp/images/li/index/icon_search.jpeg);
     border-radius: 5px;
 }
 /*webkit内核*/

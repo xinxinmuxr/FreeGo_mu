@@ -10,42 +10,26 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>酒店订购</title>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
-    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
-    <!--[if lt IE 9]>
+    <%--<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-    <![endif]-->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>--%>
 
+    <%--导入CSS--%>
+    <%--<link rel="stylesheet" type="text/css" href="../lww/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../lww/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../lww/css/index.css">
+    &lt;%&ndash;导入jQuery&ndash;%&gt;
+    <script src="../lww/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../lww/js/bootstrap.min.js"></script>
+    &lt;%&ndash;导入布局js&ndash;%&gt;
+    <script src="../lww/js/getParameter.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css">--%>
 
-
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <%--导入jQuery--%>
-    <script src="js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <style>
-        body{padding: 20px;}
-        .demo-input{padding-left: 10px; height: 38px; min-width: 262px; line-height: 38px; border: 1px solid #e6e6e6;  background-color: #fff;  border-radius: 2px;}
-        .demo-footer{padding: 50px 0; color: #999; font-size: 14px;}
-        .demo-footer a{padding: 0 5px; color: #01AAED;}
-    </style>
-    <script>
-
-    </script>
     <style>
         body{text-align:center}
         /*最上面三个输入框*/
@@ -61,49 +45,37 @@
         }
     </style>
 
-    <script>
-        $(document).ready(function() {
-            $("#calendar").bootstrapDatepickr();
-        });
-    </script>
 </head>
 <body>
     <%--<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>--%>
-    <div id="lwwHead">
-        <div id="header">
-            <%--导入布局js--%>
-            <script src="js/getParameter.js"></script>
-            <div class="freego_header clearfix" id="head_nav_warper">
-                <div class="head_logo"><a class="freego_logo" title="FreeGo" href="http://localhost:8080/index.jsp"></a></div>
-                <ul class="head_nav" id="_j_head_nav" role="tablist">
-                    <li id="head_nav_index_li" role="presentation"><a href="" id="head_nav_index_a">首页</a></li>
-                    <li id="head_nav_scenic_li" role="presentation"><a href="" id="head_nav_scenic_a" title="景点">景点</a></li>
-                    <li id="head_nav_gonglve_li" role="presentation"><a href="" id="head_nav_gonglve_a" title="旅游攻略">旅游攻略</a></li>
-                    <li id="head_nav_hotel_li" role="presentation"><a href="" id="head_nav_hotel_a" title="酒店">订酒店</a></li>
-                </ul>
-
-                <div class="login_status">
-                    <!-- 未登录状态  -->
-                    <div id="login_out" class="login_out">
-                        <a href="login.jsp">登录</a>
-                        <a href="register.jsp">注册</a>
-                    </div>
-                    <!-- 登录状态  -->
-                    <div id="login_in" class="login_in">
-                        <span id="span_username"></span>
-                        <a href="javascript:location.href='user/exit';">退出</a>
-                        <a id="cancelAccount">注销账号</a>
-                    </div>
+    <div id="header">
+        <div class="freego_header clearfix" id="head_nav_warper">
+            <div class="head_logo"><a class="freego_logo" title="FreeGo" href="http://localhost:8080/index.jsp"></a></div>
+            <ul class="head_nav" id="_j_head_nav" role="tablist">
+                <li id="head_nav_index_li" role="presentation"><a href="" id="head_nav_index_a">首页</a></li>
+                <li id="head_nav_scenic_li" role="presentation"><a href="" id="head_nav_scenic_a" title="景点">景点</a></li>
+                <li id="head_nav_gonglve_li" role="presentation"><a href="" id="head_nav_gonglve_a" title="旅游攻略">旅游攻略</a></li>
+                <li id="head_nav_hotel_li" role="presentation"><a href="" id="head_nav_hotel_a" title="酒店">订酒店</a></li>
+            </ul>
+            <div class="login_status">
+                <!-- 未登录状态  -->
+                <div id="login_out" class="login_out">
+                    <a href="../lww/login.jsp">登录</a>
+                    <a href="../lww/register.jsp">注册</a>
                 </div>
             </div>
         </div>
     </div>
-    <!--居中div-->
-    <label  style="font-size:30px;" class = "alignCenter" id="headline">订酒店</label>
-
+    <!-- Bootstrap -->
+    <%--<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>--%>
+    <script type="application/javascript" src="layui/layui.js"></script>
     <!--第一部分  输入框部分-->
     <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet" >
         <!--出行目的地-->
@@ -111,22 +83,18 @@
             <input id="distination" name="mudidi"  type="text" class="form-control"  placeholder="出行目的地">
         </div>
         <!--入住日期-->
-        <input type="text" name="ruzhu" class="demo-input" placeholder="请选择日期" id="inTime" style=" border-radius: 4px;height: 35px;">
-        <script src="laydate/laydate.js"></script> <!-- 改成你的路径 -->
+        <input type="text" name="ruzhu" class="layui-input" placeholder="请选择日期" id="inTime" style=" border-radius: 4px;height: 35px;">
+        <%--<script src="laydate/laydate.js"></script>--%> <!-- 改成你的路径 -->
         <script>
-            lay('#version').html('-v'+ laydate.v);
-
             //执行一个laydate实例
             laydate.render({
                 elem: '#inTime' //指定元素
             });
         </script>
         <!--离店日期-->
-        <input type="text" name="likai" class="demo-input" placeholder="请选择日期" id="outTime" style="border-radius: 4px;height: 35px">
-        <script src="laydate/laydate.js"></script> <!-- 改成你的路径 -->
+        <input type="text" name="likai" class="layui-input" placeholder="请选择日期" id="outTime" style="border-radius: 4px;height: 35px">
+        <%--<script src="laydate/laydate.js"></script>--%> <!-- 改成你的路径 -->
         <script>
-            lay('#version').html('-v'+ laydate.v);
-            //执行一个laydate实例
             laydate.render({
                 elem: '#outTime' //指定元素
             });

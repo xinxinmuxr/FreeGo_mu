@@ -8,20 +8,16 @@ package domain;
 public class LocateInfo {
     private int locateId;                   //位置id
     private String locateName;              //位置名称
-    private String LongitudeAndLatitude;    //经纬度
+    private float lng;                      //经度
+    private float lag;                      //纬度
     private String introduce;               //介绍
-
     public LocateInfo() {
-
     }
-    /**
-     * 穆正阳使用
-     * @param locateName
-     * @param longitudeAndLatitude
-     */
-    public LocateInfo(int locateId,String locateName, String longitudeAndLatitude,String introduce) {
+    public LocateInfo(int locateId, String locateName, float lng, float lag, String introduce) {
+        this.locateId = locateId;
         this.locateName = locateName;
-        this.LongitudeAndLatitude = longitudeAndLatitude;
+        this.lng = lng;
+        this.lag = lag;
         this.introduce = introduce;
     }
 
@@ -41,16 +37,24 @@ public class LocateInfo {
         this.locateName = locateName;
     }
 
-    public String getLongitudeAndLatitude() {
-        return LongitudeAndLatitude;
+    public float getLng() {
+        return lng;
     }
 
-    public void setLongitudeAndLatitude(String longitudeAndLatitude) {
-        LongitudeAndLatitude = longitudeAndLatitude;
+    public void setLng(float lng) {
+        this.lng = lng;
+    }
+
+    public float getLag() {
+        return lag;
+    }
+
+    public void setLag(float lag) {
+        this.lag = lag;
     }
 
     public String getIntroduce() {
-        return this.introduce;
+        return introduce;
     }
 
     public void setIntroduce(String introduce) {
@@ -62,7 +66,9 @@ public class LocateInfo {
         return "LocateInfo{" +
                 "locateId=" + locateId +
                 ", locateName='" + locateName + '\'' +
-                ", LongitudeAndLatitude='" + LongitudeAndLatitude + '\'' +
+                ", lng=" + lng +
+                ", lag=" + lag +
+                ", introduce='" + introduce + '\'' +
                 '}';
     }
 }

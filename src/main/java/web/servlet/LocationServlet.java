@@ -63,14 +63,15 @@ public class LocationServlet extends HttpServlet {
             //获取session
             HotelServlet hotelServlet = new HotelServlet();
             hotelList = hotelServlet.queryHotel(mudidi);
-            scenicList = hotelServlet.queryScenicInfoBySearchM(mudidi);
+            //scenicList = hotelServlet.queryScenicInfoBySearchM(mudidi);
 
-            /*待更新因为经典信息并没有获取*/
+            /*待更新因为景点信息并没有获取*/
             if(locateList.size() != 0 || scenicList.size() != 0){ //还有景点或者酒店重名
                 HttpSession session = request.getSession();
                 session.setAttribute("hotelList",hotelList);
                 session.setAttribute("scenicList",scenicList);
                 session.setAttribute("locateList",locateList);
+                System.out.println("既有地点又有景点");
                 request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request,response);
             }
             else{  //只有酒店信息

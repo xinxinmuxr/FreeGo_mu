@@ -1,7 +1,7 @@
 package domain;
 
 import java.time.Year;
-import java.util.Date;
+import java.util.*;
 
 /**
  * @Author: 李旺旺
@@ -231,5 +231,25 @@ public class HotelInfo {
                 ", flag=" + flag +
                 ", overPicture='" + picturePath + '\'' +
                 '}';
+    }
+
+
+    public static List<String> queryCountyList(List<HotelInfo> hotelList) {
+        List<String> countyList = new ArrayList<String>();
+        if(hotelList.size() != 0){
+            if(hotelList.size() == 1){
+                 countyList.add(hotelList.get(0).getCounty());
+                 return countyList;
+            }else{
+                for(int i = 0;i < hotelList.size();i++){
+                    if(!countyList.contains(hotelList.get(i).getCounty())){
+                        countyList.add(hotelList.get(i).getCounty());
+                    }
+                }
+                return countyList;
+            }
+        }else{
+            return countyList;
+        }
     }
 }
