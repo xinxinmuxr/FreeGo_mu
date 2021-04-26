@@ -15,20 +15,20 @@
     <title>酒店订购</title>
 
     <!-- Bootstrap -->
-    <%--<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>--%>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 
     <%--导入CSS--%>
-    <%--<link rel="stylesheet" type="text/css" href="../lww/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../lww/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../lww/css/common.css">
     <link rel="stylesheet" type="text/css" href="../lww/css/index.css">
-    &lt;%&ndash;导入jQuery&ndash;%&gt;
+
     <script src="../lww/js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="../lww/js/bootstrap.min.js"></script>
-    &lt;%&ndash;导入布局js&ndash;%&gt;
+
     <script src="../lww/js/getParameter.js"></script>
-    <link rel="stylesheet" href="layui/css/layui.css">--%>
+    <link rel="stylesheet" href="layui/css/layui.css">
 
     <style>
         body{text-align:center}
@@ -47,10 +47,6 @@
 
 </head>
 <body>
-    <%--<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
-    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>--%>
     <div id="header">
         <div class="freego_header clearfix" id="head_nav_warper">
             <div class="head_logo"><a class="freego_logo" title="FreeGo" href="http://localhost:8080/index.jsp"></a></div>
@@ -69,34 +65,37 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap -->
-    <%--<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" ></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>--%>
     <script type="application/javascript" src="layui/layui.js"></script>
     <!--第一部分  输入框部分-->
-    <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet" >
+    <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation" >
         <!--出行目的地-->
         <div class="form-group" style="margin-left: 5px;">
             <input id="distination" name="mudidi"  type="text" class="form-control"  placeholder="出行目的地">
         </div>
         <!--入住日期-->
-        <input type="text" name="ruzhu" class="layui-input" placeholder="请选择日期" id="inTime" style=" border-radius: 4px;height: 35px;">
-        <%--<script src="laydate/laydate.js"></script>--%> <!-- 改成你的路径 -->
+        <div class="form-group" style="margin-left: 5px;">
+            <input type="text" name="ruzhu" class="layui-input" placeholder="请选择日期" id="inTime" style=" border-radius: 4px;height: 35px;">
+        </div>
         <script>
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#inTime' //指定元素
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#inTime' //指定元素
+                });
             });
         </script>
         <!--离店日期-->
-        <input type="text" name="likai" class="layui-input" placeholder="请选择日期" id="outTime" style="border-radius: 4px;height: 35px">
-        <%--<script src="laydate/laydate.js"></script>--%> <!-- 改成你的路径 -->
+        <div class="form-group" style="margin-left: 5px;">
+            <input type="text" name="likai" class="layui-input" placeholder="请选择日期" id="outTime" style="border-radius: 4px;height: 35px">
+        </div>
         <script>
-            laydate.render({
-                elem: '#outTime' //指定元素
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#outTime' //指定元素
+                });
             });
         </script>
         <!--人数-->
@@ -112,7 +111,7 @@
                 <option>5</option>
             </select>
         </div>
-        <input type="hidden" id="methods" name="methods" value="queryLocation">
+        <%--<input type="hidden" id="methods" name="methods" value="queryLocation">--%>
         <input type="submit" class="btn btn-warning" value="查询">
     </form>
 

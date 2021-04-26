@@ -56,7 +56,6 @@
     <input type="hidden" id="methods" name="methods" value="queryLocation">
     <input type="submit" class="btn btn-warning" value="查询">
     <input type="text" placeholder="">
-    ">
 
 </form>
 </body>

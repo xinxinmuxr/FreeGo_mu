@@ -15,6 +15,7 @@ import service.impl.HotelInfoServiceImpl;
 import service.impl.ScenicInfoServiceImpl;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ import java.util.List;
  * date: 2021/4/20 14:52<br/>
  * @author hp<br />
  */
+@WebServlet("/HotelServlet")
 public class HotelServlet extends HttpServlet {
     private String methods;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,10 +40,21 @@ public class HotelServlet extends HttpServlet {
         if(methods.equals("queryLocation")){
             HttpSession hs = request.getSession();
             List<LocateInfo> locateList= (List<LocateInfo>) hs.getAttribute("locateList");
-            System.out.println("hotelServlet："+locateList.get(0).toString());
+            //System.out.println("hotelServlet："+locateList.get(0).toString());
         }
     }
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        methods = req.getParameter("methods");
+        if(methods.equals("Class")){ //酒店分地区
+            System.out.println("跳转成功");
+            String county = req.getParameter("county");
+            String ye = req.getParameter("ye");
+            req.setAttribute("county",county);
+            req.setAttribute("ye",ye);
+            req.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(req,resp);
+        }
+    }
     /*用户输入查询景点*/
     List<ScenicInfo> queryScenicInfoBySearchM(String userInput){
         ScenicInfoServiceImpl Impl = new ScenicInfoServiceImpl();
