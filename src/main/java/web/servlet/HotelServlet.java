@@ -36,7 +36,7 @@ public class HotelServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         methods = request.getParameter("methods");
 
-        /*从 查询酒店 过来的*/
+        /*从查询酒店 过来的*/
         if(methods.equals("queryLocation")){
             HttpSession hs = request.getSession();
             List<LocateInfo> locateList= (List<LocateInfo>) hs.getAttribute("locateList");
@@ -52,6 +52,11 @@ public class HotelServlet extends HttpServlet {
             req.setAttribute("county",county);
             req.setAttribute("ye",ye);
             req.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(req,resp);
+        }else if(methods.equals("toHotel")){
+            String userId = req.getParameter("userId");
+            HttpSession session = req.getSession();
+            session.setAttribute("userId",userId);
+            req.getRequestDispatcher("/mu/ViewHotelMainInterface.jsp").forward(req,resp);
         }
     }
     /*用户输入查询景点*/

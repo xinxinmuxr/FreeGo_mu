@@ -13,20 +13,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>酒店订购</title>
-
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-
     <%--导入CSS--%>
     <link rel="stylesheet" type="text/css" href="../lww/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../lww/css/common.css">
     <link rel="stylesheet" type="text/css" href="../lww/css/index.css">
-
     <script src="../lww/js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="../lww/js/bootstrap.min.js"></script>
-
     <script src="../lww/js/getParameter.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css">
 
@@ -46,6 +42,8 @@
     </style>
 </head>
 <body>
+
+    <%String userId = (String) session.getAttribute("userId");%>
     <div id="header">
         <div class="freego_header clearfix" id="head_nav_warper">
             <div class="head_logo"><a class="freego_logo" title="FreeGo" href="http://localhost:8080/index.jsp"></a></div>
@@ -66,8 +64,7 @@
     </div>
     <script type="application/javascript" src="layui/layui.js"></script>
     <!--第一部分  输入框部分-->
-    <a href="#"></a>
-    <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation" >
+    <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation&userId=<%=userId%>" >
         <!--出行目的地-->
         <div class="form-group" style="margin-left: 5px;">
             <input id="distination" name="mudidi"  type="text" class="form-control"  placeholder="出行目的地">

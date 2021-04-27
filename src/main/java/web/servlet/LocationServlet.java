@@ -53,17 +53,17 @@ public class LocationServlet extends HttpServlet {
 
         if(methods.equals("queryLocation")) {
             /*ViewHotelMainInterface传过来的数据*/
+            String userId = request.getParameter("userId");
             String mudidi = request.getParameter("mudidi");
             String ruzhu = request.getParameter("ruzhu");
             String likai = request.getParameter("likai");
+            //System.out.println("userId:"+userId);
             locateList = queryLocation(mudidi);//查询地点
             HotelServlet hotelServlet = new HotelServlet();
             hotelList = hotelServlet.queryHotel(mudidi);
-            System.out.println("0");
             /*待更新因为景点信息并没有获取*/
             if (ruzhu.equals("") || likai.equals("")) {
                 //都为空 把所有房间都找出来
-                System.out.println("成功1");
                 HttpSession session = request.getSession();
                 //获取其他信息
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
@@ -71,6 +71,7 @@ public class LocationServlet extends HttpServlet {
                 //System.out.println("1");
                 MapRoomList = hotelInfoImpl.queryHotelofRoomByHotelId(hotelList);
                 //System.out.println("2");
+                session.setAttribute("userId", userId);
                 session.setAttribute("hotelList", hotelList);
                 session.setAttribute("locateList", locateList);
                 session.setAttribute("MapRoomList", MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
@@ -103,6 +104,7 @@ public class LocationServlet extends HttpServlet {
                 System.out.println(hotelList.get(0).toString());
                 //System.out.println("MapList:" + MapRoomList.keySet());
                 int ye = 1;
+                session.setAttribute("userId", userId);
                 session.setAttribute("MapRoomList", MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
                 session.setAttribute("hotelList", hotelList);       //符合输入的酒店列表
                 session.setAttribute("locateList",locateList);
@@ -110,7 +112,6 @@ public class LocationServlet extends HttpServlet {
                 request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request, response);
             }
         }
-
     }
 
     @Override

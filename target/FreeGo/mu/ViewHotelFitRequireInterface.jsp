@@ -296,7 +296,7 @@
                 <%}%>
                 </div>
             </div>
-            <hr class="layui-border-black">
+            <hr class="layui-border-black"style="width: 950px;">
             <%}}else if(length != 1 && ye == length){
                 for (int i = 0;i < hotelInfoListClass.size()-(ye-1)*limite;i++){%>
                 <div style="margin-top: 20px;height: 250px;width: 1000px;">
@@ -326,7 +326,7 @@
                         <%}%>
                     </div>
                 </div>
-                <hr class="layui-border-black">
+                <hr class="layui-border-black" style="width: 950px;">
             <%}}else if(length == 1){
                 for (int i = 0;i < hotelInfoListClass.size();i++){
             %>
@@ -353,7 +353,7 @@
                         <div style="float: left;position: relative;margin-left: 60px;margin-top: 4px">
                             <div class="layui-font-orange layui-font-18"><%=roomList.get(k).getRoomPrice()%></div></div>
                     </div>
-                    <hr style="width:150px;">
+                    <hr style="width:150px;" style="width: 950px;">
                     <%}%>
                 </div>
             </div>
