@@ -55,32 +55,37 @@ public class LocationServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         String methods = request.getParameter("methods");
 
-        if(methods.equals("queryLocation")){
+        if(methods.equals("queryLocation")) {
             /*ViewHotelMainInterface传过来的数据*/
             String mudidi = request.getParameter("mudidi");
-
+            String ruzhu = request.getParameter("ruzhu");
+            String likai = request.getParameter("likai");
             locateList = queryLocation(mudidi);//查询地点
-            //获取session
             HotelServlet hotelServlet = new HotelServlet();
             hotelList = hotelServlet.queryHotel(mudidi);
-            //scenicList = hotelServlet.queryScenicInfoBySearchM(mudidi);
-
+            System.out.println("0");
             /*待更新因为景点信息并没有获取*/
-            if(locateList.size() != 0 || scenicList.size() != 0){ //还有景点或者酒店重名
+            if (ruzhu == null || likai == null) {
+                //都为空 把所有房间都找出来
                 HttpSession session = request.getSession();
-                session.setAttribute("hotelList",hotelList);
-                session.setAttribute("scenicList",scenicList);
-                session.setAttribute("locateList",locateList);
+                //获取其他信息
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+                HotelInfoServiceImpl hotelInfoImpl = new HotelInfoServiceImpl();
+                System.out.println("1");
+                MapRoomList = hotelInfoImpl.queryHotelofRoomByHotelId(hotelList);
+                System.out.println("2");
+                session.setAttribute("hotelList", hotelList);
+                session.setAttribute("locateList", locateList);
+                session.setAttribute("MapRoomList", MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
                 System.out.println("既有地点又有景点");
-                request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request,response);
-            }
-            else{  //只有酒店信息
+                request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request, response);
+
+            }else if (ruzhu != null && likai != null) {  //离开 入住都有
                 HttpSession session = request.getSession();
                 //已知道和用户输入的相同的酒店列表
                 //酒店已经存在了hotelList
                 //获取其他信息
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-                String ruzhu = request.getParameter("ruzhu");
                 Date likaiDate = null;
                 Date ruzhuDate = null;
                 try {
@@ -88,8 +93,6 @@ public class LocationServlet extends HttpServlet {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                String likai = request.getParameter("likai");
-
                 try {
                     likaiDate = (Date) formatter.parse(likai);
                 } catch (ParseException e) {
@@ -99,13 +102,15 @@ public class LocationServlet extends HttpServlet {
                 //对所有酒店对应的可用的房间进行接收
                 HotelInfoServiceImpl hotelInfoImpl = new HotelInfoServiceImpl();
                 //酒店id 对应下面可以入住的房间
-                MapRoomList = hotelInfoImpl.queryHotelofRoomByHotelId(hotelList,ruzhuDate,likaiDate);
+                MapRoomList = hotelInfoImpl.queryHotelofRoomByHotelId(hotelList, ruzhuDate, likaiDate);
                 System.out.println(hotelList.get(0).toString());
+                //System.out.println("MapList:" + MapRoomList.keySet());
                 int ye = 1;
-                session.setAttribute("MapRoomList",MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
-                session.setAttribute("hotelList",hotelList);       //符合输入的酒店列表
+                session.setAttribute("MapRoomList", MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
+                session.setAttribute("hotelList", hotelList);       //符合输入的酒店列表
+                session.setAttribute("locateList",locateList);
                 //第几页
-                request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request,response);
+                request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request, response);
             }
         }
         //request.getRequestDispatcher("/test.jsp").forward(request,response);
@@ -142,3 +147,5 @@ public class LocationServlet extends HttpServlet {
     }
 
 }
+
+

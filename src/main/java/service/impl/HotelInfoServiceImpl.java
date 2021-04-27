@@ -25,4 +25,9 @@ public class HotelInfoServiceImpl implements HotelInfoService {
         HotelInfoDaoImpl impl = new HotelInfoDaoImpl();
         return impl.queryHotelofRoomByHotelId(hotelList,ruzhu,likai);
     }
+    public Map<Integer,List<RoomInfo>> queryHotelofRoomByHotelId(List<HotelInfo> hotelList){
+        HotelInfoDaoImpl impl = new HotelInfoDaoImpl();
+        return impl.queryHotelofRoomByHotelId(hotelList);
+    }
+
 }

@@ -2,7 +2,10 @@
 <%@ page import="domain.ScenicInfo" %>
 <%@ page import="domain.LocateInfo" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="domain.RoomInfo" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %><%--
   Created by IntelliJ IDEA.
   User: hp
   Date: 2021/4/17
@@ -83,7 +86,7 @@
 
     <%--layui--%>
     <!--第一部分  输入框部分-->
-    <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet" >
+    <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation" >
         <!--出行目的地-->
         <div class="form-group" style="margin-left: 5px;">
             <input id="distinati" name="mudidi"  type="text" class="form-control"  placeholder="出行目的地">
@@ -132,10 +135,14 @@
     </form>
 
     <%--接收从servlet中的数据--%>
-    <%List<HotelInfo> hotelInfoList = (List<HotelInfo>)session.getAttribute("hotelList");
+    <%
+    List<HotelInfo> hotelInfoList = (List<HotelInfo>)session.getAttribute("hotelList");
     List<ScenicInfo> scenicInfoList = (List<ScenicInfo>)session.getAttribute("scenicList");
     List<LocateInfo> locateInfoList = (List<LocateInfo>)session.getAttribute("locateList");
-    List<HotelInfo> hotelInfoListClass = new ArrayList<HotelInfo>();  //根据用户的点击确定的区
+    List<HotelInfo> hotelInfoListClass = new ArrayList<HotelInfo>();  //根据用户的点击确定的
+    Map<Integer,List<RoomInfo>> MapRoomList = (Map<Integer,List<RoomInfo>>)session.getAttribute("MapRoomList");
+    List<RoomInfo> roomList = new ArrayList<RoomInfo>();
+    //System.out.println("keySet:"+MapRoomList.keySet());
     String yeChuan = request.getParameter("ye");
     String county = request.getParameter("county");
     System.out.println("county:"+county);
@@ -171,7 +178,7 @@
         if(hotelInfoListClass.size() % 15 != 0){
             length++;
         }
-        System.out.println("总页数"+length);
+        //System.out.println("总页数"+length);
     %>
     <%--地图模块    展开--%>
     <%if(locateInfoList.size() == 1){%>
@@ -181,46 +188,58 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div style="float: left;position: absolute;margin-top: 5px;width: 400px;">
-                        <div style="position: absolute;margin-top: 2px"><h5>区域:</h5></div>
-                        <form class="form-inline" style="position: relative;float:left;margin-left: 45px;">
-                            <%if(county == null || county.equals("suoyou")){%>
-                            <div class="form-group" style="margin-left: 5px;">
-                                <a class="layui-font-orange" href="/HotelServlet?methods=Class&county=suoyou&ye=1">
+                        <dl>
+                            <div style="position: absolute;margin-top: 2px"><h5>区域:</h5></div>
+                            <form class="form-inline" style="position: relative;float:left;margin-left: 45px;">
+                                <%if(county == null || county.equals("suoyou")){%>
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <a class="layui-font-orange" href="/HotelServlet?methods=Class&county=suoyou&ye=1">
+                                        <h5>全部</h5></a>
+                                </div>
+                                <%for (int i = 0;i < countyList.size();i++){%>
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <a href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
+                                        <h5><%=countyList.get(i)%></h5>
+                                    </a>
+                                </div>
+
+                                <%}%>
+                                <%}else{%>
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <a href="/HotelServlet?methods=Class&county=suoyou&ye=1">
                                     <h5>全部</h5></a>
+                                </div>
+                                <%for (int i = 0;i < countyList.size();i++){
+                                    if(county.equals(countyList.get(i))){%>
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <a class="layui-font-orange" href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
+                                        <h5><%=countyList.get(i)%></h5>
+                                    </a>
+                                </div>
+                                <%}else{%>
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <a href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
+                                        <h5><%=countyList.get(i)%></h5>
+                                    </a>
+                                </div>
+                                <%}}}%>
+                                </form>
+                        </dl>
+                        <dl>
+                            <%--地方简介--%>
+                            <div style="float: left;position: relative;margin-top: 40px;width: 400px;">
+                                <div style="position: absolute;margin-top: 2px"><h5>简介:</h5></div>
+                                <div style="position: relative;float:left;margin-left: 45px;">
+                                    <h5><%=locateInfoList.get(0).getIntroduce()%></h5>
+                                </div>
                             </div>
-                            <%for (int i = 0;i < countyList.size();i++){%>
-                            <div class="form-group" style="margin-left: 5px;">
-                                <a href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
-                                    <h5><%=countyList.get(i)%></h5>
-                                </a>
-                            </div>
-                            <%}%>
-                            <%}else{%>
-                            <div class="form-group" style="margin-left: 5px;">
-                                <a href="/HotelServlet?methods=Class&county=suoyou&ye=1">
-                                <h5>全部</h5></a>
-                            </div>
-                            <%for (int i = 0;i < countyList.size();i++){
-                                if(county.equals(countyList.get(i))){%>
-                            <div class="form-group" style="margin-left: 5px;">
-                                <a class="layui-font-orange" href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
-                                    <h5><%=countyList.get(i)%></h5>
-                                </a>
-                            </div>
-                            <%}else{%>
-                            <div class="form-group" style="margin-left: 5px;">
-                                <a href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
-                                    <h5><%=countyList.get(i)%></h5>
-                                </a>
-                            </div>
-                            <%}}}%>
-
-
-                        </form>
+                        </dl>
                     </div>
+                    <%--地图--%>
                     <div style="position: relative;margin-left: 420px;">
-                        <iframe name="my-iframe" id="baiduMap" src="/mu/baiduMapTest.jsp" frameborder="0" width="400px" height="200px" scrolling="no"></iframe>
+                        <iframe name="my-iframe" id="baiduMap" src="/mu/baiduMapTest.jsp?lng=<%=locateInfoList.get(0).getLng()%>&lag=<%=locateInfoList.get(0).getLag()%>" frameborder="0" width="400px" height="200px" scrolling="no"></iframe>
                     </div>
+
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -235,9 +254,8 @@
         <div class="col-md-6">
         <div style="width: 1200px; margin: 0 auto;">
             <%if(hotelInfoListClass != null){
-                if(length != 1){
-                    for(int i = 0;i < limite;i++){
-            //System.out.println("当前ye是"+ye);%>
+                if(length != 1 && ye != length){
+                    for(int i = 0;i < limite;i++){%>
             <div style="margin-top: 20px;height: 250px;width: 1000px;">
                 <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
                         <img style="border-radius:10px;height: 200px;width: 280px;"
@@ -245,16 +263,33 @@
                     </a>
                 </div>
                 <div style="float: left;height: 250px">
-                    <div style="float: left;position: absolute;">
-                        <a href=""><h4><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h4></a></div>
-                    <div style="float: left;position: relative;top:40px;left: 0px;">
-                        <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div>
-                    <div style="float: left;position: relative;top: 180px;left: -140px;">
-                        <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div>
-                    <div style=""></div>
+                    <dl><div style="float: left;position: absolute;">
+                        <a href=""><h4><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h4></a></div></dl>
+                    <dl><div style="float: left;position: relative;top:40px;left: 0px;">
+                        <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
+                    <dl><div style="float: left;position: relative;top: 180px;">
+                        <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
                 </div>
             </div>
             <hr class="layui-border-black">
+            <%}}else if(length != 1 && ye == length){
+                for (int i = 0;i < hotelInfoListClass.size()-(ye-1)*limite;i++){%>
+                <div style="margin-top: 20px;height: 250px;width: 1000px;">
+                <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
+                        <img style="border-radius:10px;height: 200px;width: 280px;"
+                    src="/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getPicturePath()%>.jpeg" alt="">
+                </a>
+                </div>
+                <div style="float: left;height: 250px">
+                    <dl><div style="float: left;position: absolute;">
+                        <a href=""><h4><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h4></a></div></dl>
+                    <dl><div style="float: left;position: relative;top:40px;left: 0px;">
+                        <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
+                    <dl><div style="float: left;position: relative;top: 180px;">
+                        <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
+                </div>
+                </div>
+                <hr class="layui-border-black">
             <%}}else if(length == 1){
                 for (int i = 0;i < hotelInfoListClass.size();i++){
             %>
@@ -265,15 +300,15 @@
                     </a>
                 </div>
                 <div style="float: left;height: 250px">
-                    <div style="float: left;position: absolute;">
-                        <a href=""><h4><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h4></a></div>
-                    <div style="float: left;position: relative;top:40px;left: 0px;">
-                        <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div>
-                    <div style="float: left;position: relative;top: 180px;left: -140px;">
-                        <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div>
-                    <div style=""></div>
+                    <dl><div style="float: left;position: absolute;">
+                        <a href=""><h4><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h4></a></div></dl>
+                    <dl><div style="float: left;position: relative;top:40px;left: 0px;">
+                        <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
+                    <dl><div style="float: left;position: relative;top: 180px;">
+                        <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
                 </div>
             </div>
+            <hr class="layui-border-black">
             <%}}else{%>
             <option value="空">空</option>
             <%}%>
@@ -286,20 +321,20 @@
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <%
-                System.out.println("页："+ye);
+                //System.out.println("页："+ye);
             %>
             <%if(ye <= 3 && length <5){/*System.out.println("输出123-limite");*/
                 for(int i = 1;i <= length;i++){%>
-            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>"><%=i%></a></li>
+            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>"><%=i%></a></li>
             <%}}else if(ye <=3 && length >5){/*System.out.println("输出12345");*/
                 for(int i = 1;i <= 5;i++){%>
-            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>"><%=i%></a></li>
+            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>"><%=i%></a></li>
             <%}}else if(ye >3 && ye+2<length){/*System.out.println("输出ye-1 y1-2 ye ye+1 ye+2");*/
                 for(int i = ye-2;i <= ye+2;i++){%>
-            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>"><%=i%></a></li>
+            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>"><%=i%></a></li>
             <%}}else if(ye > 3 && ye +2>length){/*System.out.println("limite -1-2-3-4-5");*/
                 for(int i = length-4;i <= length;i++){%>
-            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>"><%=i%></a></li>
+            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>"><%=i%></a></li>
             <%}}%>
         </ul>
     </nav>
