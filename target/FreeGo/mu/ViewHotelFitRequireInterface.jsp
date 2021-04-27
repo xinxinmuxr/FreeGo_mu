@@ -58,6 +58,19 @@
             margin-top: 10px;
             height: 100px;
         }
+        div.room{
+
+        }
+        div.ota{
+            float: left;
+            width: 180px;
+            display: inline;
+        }
+        div.roomBtn{
+            position: relative;
+            float: right;
+            width: 300px;
+        }
         /*订酒店标题*/
         #headline{
             margin-top:5%;
@@ -145,7 +158,7 @@
     //System.out.println("keySet:"+MapRoomList.keySet());
     String yeChuan = request.getParameter("ye");
     String county = request.getParameter("county");
-    System.out.println("county:"+county);
+    //System.out.println("county:"+county);
     List<String> countyList = new ArrayList<String>();
     int ye = 1;
     if(yeChuan == null){
@@ -262,32 +275,56 @@
                              src="/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getPicturePath()%>.jpeg" alt="">
                     </a>
                 </div>
-                <div style="float: left;height: 250px">
+                <div style="float: left;height: 250px;width: 300px;">
                     <dl><div style="float: left;position: absolute;">
-                        <a href=""><h4><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h4></a></div></dl>
+                        <a href=""><h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                     <dl><div style="float: left;position: relative;top:40px;left: 0px;">
                         <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
                     <dl><div style="float: left;position: relative;top: 180px;">
                         <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
+                </div>
+                <div style="float: right;margin-top: 100px;">
+                <%for(int k = 0;k < MapRoomList.get(hotelInfoList.get(i).getHotelId()).size();k++){
+                roomList = MapRoomList.get(hotelInfoList.get(i).getHotelId());%>
+                <div style="float: right;width: 300px;margin-top: 35px;">
+                    <div style="float: left;position: absolute;">
+                        <div class="layui-font-18"><%=roomList.get(k).getRoomName()%></div></div>
+                    <div style="float: left;position: relative;margin-left: 60px;margin-top: 4px">
+                        <div class="layui-font-orange layui-font-18"><%=roomList.get(k).getRoomPrice()%></div></div>
+                </div>
+                <hr style="width:150px;">
+                <%}%>
                 </div>
             </div>
             <hr class="layui-border-black">
             <%}}else if(length != 1 && ye == length){
                 for (int i = 0;i < hotelInfoListClass.size()-(ye-1)*limite;i++){%>
                 <div style="margin-top: 20px;height: 250px;width: 1000px;">
-                <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
-                        <img style="border-radius:10px;height: 200px;width: 280px;"
-                    src="/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getPicturePath()%>.jpeg" alt="">
-                </a>
-                </div>
-                <div style="float: left;height: 250px">
-                    <dl><div style="float: left;position: absolute;">
-                        <a href=""><h4><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h4></a></div></dl>
-                    <dl><div style="float: left;position: relative;top:40px;left: 0px;">
-                        <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
-                    <dl><div style="float: left;position: relative;top: 180px;">
-                        <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
-                </div>
+                    <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
+                            <img style="border-radius:10px;height: 200px;width: 280px;"
+                        src="/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getPicturePath()%>.jpeg" alt="">
+                    </a>
+                    </div>
+                    <div style="float: left;height: 250px;width: 300px;">
+                        <dl><div style="float: left;position: absolute;">
+                            <a href=""><h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
+                        <dl><div style="float: left;position: relative;top:40px;left: 0px;">
+                            <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
+                        <dl><div style="float: left;position: relative;top: 180px;">
+                            <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
+                    </div>
+                    <div style="float: right;margin-top: 100px;">
+                        <%for(int k = 0;k < MapRoomList.get(hotelInfoList.get(i).getHotelId()).size();k++){
+                            roomList = MapRoomList.get(hotelInfoList.get(i).getHotelId());%>
+                        <div style="float: right;width: 300px;margin-top: 35px;">
+                            <div style="float: left;position: absolute;">
+                                <div class="layui-font-18"><%=roomList.get(k).getRoomName()%></div></div>
+                            <div style="float: left;position: relative;margin-left: 60px;margin-top: 4px">
+                                <div class="layui-font-orange layui-font-18"><%=roomList.get(k).getRoomPrice()%></div></div>
+                        </div>
+                        <hr style="width:150px;">
+                        <%}%>
+                    </div>
                 </div>
                 <hr class="layui-border-black">
             <%}}else if(length == 1){
@@ -299,13 +336,25 @@
                          src="/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getPicturePath()%>.jpeg" alt="">
                     </a>
                 </div>
-                <div style="float: left;height: 250px">
+                <div style="float: left;height: 250px;width: 300px;">
                     <dl><div style="float: left;position: absolute;">
-                        <a href=""><h4><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h4></a></div></dl>
+                        <a href=""><h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                     <dl><div style="float: left;position: relative;top:40px;left: 0px;">
                         <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
                     <dl><div style="float: left;position: relative;top: 180px;">
                         <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
+                </div>
+                <div style="float: right;margin-top: 100px;">
+                    <%for(int k = 0;k < MapRoomList.get(hotelInfoList.get(i).getHotelId()).size();k++){
+                        roomList = MapRoomList.get(hotelInfoList.get(i).getHotelId());%>
+                    <div style="float: right;width: 300px;margin-top: 35px;">
+                        <div style="float: left;position: absolute;">
+                            <div class="layui-font-18"><%=roomList.get(k).getRoomName()%></div></div>
+                        <div style="float: left;position: relative;margin-left: 60px;margin-top: 4px">
+                            <div class="layui-font-orange layui-font-18"><%=roomList.get(k).getRoomPrice()%></div></div>
+                    </div>
+                    <hr style="width:150px;">
+                    <%}%>
                 </div>
             </div>
             <hr class="layui-border-black">

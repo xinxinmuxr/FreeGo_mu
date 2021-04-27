@@ -47,7 +47,6 @@ public class HotelServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         methods = req.getParameter("methods");
         if(methods.equals("Class")){ //酒店分地区
-            System.out.println("跳转成功");
             String county = req.getParameter("county");
             String ye = req.getParameter("ye");
             req.setAttribute("county",county);
