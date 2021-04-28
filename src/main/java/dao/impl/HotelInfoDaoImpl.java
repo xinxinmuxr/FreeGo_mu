@@ -205,6 +205,11 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
 
         return null;
     }
+
+    public void queryLike(int userId){
+
+    }
+
     public static void main(String[] args) throws ParseException {
 
     }

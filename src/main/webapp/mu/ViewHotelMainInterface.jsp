@@ -43,7 +43,8 @@
 </head>
 <body>
 
-    <%String userId = (String) session.getAttribute("userId");%>
+    <%String userId = (String) session.getAttribute("userId");
+    %>
     <div id="header">
         <div class="freego_header clearfix" id="head_nav_warper">
             <div class="head_logo"><a class="freego_logo" title="FreeGo" href="http://localhost:8080/index.jsp"></a></div>
@@ -152,7 +153,9 @@
     </div>
 
     <!--内容-->
-    <div class="row">
+
+    <%--<%for (int i = 0;i < ;i++)%>--%>
+    <%--<div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6" style="text-align: center;">
             <div style="text-align: center;">
@@ -344,6 +347,6 @@
             </div>
             <div class="col-md-3"></div>
         </div>
-    </div>
+    </div>--%>
 </body>
 </html>

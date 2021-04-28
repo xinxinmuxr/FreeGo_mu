@@ -143,7 +143,6 @@ public class LocationServlet extends HttpServlet {
         locate = locateImpl.queryLocation(userInput);
         return locate;
     }
-
 }
 
 
