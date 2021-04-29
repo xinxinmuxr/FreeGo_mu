@@ -15,4 +15,30 @@ package domain;/**
  * @author hp<br />
  */
 public class HotelCollectInfo {
+    private int hotelId;
+    private int userId;
+
+    public HotelCollectInfo(int hotelId, int userId) {
+        this.hotelId = hotelId;
+        this.userId = userId;
+    }
+
+    public HotelCollectInfo() {
+    }
+
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

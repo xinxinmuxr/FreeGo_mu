@@ -8,10 +8,7 @@ package dao.impl;/**
  * @since JDK 1.8
  */
 
-import domain.HotelInfo;
-import domain.RoomInfo;
-import domain.TagLinkInfo;
-import domain.UserInfo;
+import domain.*;
 import org.apache.commons.collections.ArrayStack;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -140,19 +137,43 @@ public class insertValue {
             }
         }
     }
-
+    /*设初值 就是全部标签设置成0*/
+    public static void insertUserPreferFirstValue(){
+        JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+        List<UserInfo> userList = new ArrayList<UserInfo>();   //所有用户】
+        try {
+            //1.定义sql语句
+            String sql = "select * from user";
+            userList = template.query(sql, new BeanPropertyRowMapper<UserInfo>(UserInfo.class));
+        }catch (Exception e) {
+            System.out.println("失败");
+        }
+        for(int i= 0;i < userList.size();i++){
+            for(int j = 1;j <= 23;j++){
+                try {
+                    //1.定义sql语句
+                    String sql = "insert into userprefer(userId,tagId,preferWeight) values(?,?,?)";
+                    template.update(sql,userList.get(i).getUserId(),j,(float)(0));
+                    System.out.println("user:"+userList.get(i).getUserId()+" tagId:"+j+" weight:"+0);
+                }catch (Exception e) {
+                    System.out.println("失败");
+                }
+            }
+        }
+    }
     public static void insertLikeWeigh(){
         JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
         List<UserInfo> userList = new ArrayList<UserInfo>();   //所有用户
         List<TagLinkInfo> taglinkList = new ArrayList<TagLinkInfo>();   //所有用户
-        List<HotelCo> taglinkList = new ArrayList<TagLinkInfo>();   //所有用户
+        List<HotelCollectInfo> hotelCollectList = new ArrayList<HotelCollectInfo>();   //所有用户
+
         /*用户信息*/
         try {
             //1.定义sql语句
             String sql = "select * from user";
             userList = template.query(sql, new BeanPropertyRowMapper<UserInfo>(UserInfo.class));
-        } catch (Exception e) {
-            System.out.println("失败");
+        }catch (Exception e) {
+            System.out.println("失败1");
         }
         /*tagLink信息*/
         try {
@@ -160,15 +181,35 @@ public class insertValue {
             String sql = "select * from taglink";
             taglinkList = template.query(sql, new BeanPropertyRowMapper<TagLinkInfo>(TagLinkInfo.class));
         } catch (Exception e) {
-            System.out.println("失败");
+            System.out.println("失败2");
+        }
+        try {
+            //1.定义sql语句
+            String sql = "select * from hotelcollect";
+            hotelCollectList = template.query(sql, new BeanPropertyRowMapper<HotelCollectInfo>(HotelCollectInfo.class));
+        } catch (Exception e) {
+            System.out.println("失败3");
         }
 
-        for(int i = 0;i < userList.size();i++){  //所有用户
-
+        for(int i = 0;i < hotelCollectList.size();i++){  //所有用户
+            List<TagInfo> tagList = new ArrayList<TagInfo>();
+            String sql = "select * from taglink where linkId = ? and type = ?";
+            tagList = template.query(sql, new BeanPropertyRowMapper<TagInfo>(TagInfo.class),hotelCollectList.get(i).getHotelId(),"酒店");
+            //System.out.println("数量"+tagList.size());
+            for(int j = 0;j < tagList.size();j++){
+                /*try{*/
+                    String sqll = "update userprefer set preferWeight = preferWeight+? where tagId = ? and userId = ?";
+                    template.update(sql,(float)(0.5),tagList.get(j).getTagId(),hotelCollectList.get(i).getUserId());
+                /*}catch (Exception e) {
+                    System.out.println("失败4");
+                }*/
+            }
         }
     }
     public static void main(String[] arge){
-        //insertValue.insertValue();
-        //insertValue.insertCollect();
+        //insertValue.insertValue();  //给所有酒店插入它的tag
+        //insertValue.insertCollect();//给所有用户随机收藏20-40个酒店景点
+        insertValue.insertUserPreferFirstValue();//给所用用户的tag设置成0
+        //insertValue.insertLikeWeigh();  //通过用户收藏更新用户对每个方向上的喜爱值
     }
 }
