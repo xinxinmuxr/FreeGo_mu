@@ -257,8 +257,6 @@
         </div>
     <%}%>
 
-
-
     <%--酒店信息展示--%>
     <%--如果在景点表中查找到--%>
     <%if(locateInfoList.size() != 0){%>
@@ -271,14 +269,15 @@
                     for(int i = 0;i < limite;i++){%>
             <div style="margin-top: 20px;height: 250px;width: 1000px;">
                 <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
-                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>"><img style="border-radius:10px;height: 200px;width: 280px;"
+                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
+                        <img style="border-radius:10px;height: 200px;width: 280px;"
                              src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>.jpeg" alt="">
-                        <%System.out.println("图片"+hotelInfoListClass.get((ye-1)*15+i).getOverPicture());%>
+                        <%--<%System.out.println("图片"+hotelInfoListClass.get((ye-1)*15+i).getOverPicture());%>--%>
                     </a>
                 </div>
                 <div style="float: left;height: 250px;width: 300px;">
                     <dl><div style="float: left;position: absolute;">
-                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>">
+                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                             <h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                     <dl><div style="float: left;position: relative;top:40px;left: 0px;">
                         <h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></div></dl>
@@ -303,14 +302,14 @@
                 for (int i = 0;i < hotelInfoListClass.size()-(ye-1)*limite;i++){%>
                 <div style="margin-top: 20px;height: 250px;width: 1000px;">
                     <div style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
-                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>">
+                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                             <img style="border-radius:10px;height: 200px;width: 280px;"
                                  src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>.jpeg" alt="">
                         </a>
                     </div>
                     <div style="float: left;height: 250px;width: 300px;">
                         <dl><div style="float: left;position: absolute;">
-                            <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>">
+                            <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                                 <h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                         <dl><div style="float: left;position: relative;top:40px;left: 0px;">
                             <h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></div></dl>
@@ -336,17 +335,17 @@
             %>
             <div style="margin-top: 20px;height: 250px;width: 1000px;">
                 <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
-                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>">
+                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                         <img style="border-radius:10px;height: 200px;width: 280px;"
                          src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>.jpeg" alt="">
                     </a>
                 </div>
                 <div style="float: left;height: 250px;width: 300px;">
                     <dl><div style="float: left;position: absolute;">
-                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>">
+                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                             <h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                     <dl><div style="float: left;position: relative;top:40px;left: 0px;">
-                        <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
+                        <h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></div></dl>
                     <dl><div style="float: left;position: relative;top: 180px;">
                         <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
                 </div>

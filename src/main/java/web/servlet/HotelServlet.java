@@ -61,19 +61,29 @@ public class HotelServlet extends HttpServlet {
             session.setAttribute("userId",userId);
             req.getRequestDispatcher("/mu/ViewHotelMainInterface.jsp").forward(req,resp);
         }else if(methods.equals("toViewHotel")){
+            HotelInfoDaoImpl hotelImpl = new HotelInfoDaoImpl();
             String hotelIdStr = req.getParameter("hotelId");
             String userIdStr = req.getParameter("userId");
+            String overPicture = req.getParameter("overPicture");
             int hotelId = Integer.parseInt(hotelIdStr);
             int userId = Integer.parseInt(userIdStr);
+            HotelInfo hotel = hotelImpl.queryOneHotel(hotelId);
             HotelInfoDaoImpl impl = new HotelInfoDaoImpl();
+            //获得  酒店 信息
             HotelInfo hotelInfo = impl.queryOneHotel(hotelId);
+            //获得  酒店 图片
+            List<String> hotelPicture = impl.queryHotelInPicture(hotelId);
+
             HttpSession hs = req.getSession();
             List<RoomInfo> roomList = new ArrayList<RoomInfo>();
-            System.out.println("hotelId:"+hotelId);
-            System.out.println("hotelId:"+userId);
+            //System.out.println("hotelId:"+hotelId);
+            //System.out.println("overPicture:"+overPictureInt);
             //roomList = impl.queryRoomAll(hotelId);
+            hs.setAttribute("hotelPicture",hotelPicture);
+            hs.setAttribute("userId",hotel);
             hs.setAttribute("userId",userId);
             hs.setAttribute("hotelInfo",hotelInfo);
+            //hs.setAttribute("roomList",roomList);
             req.getRequestDispatcher("/mu/ViewHotelInfoInterface.jsp").forward(req,resp);
         }
     }

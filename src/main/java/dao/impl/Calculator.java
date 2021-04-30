@@ -15,4 +15,7 @@ package dao.impl;/**
  * @author hp<br />
  */
 public class Calculator {
+    public static float calculatorUserValue(int userOne,int userTwo){
+        return 0;
+    }
 }

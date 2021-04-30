@@ -139,6 +139,27 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
         return MapRoomList;
     }
 
+
+    /*下面是推荐所用到的算法*/
+    public List<UserInfo> queryAllOtherUser(int userId){
+        List<UserInfo> userInfoList= new ArrayList<UserInfo>();
+        try {
+            //1.定义sql语句
+            String sql = "select * from userprefer where userId <> ?";
+            //2.执行
+            //roomListOne中放了一个酒店id下面的所有房间号
+            userInfoList = template.query(sql, new BeanPropertyRowMapper<UserInfo>(UserInfo.class),userId);
+        } catch (Exception e) {
+            System.out.println("失败");
+        }
+        return userInfoList;
+    }
+    public List<List<HotelInfo>> queryUserLikeHotel(int userId){
+        List<UserInfo> userAllOtherList = new ArrayList<UserInfo>();
+        //找出userPrefer表中除了当前用户外的所有用户
+        userAllOtherList = queryAllOtherUser(userId);
+        return null;
+    }
     /*queryHotelofRoomByHotelId 的测试函数*/
     /*public void queryHotelofRoomByHotelIdTest(){
         HotelInfoDaoImpl ss = new HotelInfoDaoImpl();
@@ -205,9 +226,9 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
         }else{
             System.out.println("读取失败");
         }
-
         return null;
     }
+
 
     public void queryLike(int userId){
         List<UserInfo> userList = new ArrayList<UserInfo>();
@@ -303,6 +324,23 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
         return null;
     }
 
+    public List<String> queryHotelInPicture(int hotelId){
+        JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+        List<String> pList = new ArrayList<String>();
+        List<HotelPictureRelationInfo> ppList = new ArrayList<HotelPictureRelationInfo>();
+        try{
+            //1.定义sql语句
+            String sql = "select * from hotelpicturerelation where hotelId = ?";
+            //2.执行
+            ppList = template.query(sql, new BeanPropertyRowMapper<HotelPictureRelationInfo>(HotelPictureRelationInfo.class), hotelId);
+        }catch (Exception e){
+            System.out.println("根据用户手机号查询用户信息失败");
+        }
+        for(int i = 0;i < ppList.size();i++){
+            pList.add(ppList.get(i).getPicturePath());
+        }
+        return pList;
+    }
     @Override
     public int addHotelComment(HotelCommentInfo comment) {
         String sql;

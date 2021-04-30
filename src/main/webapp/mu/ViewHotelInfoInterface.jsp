@@ -1,4 +1,8 @@
-<%--
+<%@ page import="domain.RoomInfo" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="domain.HotelInfo" %>
+<%@ page import="javax.lang.model.element.NestingKind" %><%--
   Created by IntelliJ IDEA.
   User: hp
   Date: 2021/4/29
@@ -84,6 +88,12 @@
     <script async="" src="https://js.mafengwo.net/js/cv/js+Dropdown:js+pageletcommon+pageHeadUserInfoWWWNormal:js+jquery.tmpl:js+M+module+InputListener:js+M+module+SuggestionXHR:js+M+module+DropList:js+M+module+Suggestion:js+M+module+MesSearchEvent:js+SiteSearch:js+AHeader:js+M+module+PageAdmin:js+M+module+Storage:js+M+module+Cookie:js+M+module+ResourceKeeper:js+jquery.jgrowl.min:js+AMessage:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+dialog+alert:js+M+module+FrequencyVerifyControl:js+M+module+FrequencySystemVerify:js+ALogin:js+M+module+ScrollObserver:js+M+module+QRCode:js+AToolbar:js+ACnzzGaLog:js+ARecruit:js+ALazyLoad:js+jquery.scrollTo:js+MouseTip:js+hotel+module+Hash:js+hotel+module+ModuleProvider:js+hotel+module+ImageLoader:js+hotel+module+Album:js+hotel+module+AlbumComment:js+hotel+module+Log:js+hotel+module+FavDialog:js+hotel+mfwmap+mfwmap-util:js+hotel+mfwmap+mfwmap-event:js+hotel+mfwmap+mfwmap-runtime-google:js+hotel+mfwmap+mfwmap-runtime-amap:js+hotel+mfwmap+mfwmap-runtime-leaflet:js+hotel+mfwmap+mfwmap:js+hotel+mfwmap+mfwmap-overlays:js+hotel+module+ListTips:js+xdate:js+hotel+module+BookingDate:js+hotel+info:js+hotel+module+FestivalDateConfig:js+jquery-ui-core:js+jquery-ui-datepicker:js+hotel+module+DateRangePicker:js+hotel+module+BookingGuests:js+hotel+module+NumberGuestsPicker:js+hotel+module+BookingInfo:js+hotel+info_booking:js+M+module+Pagination:js+M+module+TopTip:js+hotel+module+ReportDialog:js+hotel+info_comment:js+hotel+pc_app_guide^YlFVSg^1584071349.js" crossorigin="anonymous"></script>
     <script async="" src="https://js.mafengwo.net/js/BrowserState.js?1542357400" crossorigin="anonymous"></script>
 </head>
+<%  String userId = (String) session.getAttribute("userId");
+    String hotelId = (String) session.getAttribute("hotelId");
+    //List<RoomInfo> roomList = new ArrayList<RoomInfo>();
+    HotelInfo hotel= (HotelInfo) session.getAttribute("hotelInfo");
+    List<String> hotelInPictureList = (List<String>)session.getAttribute("hotelPicture");
+%>
 <body style="position: relative;">
 <%--酒店信息展示--%>
 <div class="container">
@@ -108,7 +118,7 @@
                         </div>
                         <div class="more"><a href="/hotel/" target="_blank">&gt;&gt;更多国家和地区</a></div>                        </div>
                 </div>
-                <em>&gt;</em>                </div>
+                <em></em>                </div>
             <div class="item">
                 <div class="drop">
                     <span class="hd"><a href="/hotel/21536/" target="_blank" title="中国酒店预订">中国<i></i></a></span>
@@ -127,7 +137,7 @@
                         </div>
                         <div class="more"><a href="/hotel/21536/" target="_blank">&gt;&gt;更多城市</a></div>                        </div>
                 </div>
-                <em>&gt;</em>                </div>
+                <em></em>                </div>
             <div class="item"><a href="/hotel/10198/" target="_blank" title="深圳酒店查询">深圳</a><em>&gt;</em></div>
             <div class="item cur"><strong title="深圳皇庭V酒店预订">深圳皇庭V酒店预订</strong></div>
         </div>
@@ -159,16 +169,15 @@
 
     <div class="intro-bd clearfix" data-cs-t="酒店详情页">
         <div class="img-big _j_album_trigger clickstat " data-id="862053914" data-is-top-album="1" data-cs-p="图片" data-cs-l="大图" data-cs-d="大图">
-            <img src="https://b1-q.mafengwo.net/s11/M00/B8/AE/wKgBEFz1pQ2APfwSABnSVXcUqEo72.jpeg?imageMogr2%2Fthumbnail%2F%211360x760r%2Fgravity%2FCenter%2Fcrop%2F%211360x760%2Fquality%2F90">
+            <img src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotel.getOverPicture()%>.jpeg">
             <span class="num"><em>84</em> 张图片</span>
         </div>
         <ul class="img-small">
-            <li><img class="_j_album_trigger clickstat" src="https://p1-q.mafengwo.net/s7/M00/EB/A9/wKgB6lPNiziAeUMeAAOQIkZ8o6c04.jpeg?imageMogr2%2Fthumbnail%2F%21300x240r%2Fgravity%2FCenter%2Fcrop%2F%21300x240%2Fquality%2F90" data-id="16108332" data-cs-p="图片" data-cs-l="小图" data-cs-d="小图"></li>
-            <li><img class="_j_album_trigger clickstat" src="https://b1-q.mafengwo.net/s12/M00/EE/D4/wKgED1vAWaCATW8dACnRu7CnXu492.jpeg?imageMogr2%2Fthumbnail%2F%21300x240r%2Fgravity%2FCenter%2Fcrop%2F%21300x240%2Fquality%2F90" data-id="290830420" data-cs-p="图片" data-cs-l="小图" data-cs-d="小图"></li>
-            <li><img class="_j_album_trigger clickstat" src="https://p1-q.mafengwo.net/s10/M00/4F/24/wKgBZ1mIgOeASlT-ABOCntp6cfI87.jpeg?imageMogr2%2Fthumbnail%2F%21300x240r%2Fgravity%2FCenter%2Fcrop%2F%21300x240%2Fquality%2F90" data-id="168939732" data-cs-p="图片" data-cs-l="小图" data-cs-d="小图"></li>
-            <li><img class="_j_album_trigger clickstat" src="https://b1-q.mafengwo.net/s12/M00/EE/E3/wKgED1vAWaaAOhnRACq_JDs40RE51.jpeg?imageMogr2%2Fthumbnail%2F%21300x240r%2Fgravity%2FCenter%2Fcrop%2F%21300x240%2Fquality%2F90" data-id="290830576" data-cs-p="图片" data-cs-l="小图" data-cs-d="小图"></li>
-            <li><img class="_j_album_trigger clickstat" src="https://p1-q.mafengwo.net/s12/M00/EE/D0/wKgED1vAWZ-AKajQAAXhzZqT3zQ43.jpeg?imageMogr2%2Fthumbnail%2F%21300x240r%2Fgravity%2FCenter%2Fcrop%2F%21300x240%2Fquality%2F90" data-id="290830412" data-cs-p="图片" data-cs-l="小图" data-cs-d="小图"></li>
-            <li><img class="_j_album_trigger clickstat" src="https://n1-q.mafengwo.net/s12/M00/EE/D5/wKgED1vAWaCACIJAACvBwDA9OZU86.jpeg?imageMogr2%2Fthumbnail%2F%21300x240r%2Fgravity%2FCenter%2Fcrop%2F%21300x240%2Fquality%2F90" data-id="290830424" data-cs-p="图片" data-cs-l="小图" data-cs-d="小图"></li>
+            <%for(int hipl = 0;hipl < hotelInPictureList.size();hipl++){%>
+
+            <li><img class="_j_album_trigger clickstat"
+                     src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/inPicture/<%=hotelInPictureList.get(hipl)%>" data-id="16108332" data-cs-p="图片" data-cs-l="小图" data-cs-d="小图"></li>
+            <%}%>
         </ul>
     </div>
 </div>

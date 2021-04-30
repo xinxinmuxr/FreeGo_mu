@@ -212,5 +212,90 @@ public class insertValue {
         //insertValue.insertCollect();//给所有用户随机收藏20-40个酒店景点
         //insertValue.insertUserPreferFirstValue();//给所用用户的tag设置成0
         //insertValue.insertLikeWeigh();  //通过用户收藏更新用户对每个方向上的喜爱值
+
+        //其余插入
+        //insertValue.insertRoomPicture();
+        insertValue.insertHotelPicture();
+    }
+    /*插入每个房间对应的小图片*/
+    public static void insertRoomPicture(){
+        JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+        List<RoomInfo> roomInfoList = new ArrayList<RoomInfo>();
+        try {
+            //1.定义sql语句
+            String sql = "select * from room";
+            roomInfoList = template.query(sql, new BeanPropertyRowMapper<RoomInfo>(RoomInfo.class));
+        } catch (Exception e) {
+            System.out.println("失败2");
+        }
+
+        for(int i = 0;i < roomInfoList.size();i++){
+            List<Integer> pictureList = new ArrayList<Integer>();
+            for(int j = 0;j < 6;j++){
+                int pd = 0;
+                while(pd != -1) {
+                    pd = 0;
+                    int a = (int)(random() * 79) + 1;
+                    for (int k = 0; k < pictureList.size(); k++) {
+                        if (pictureList.get(k) == a) {
+                            pd++;
+                        }
+                    }
+                    if (pd == 0) {
+                        pictureList.add(a);
+                        pd = -1;
+                    }
+                }
+            }
+            for(int kk = 0;kk < pictureList.size();kk++){
+                try {
+                    //1.定义sql语句
+                    String sql = "insert into roompicturerelation(roomId,picturePath,pictureOrder) values(?,?,?)";
+                    template.update(sql,roomInfoList.get(i).getRoomId(),pictureList.get(kk)+".jpeg",kk+1);
+                }catch (Exception e) {
+                    System.out.println("失败2");
+                }
+            }
+        }
+
+        /**/
+    }
+
+    /*插入每个酒店对应的小图片*/
+    public static void insertHotelPicture(){
+        JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+        List<HotelInfo> hotelInfoList = new ArrayList<HotelInfo>();
+        try {
+            //1.定义sql语句
+            String sql = "select * from Hotel";
+            hotelInfoList = template.query(sql, new BeanPropertyRowMapper<HotelInfo>(HotelInfo.class));
+        } catch (Exception e) {
+            System.out.println("失败2");
+        }
+
+        for(int i = 0;i < hotelInfoList.size();i++){
+            List<Integer> pictureList = new ArrayList<Integer>();
+            for(int j = 0;j < 6;j++){
+                int pd = 0;
+                while(pd != -1) {
+                    pd = 0;
+                    int a = (int)(random() * 79) + 1;
+                    for (int k = 0; k < pictureList.size(); k++) {
+                        if (pictureList.get(k) == a) {
+                            pd++;
+                        }
+                    }
+                    if (pd == 0) {
+                        pictureList.add(a);
+                        pd = -1;
+                    }
+                }
+            }
+            for(int kk = 0;kk < pictureList.size();kk++){
+                    //1.定义sql语句
+                    String sql = "insert into hotelpicturerelation(hotelId,picturePath,order) values(?,?,?)";
+                    template.update(sql,hotelInfoList.get(i).getHotelId(),pictureList.get(kk)+".jpeg",kk+1);
+            }
+        }
     }
 }

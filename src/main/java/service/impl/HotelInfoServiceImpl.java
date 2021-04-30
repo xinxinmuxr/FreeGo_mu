@@ -29,10 +29,12 @@ public class HotelInfoServiceImpl implements HotelInfoService {
         HotelInfoDaoImpl Impl = new HotelInfoDaoImpl();
         return Impl.recommendHotel(userInput);
     }
+
     public Map<Integer,List<RoomInfo>> queryHotelofRoomByHotelId(List<HotelInfo> hotelList, Date ruzhu, Date likai){
         HotelInfoDaoImpl impl = new HotelInfoDaoImpl();
         return impl.queryHotelofRoomByHotelId(hotelList,ruzhu,likai);
     }
+
     public Map<Integer,List<RoomInfo>> queryHotelofRoomByHotelId(List<HotelInfo> hotelList){
         HotelInfoDaoImpl impl = new HotelInfoDaoImpl();
         return impl.queryHotelofRoomByHotelId(hotelList);
