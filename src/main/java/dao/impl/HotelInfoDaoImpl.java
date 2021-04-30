@@ -10,9 +10,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static java.lang.Math.random;
+
 public class HotelInfoDaoImpl implements HotelInfoDao {
 
-    private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+    JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+    JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtils.getDataSource());
     /*查询酒店
     * */
     @Override
@@ -207,11 +210,27 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
     }
 
     public void queryLike(int userId){
-
+        List<UserInfo> userList = new ArrayList<UserInfo>();
+        /*try{
+            String sql = "select  from userprefer where";
+            //2.执行
+           // hotelList = template.query(sql, new BeanPropertyRowMapper<UserInfo>(UserInfo.class), );
+        }*/
     }
 
     public static void main(String[] args) throws ParseException {
-
+        //updateImg();
+        JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+        HotelInfo hotel = new HotelInfo();
+        try{
+            //1.定义sql语句
+            String sql = "select * from Hotel where hotelId = ?";
+            //2.执行
+            hotel = template.queryForObject(sql, new BeanPropertyRowMapper<HotelInfo>(HotelInfo.class), 1000);
+        }catch (Exception e){
+            System.out.println("根据用户手机号查询用户信息失败");
+        }
+        System.out.println("图片"+hotel.getOverPicture());
     }
     /*为数据库中的房间添加数据*/
     public void insertAllRoom(){
@@ -226,7 +245,18 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
             j++;
         }
     }
-
+    public HotelInfo queryOneHotel(int hotelId){
+        HotelInfo hotel = new HotelInfo();
+        try{
+            //1.定义sql语句
+            String sql = "select * from Hotel where hotelId = ?";
+            //2.执行
+            hotel = template.queryForObject(sql, new BeanPropertyRowMapper<HotelInfo>(HotelInfo.class), hotelId);
+        }catch (Exception e){
+            System.out.println("根据用户手机号查询用户信息失败");
+        }
+        return hotel;
+    }
     @Override
     public List<HotelPictureInfo> queryHotelPicture(int hotelId) {
         return null;
@@ -267,20 +297,49 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
         return null;
     }
 
+
     @Override
     public List<RoomDateInfo> queryTheTimeRoom(int hotelId, String checkInDate, String departureDate) {
         return null;
     }
 
     @Override
-    public Boolean addHotelComment(HotelCommentInfo comment) {
-        return null;
+    public int addHotelComment(HotelCommentInfo comment) {
+        String sql;
+        int addResult = 0;
+        sql = "INSERT INTO hotelcomment VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        addResult = jdbcTemplate.update(sql
+                ,comment.getCommentId()
+                ,comment.getParentId()
+                ,comment.getUserId()
+                ,comment.getHotelId()
+                ,comment.getParentCommentId()
+                ,comment.getCommentWord()
+                ,comment.getCleanScore()
+                ,comment.getAllScore()
+                ,comment.getLocateScore()
+                ,comment.getServiceScore()
+                ,comment.getFacilitiesScore()
+                ,comment.getComfortScore()
+                ,comment.getEatScore()
+                ,comment.getFlag());
+        /*返回最近一次插入数据的id*/
+        sql = "SELECT LAST_INSERT_ID();";
+        addResult = jdbcTemplate.queryForObject(sql,Integer.class);
+        return addResult;
     }
 
     @Override
-    public Boolean addHotelCommentPicture(HotelCommentInfo comment) {
-        return null;
+    public int addHotelCommentPicture(int userId, int hotelCommentId, List<String> picturePathList) throws Exception {
+        String sql;
+        int addResult = 0;
+        for (int i = 0; i < picturePathList.size(); i++) {
+            sql = "INSERT INTO hotelcommentpicture VALUES(?,?,?);";
+            addResult = jdbcTemplate.update(sql, hotelCommentId, picturePathList.get(i), i);
+        }
+        return addResult;
     }
+
 
     @Override
     public Boolean saveHotelOrderInfo(HotelOrderInfo hotelOrder) {
@@ -311,4 +370,61 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
     public List<HotelOrderInfo> queryHotelOrderInfo(int userId) {
         return null;
     }
+
+    @Override
+    public int increaseUserPreferHotel(int userId, int hotelId, float weight) throws Exception {
+        String sql;
+        sql = "UPDATE userprefer SET preferWeight = preferWeight+? where( userId = ? and tagId IN (SELECT tagId FROM taglink where type = '酒店' and linkId = ?));";
+        int result = jdbcTemplate.update(sql,weight,userId,hotelId);
+        return result;
+    }
+
+    @Override
+    public int decreaseUserPreferHotel(int userId, int hotelId, float weight) throws Exception {
+        String sql;
+        sql = "UPDATE userprefer SET preferWeight = preferWeight-? where( userId = ? and tagId IN (SELECT tagId FROM taglink where type = '酒店' and linkId = ?));";
+        int result = jdbcTemplate.update(sql,weight,userId,hotelId);
+        return result;
+    }
+
+    @Override
+    public int collectHotel(int userId, int hotelId) throws Exception {
+        String sql;
+        sql = "INSERT INTO hotelcollect VALUES(?,?);";
+        int result=0;
+        result = jdbcTemplate.update(sql,hotelId,userId);
+        return result;
+    }
+
+    @Override
+    public int disCollectHotel(int userId, int hotelId) throws Exception {
+        String sql;
+        sql = "DELETE FROM hotelcollect WHERE (hotel = ? and userId = ?);";
+        int result=0;
+        result = jdbcTemplate.update(sql,hotelId,userId);
+        return result;
+    }
+   /* public static void updateImg(){
+        JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+        List<HotelInfo> hotelList = new ArrayList<HotelInfo>();
+        try {
+            //1.定义sql语句
+            String sql = "select * from hotel ";
+            //2.执行
+            hotelList = template.query(sql, new BeanPropertyRowMapper<HotelInfo>(HotelInfo.class));
+        }catch (Exception e){
+            System.out.println("根据用户手机号查询用户信息失败");
+        }
+
+        int random = 0;
+        for(int i = 0;i < hotelList.size();i++){
+            random = (int)(random() * 48 + 1);
+            try{
+                String sql = "update hotel set overPicture = ? where hotelId = ?";
+                int result = template.update(sql,random,hotelList.get(i).getHotelId());
+            }catch (Exception e) {
+                System.out.println("失败");
+            }
+        }
+    }*/
 }

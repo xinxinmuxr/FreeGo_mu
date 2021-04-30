@@ -8,8 +8,10 @@ package web.servlet;/**
  * @since JDK 1.8
  */
 
+import dao.impl.HotelInfoDaoImpl;
 import domain.HotelInfo;
 import domain.LocateInfo;
+import domain.RoomInfo;
 import domain.ScenicInfo;
 import service.impl.HotelInfoServiceImpl;
 import service.impl.ScenicInfoServiceImpl;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,6 +60,21 @@ public class HotelServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("userId",userId);
             req.getRequestDispatcher("/mu/ViewHotelMainInterface.jsp").forward(req,resp);
+        }else if(methods.equals("toViewHotel")){
+            String hotelIdStr = req.getParameter("hotelId");
+            String userIdStr = req.getParameter("userId");
+            int hotelId = Integer.parseInt(hotelIdStr);
+            int userId = Integer.parseInt(userIdStr);
+            HotelInfoDaoImpl impl = new HotelInfoDaoImpl();
+            HotelInfo hotelInfo = impl.queryOneHotel(hotelId);
+            HttpSession hs = req.getSession();
+            List<RoomInfo> roomList = new ArrayList<RoomInfo>();
+            System.out.println("hotelId:"+hotelId);
+            System.out.println("hotelId:"+userId);
+            //roomList = impl.queryRoomAll(hotelId);
+            hs.setAttribute("userId",userId);
+            hs.setAttribute("hotelInfo",hotelInfo);
+            req.getRequestDispatcher("/mu/ViewHotelInfoInterface.jsp").forward(req,resp);
         }
     }
     /*用户输入查询景点*/

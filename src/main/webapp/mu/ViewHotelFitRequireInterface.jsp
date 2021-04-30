@@ -21,20 +21,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%--导入CSS--%>
-    <link rel="stylesheet" type="text/css" href="../lww/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../lww/css/common.css">
-    <link rel="stylesheet" type="text/css" href="../lww/css/index.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lww/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lww/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lww/css/index.css">
     <%--导入jQuery--%>
-    <script src="../lww/js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="../lww/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/lww/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/lww/js/bootstrap.min.js"></script>
     <%--导入布局js--%>
-    <script src="../lww/js/getParameter.js"></script>
+    <script src="${pageContext.request.contextPath}/lww/js/getParameter.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/mu/layui/css/layui.css">
     <script type="application/javascript" src="${pageContext.request.contextPath}/mu/layui/layui.js"></script>
 
-    <link href="${pageContext.request.contextPath}/bootstrap-select-1.12.4/dist/css/bootstrap-select.min.css" rel="stylesheet" />
-
-    <script src="/bootstrap-select-1.12.4/dist/js/bootstrap-select.min.js"></script>
     <style>
         body{text-align:center}
         /*最上面三个输入框*/
@@ -155,6 +152,7 @@
     List<HotelInfo> hotelInfoListClass = new ArrayList<HotelInfo>();  //根据用户的点击确定的
     Map<Integer,List<RoomInfo>> MapRoomList = (Map<Integer,List<RoomInfo>>)session.getAttribute("MapRoomList");
     List<RoomInfo> roomList = new ArrayList<RoomInfo>();
+    String userId = request.getParameter("userId");
     //System.out.println("keySet:"+MapRoomList.keySet());
     String yeChuan = request.getParameter("ye");
     String county = request.getParameter("county");
@@ -260,6 +258,8 @@
     <%}%>
 
 
+
+    <%--酒店信息展示--%>
     <%--如果在景点表中查找到--%>
     <%if(locateInfoList.size() != 0){%>
     <div class="row">
@@ -271,15 +271,17 @@
                     for(int i = 0;i < limite;i++){%>
             <div style="margin-top: 20px;height: 250px;width: 1000px;">
                 <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
-                        <img style="border-radius:10px;height: 200px;width: 280px;"
-                             src="/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getPicturePath()%>.jpeg" alt="">
+                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>"><img style="border-radius:10px;height: 200px;width: 280px;"
+                             src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>.jpeg" alt="">
+                        <%System.out.println("图片"+hotelInfoListClass.get((ye-1)*15+i).getOverPicture());%>
                     </a>
                 </div>
                 <div style="float: left;height: 250px;width: 300px;">
                     <dl><div style="float: left;position: absolute;">
-                        <a href=""><h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
+                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>">
+                            <h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                     <dl><div style="float: left;position: relative;top:40px;left: 0px;">
-                        <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
+                        <h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></div></dl>
                     <dl><div style="float: left;position: relative;top: 180px;">
                         <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
                 </div>
@@ -300,16 +302,18 @@
             <%}}else if(length != 1 && ye == length){
                 for (int i = 0;i < hotelInfoListClass.size()-(ye-1)*limite;i++){%>
                 <div style="margin-top: 20px;height: 250px;width: 1000px;">
-                    <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
+                    <div style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
+                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>">
                             <img style="border-radius:10px;height: 200px;width: 280px;"
-                        src="/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getPicturePath()%>.jpeg" alt="">
-                    </a>
+                                 src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>.jpeg" alt="">
+                        </a>
                     </div>
                     <div style="float: left;height: 250px;width: 300px;">
                         <dl><div style="float: left;position: absolute;">
-                            <a href=""><h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
+                            <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>">
+                                <h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                         <dl><div style="float: left;position: relative;top:40px;left: 0px;">
-                            <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
+                            <h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></div></dl>
                         <dl><div style="float: left;position: relative;top: 180px;">
                             <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
                     </div>
@@ -332,13 +336,15 @@
             %>
             <div style="margin-top: 20px;height: 250px;width: 1000px;">
                 <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
-                    <img style="border-radius:10px;height: 200px;width: 280px;"
-                         src="/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getPicturePath()%>.jpeg" alt="">
+                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>">
+                        <img style="border-radius:10px;height: 200px;width: 280px;"
+                         src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>.jpeg" alt="">
                     </a>
                 </div>
                 <div style="float: left;height: 250px;width: 300px;">
                     <dl><div style="float: left;position: absolute;">
-                        <a href=""><h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
+                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>">
+                            <h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                     <dl><div style="float: left;position: relative;top:40px;left: 0px;">
                         <a href=""><h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></a></div></dl>
                     <dl><div style="float: left;position: relative;top: 180px;">
@@ -370,8 +376,7 @@
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <%
-                //System.out.println("页："+ye);
-            %>
+                //System.out.println("页："+ye);%>
             <%if(ye <= 3 && length <5){/*System.out.println("输出123-limite");*/
                 for(int i = 1;i <= length;i++){%>
             <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>"><%=i%></a></li>

@@ -18,13 +18,15 @@
     <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <%--导入CSS--%>
-    <link rel="stylesheet" type="text/css" href="../lww/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../lww/css/common.css">
-    <link rel="stylesheet" type="text/css" href="../lww/css/index.css">
-    <script src="../lww/js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="../lww/js/bootstrap.min.js"></script>
-    <script src="../lww/js/getParameter.js"></script>
-    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lww/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lww/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lww/css/index.css">
+    <script src="${pageContext.request.contextPath}/lww/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/lww/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/lww/js/getParameter.js"></script>
+    <%--layui--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/mu/layui/css/layui.css">
+    <script type="application/javascript" src="${pageContext.request.contextPath}/mu/layui/layui.js"></script>
 
     <style>
         body{text-align:center}
@@ -35,35 +37,33 @@
             margin-top: 10px;
             height: 100px;
         }
-        /*订酒店标题*/
-        #headline{
-            margin-top:5%;
-        }
     </style>
 </head>
 <body>
 
-    <%String userId = (String) session.getAttribute("userId");
-    %>
+    <%String userId = (String)session.getAttribute("userId");%>
     <div id="header">
         <div class="freego_header clearfix" id="head_nav_warper">
             <div class="head_logo"><a class="freego_logo" title="FreeGo" href="http://localhost:8080/index.jsp"></a></div>
+
             <ul class="head_nav" id="_j_head_nav" role="tablist">
                 <li id="head_nav_index_li" role="presentation"><a href="" id="head_nav_index_a">首页</a></li>
                 <li id="head_nav_scenic_li" role="presentation"><a href="" id="head_nav_scenic_a" title="景点">景点</a></li>
                 <li id="head_nav_gonglve_li" role="presentation"><a href="" id="head_nav_gonglve_a" title="旅游攻略">旅游攻略</a></li>
                 <li id="head_nav_hotel_li" role="presentation"><a href="" id="head_nav_hotel_a" title="酒店">订酒店</a></li>
             </ul>
+
             <div class="login_status">
                 <!-- 未登录状态  -->
                 <div id="login_out" class="login_out">
-                    <a href="../lww/login.jsp">登录</a>
-                    <a href="../lww/register.jsp">注册</a>
+                    <a href="${pageContext.request.contextPath}/lww/login.jsp">登录</a>
+                    <a href="${pageContext.request.contextPath}/lww/register.jsp">注册</a>
                 </div>
             </div>
+
         </div>
     </div>
-    <script type="application/javascript" src="layui/layui.js"></script>
+
     <!--第一部分  输入框部分-->
     <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation&userId=<%=userId%>" >
         <!--出行目的地-->
@@ -75,6 +75,8 @@
             <input type="text" name="ruzhu" class="layui-input" placeholder="请选择日期" id="inTime" style=" border-radius: 4px;height: 35px;">
         </div>
         <script>
+            var hotellisj = hotelList;
+            $("#inTime").html(hotellisj);
             layui.use('laydate', function(){
                 var laydate = layui.laydate;
                 //执行一个laydate实例
@@ -112,6 +114,7 @@
         <%--<input type="hidden" id="methods" name="methods" value="queryLocation">--%>
         <input type="submit" class="btn btn-warning" value="查询">
     </form>
+
 
     <!--广告栏-->
     <div class="row">

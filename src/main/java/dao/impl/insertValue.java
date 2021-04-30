@@ -57,7 +57,7 @@ public class insertValue {
             suiji.add(14);
             suiji.add(18);
             suiji.add(19);
-            suiji.add(10);
+            suiji.add(20);
             suiji.add(21);
             suiji.add(22);
             suiji.add(23);
@@ -194,12 +194,13 @@ public class insertValue {
         for(int i = 0;i < hotelCollectList.size();i++){  //所有用户
             List<TagInfo> tagList = new ArrayList<TagInfo>();
             String sql = "select * from taglink where linkId = ? and type = ?";
+            //查出收藏的该酒店 所拥有的tag标签
             tagList = template.query(sql, new BeanPropertyRowMapper<TagInfo>(TagInfo.class),hotelCollectList.get(i).getHotelId(),"酒店");
             //System.out.println("数量"+tagList.size());
             for(int j = 0;j < tagList.size();j++){
                 /*try{*/
-                    String sqll = "update userprefer set preferWeight = preferWeight+? where tagId = ? and userId = ?";
-                    template.update(sql,(float)(0.5),tagList.get(j).getTagId(),hotelCollectList.get(i).getUserId());
+                String sqll = "update userprefer set preferWeight = preferWeight + ? where tagId = ? and userId = ?";
+                template.update(sqll,(float)(0.5),tagList.get(j).getTagId(),hotelCollectList.get(i).getUserId());
                 /*}catch (Exception e) {
                     System.out.println("失败4");
                 }*/
@@ -209,7 +210,7 @@ public class insertValue {
     public static void main(String[] arge){
         //insertValue.insertValue();  //给所有酒店插入它的tag
         //insertValue.insertCollect();//给所有用户随机收藏20-40个酒店景点
-        insertValue.insertUserPreferFirstValue();//给所用用户的tag设置成0
+        //insertValue.insertUserPreferFirstValue();//给所用用户的tag设置成0
         //insertValue.insertLikeWeigh();  //通过用户收藏更新用户对每个方向上的喜爱值
     }
 }

@@ -34,4 +34,23 @@ public interface HotelInfoService {
      */
     public Map<Integer,List<RoomInfo>> queryHotelofRoomByHotelId(List<HotelInfo> hotelList, Date ruzhu, Date likai);
     public Map<Integer,List<RoomInfo>> queryHotelofRoomByHotelId(List<HotelInfo> hotelList);
+
+    public int collectHotel(String userIdStr, String hotelIdStr);
+
+    public int disCollectHotel(String userIdStr, String hotelIdStr);
+
+    public int commentHotel(String parentIdStr,
+                            String userIdStr,
+                            String hotelIdStr,
+                            String parentCommentIdStr,
+                            String commentText,
+                            String cleanScoreStr,
+                            String allScoreStr,
+                            String locateScoreStr,
+                            String serviceScoreStr,
+                            String facilitiesScoreStr,
+                            String comfortScoreStr,
+                            String eatScoreStr,
+                            String HotelCommentStateStr,
+                            List<String> HotelCommentPictureList);
 }

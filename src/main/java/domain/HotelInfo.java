@@ -27,14 +27,14 @@ public class HotelInfo {
     private int hot;                //酒店热度
     private String sketch;          //酒店描述
     private Boolean flag;           //酒店状态(是否删除)
-    private String picturePath;    //封面路径
+    private String overPicture;    //封面路径
 
     public HotelInfo() {}
 
     public HotelInfo(int hotelId, String hotelName, String hotelAddress, String hotelTele, String country,
                      String province, String downtown, String county, float lng, float lat, float overallScore,
                      String openTime, String fitmentTime, String brand, int level, int hot, String sketch, Boolean flag,
-                     String picturePath) {
+                     String overPicture){
         this.hotelId = hotelId;
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
@@ -53,15 +53,15 @@ public class HotelInfo {
         this.hot = hot;
         this.sketch = sketch;
         this.flag = flag;
-        this.picturePath = picturePath;
+        this.overPicture = overPicture;
     }
 
-    public String getPicturePath() {
-        return picturePath;
+    public String getOverPicture() {
+        return overPicture;
     }
 
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
+    public void setOverPicture(String overPicture) {
+        this.overPicture = overPicture;
     }
 
     public int getHotelId() {
@@ -229,7 +229,7 @@ public class HotelInfo {
                 ", hot=" + hot +
                 ", sketch='" + sketch + '\'' +
                 ", flag=" + flag +
-                ", overPicture='" + picturePath + '\'' +
+                ", overPicture='" + overPicture + '\'' +
                 '}';
     }
 

@@ -8,6 +8,7 @@ package domain;
 public class HotelCommentInfo {
     private int commentId;          //评论id
     private int parentId;           //父id
+    private int parentCommentId;    //祖宗id
     private int userId;             //用户id
     private int hotelId;            //酒店id
     private String commentWord;     //评论内容
@@ -24,9 +25,12 @@ public class HotelCommentInfo {
 
     }
 
-    public HotelCommentInfo(int parentId, int userId, int hotelId, String commentWord, int allScore,
-                            int locateScore, int cleanScore, int facilitiesScore, int serviceScore, int comfortScore, int eatScore, Boolean flag) {
+    public HotelCommentInfo(int commentId, int parentId, int parentCommentId, int userId, int hotelId,
+                            String commentWord, int allScore, int locateScore, int cleanScore, int facilitiesScore,
+                            int serviceScore, int comfortScore, int eatScore, Boolean flag) {
+        this.commentId = commentId;
         this.parentId = parentId;
+        this.parentCommentId = parentCommentId;
         this.userId = userId;
         this.hotelId = hotelId;
         this.commentWord = commentWord;
@@ -38,6 +42,14 @@ public class HotelCommentInfo {
         this.comfortScore = comfortScore;
         this.eatScore = eatScore;
         this.flag = flag;
+    }
+
+    public int getParentCommentId() {
+        return parentCommentId;
+    }
+
+    public void setParentCommentId(int parentCommentId) {
+        this.parentCommentId = parentCommentId;
     }
 
     public int getCommentId() {

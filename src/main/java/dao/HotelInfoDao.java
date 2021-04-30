@@ -106,21 +106,6 @@ public interface HotelInfoDao {
     */
     List<RoomDateInfo> queryTheTimeRoom(int hotelId, String checkInDate, String departureDate);
 
-    /**
-     * @Author:  李旺旺
-     * @Date:    2021/4/3 11:01
-     * @param:   [comment]
-     * @Description: 系统根据酒店评论实体将其内部信息存储进酒店评论表（HotelCommentList）,若保存成功返回true，若保存失败返回false。
-     */
-    Boolean addHotelComment(HotelCommentInfo comment);
-
-    /**
-     * @Author:  李旺旺
-     * @Date:    2021/4/3 11:01
-     * @param:   [comment]
-     * @Description: 系统根据酒店评论实体将其中的图片按照顺序存储进酒店评论图片关系表（HotelCommentPictureRelation）中,若保存成功返回true，若保存失败返回false。
-     */
-    Boolean addHotelCommentPicture(HotelCommentInfo comment);
 
     /**
      * @Author:  李旺旺
@@ -172,4 +157,16 @@ public interface HotelInfoDao {
     *               查询成功返回酒店订单实例集合List<HotelOrderInfo>,若查询失败，返回 null。
     */
     List<HotelOrderInfo> queryHotelOrderInfo(int userId);
+
+    //关于景点的偏好的修改
+    int increaseUserPreferHotel(int userId, int hotelId, float weight)throws Exception;
+    int decreaseUserPreferHotel(int userId, int hotelId, float weight)throws Exception;
+    //收藏景点
+    int collectHotel(int userId, int hotelId)throws Exception;
+    //取消收藏景点
+    int disCollectHotel(int userId, int hotelId)throws Exception;
+    //添加评论
+    int addHotelComment(HotelCommentInfo hotelCommentInfo)throws Exception;
+    //添加评论的图片
+    int addHotelCommentPicture(int userId,int hotelCommentId, List<String> picturePathList)throws Exception;
 }
