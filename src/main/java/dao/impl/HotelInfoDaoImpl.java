@@ -228,31 +228,29 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
         }
         return null;
     }
-
-
-    public void queryLike(int userId){
-        List<UserInfo> userList = new ArrayList<UserInfo>();
-        /*try{
-            String sql = "select  from userprefer where";
-            //2.执行
-           // hotelList = template.query(sql, new BeanPropertyRowMapper<UserInfo>(UserInfo.class), );
-        }*/
-    }
-
-    public static void main(String[] args) throws ParseException {
-        //updateImg();
+    public static Boolean judgeNewUser(int userId){
         JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
-        HotelInfo hotel = new HotelInfo();
+        List<UserPreferInfo> userperfer = new ArrayList<UserPreferInfo>();
         try{
-            //1.定义sql语句
-            String sql = "select * from Hotel where hotelId = ?";
+            String sql = "select * from userprefer where userId = ?";
             //2.执行
-            hotel = template.queryForObject(sql, new BeanPropertyRowMapper<HotelInfo>(HotelInfo.class), 1000);
-        }catch (Exception e){
-            System.out.println("根据用户手机号查询用户信息失败");
+            userperfer = template.query(sql, new BeanPropertyRowMapper<UserPreferInfo>(UserPreferInfo.class),userId);
+        }catch (Exception e) {
+            System.out.println("查询用户偏爱表失败");
         }
-        System.out.println("图片"+hotel.getOverPicture());
+        int k = 0;
+        for(int i = 0;i < userperfer.size();i++){
+            if(userperfer.get(i).getPreferWeight()!=0){
+                k++;
+            }
+        }
+        if(k!=0){//老用户
+            return false;
+        }else{//新用户
+            return true;
+        }
     }
+
     /*为数据库中的房间添加数据*/
     public void insertAllRoom(){
         String sql = "insert into room(roomId,hotelId,roomName,peopleLimite,roomPrice,roomInform,flag,relateService) values(?,?,?,?,?,?,?,?)";
@@ -334,7 +332,7 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
             //2.执行
             ppList = template.query(sql, new BeanPropertyRowMapper<HotelPictureRelationInfo>(HotelPictureRelationInfo.class), hotelId);
         }catch (Exception e){
-            System.out.println("根据用户手机号查询用户信息失败");
+            System.out.println("查询酒店对应的照片");
         }
         for(int i = 0;i < ppList.size();i++){
             pList.add(ppList.get(i).getPicturePath());

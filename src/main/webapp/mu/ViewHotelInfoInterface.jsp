@@ -88,8 +88,8 @@
     <script async="" src="https://js.mafengwo.net/js/cv/js+Dropdown:js+pageletcommon+pageHeadUserInfoWWWNormal:js+jquery.tmpl:js+M+module+InputListener:js+M+module+SuggestionXHR:js+M+module+DropList:js+M+module+Suggestion:js+M+module+MesSearchEvent:js+SiteSearch:js+AHeader:js+M+module+PageAdmin:js+M+module+Storage:js+M+module+Cookie:js+M+module+ResourceKeeper:js+jquery.jgrowl.min:js+AMessage:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+dialog+alert:js+M+module+FrequencyVerifyControl:js+M+module+FrequencySystemVerify:js+ALogin:js+M+module+ScrollObserver:js+M+module+QRCode:js+AToolbar:js+ACnzzGaLog:js+ARecruit:js+ALazyLoad:js+jquery.scrollTo:js+MouseTip:js+hotel+module+Hash:js+hotel+module+ModuleProvider:js+hotel+module+ImageLoader:js+hotel+module+Album:js+hotel+module+AlbumComment:js+hotel+module+Log:js+hotel+module+FavDialog:js+hotel+mfwmap+mfwmap-util:js+hotel+mfwmap+mfwmap-event:js+hotel+mfwmap+mfwmap-runtime-google:js+hotel+mfwmap+mfwmap-runtime-amap:js+hotel+mfwmap+mfwmap-runtime-leaflet:js+hotel+mfwmap+mfwmap:js+hotel+mfwmap+mfwmap-overlays:js+hotel+module+ListTips:js+xdate:js+hotel+module+BookingDate:js+hotel+info:js+hotel+module+FestivalDateConfig:js+jquery-ui-core:js+jquery-ui-datepicker:js+hotel+module+DateRangePicker:js+hotel+module+BookingGuests:js+hotel+module+NumberGuestsPicker:js+hotel+module+BookingInfo:js+hotel+info_booking:js+M+module+Pagination:js+M+module+TopTip:js+hotel+module+ReportDialog:js+hotel+info_comment:js+hotel+pc_app_guide^YlFVSg^1584071349.js" crossorigin="anonymous"></script>
     <script async="" src="https://js.mafengwo.net/js/BrowserState.js?1542357400" crossorigin="anonymous"></script>
 </head>
-<%  String userId = (String) session.getAttribute("userId");
-    String hotelId = (String) session.getAttribute("hotelId");
+<%
+    int userId = (int) session.getAttribute("userId");
     //List<RoomInfo> roomList = new ArrayList<RoomInfo>();
     HotelInfo hotel= (HotelInfo) session.getAttribute("hotelInfo");
     List<String> hotelInPictureList = (List<String>)session.getAttribute("hotelPicture");
@@ -102,44 +102,22 @@
             <span class="tit">您在这里：</span>
             <div class="item">
                 <div class="drop">
-                    <span class="hd"><a href="/hotel/" target="_blank">酒店<i></i></a></span>
+                    <span class="hd">酒店<i></i></span>
                     <div class="bd" style="width:auto">
                         <i class="arrow"><b></b></i>
-                        <div class="col">
-                            <h3>周边国家和地区</h3>
-                            <ul class="clearfix">
-                                <li><a href="/hotel/11780/" target="_blank" title="朝鲜酒店预订">朝鲜<span>North Korea</span></a></li>
-                                <li><a href="/hotel/10184/" target="_blank" title="韩国酒店预订">韩国<span>Korea</span></a></li>
-                                <li><a href="/hotel/14293/" target="_blank" title="蒙古酒店预订">蒙古<span>Mongolia</span></a></li>
-                                <li><a href="/hotel/10183/" target="_blank" title="日本酒店预订">日本<span>Japan</span></a></li>
-                                <li><a href="/hotel/10300/" target="_blank" title="俄罗斯酒店预订">俄罗斯<span>Russia</span></a></li>
-                                <li><a href="/hotel/10820/" target="_blank" title="老挝酒店预订">老挝<span>Laos</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="more"><a href="/hotel/" target="_blank">&gt;&gt;更多国家和地区</a></div>                        </div>
+                    </div>
                 </div>
-                <em></em>                </div>
+            </div>
             <div class="item">
                 <div class="drop">
-                    <span class="hd"><a href="/hotel/21536/" target="_blank" title="中国酒店预订">中国<i></i></a></span>
+                    <span class="hd"><%=hotel.getCounty()%><i></i></span>
                     <div class="bd" style="width:auto">
                         <i class="arrow"><b></b></i>
-                        <div class="col">
-                            <h3>中国其他城市</h3>
-                            <ul class="clearfix">
-                                <li><a href="/hotel/10065/" target="_blank" title="北京閰掑簵鎺ㄨ崘">北京<span>Beijing</span></a></li>
-                                <li><a href="/hotel/10099/" target="_blank" title="上海閰掑簵鎺ㄨ崘">上海<span>Shanghai</span></a></li>
-                                <li><a href="/hotel/10195/" target="_blank" title="西安閰掑簵鎺ㄨ崘">西安<span>Xi'an</span></a></li>
-                                <li><a href="/hotel/10088/" target="_blank" title="广州閰掑簵鎺ㄨ崘">广州<span>guangzhou</span></a></li>
-                                <li><a href="/hotel/10208/" target="_blank" title="重庆閰掑簵鎺ㄨ崘">重庆<span>ChongQing</span></a></li>
-                                <li><a href="/hotel/10035/" target="_blank" title="成都閰掑簵鎺ㄨ崘">成都<span>Chengdu</span></a></li>
-                            </ul>
                         </div>
-                        <div class="more"><a href="/hotel/21536/" target="_blank">&gt;&gt;更多城市</a></div>                        </div>
                 </div>
                 <em></em>                </div>
-            <div class="item"><a href="/hotel/10198/" target="_blank" title="深圳酒店查询">深圳</a><em>&gt;</em></div>
-            <div class="item cur"><strong title="深圳皇庭V酒店预订">深圳皇庭V酒店预订</strong></div>
+            <div class="item"><a target="_blank" title="深圳酒店查询"><%=hotel.getDowntown()%></a><em>&gt;</em></div>
+            <div class="item cur"><strong title="深圳皇庭V酒店预订"><%=hotel.getHotelName()%>预订</strong></div>
         </div>
         <div class="weather-wrapper">
 
@@ -163,18 +141,16 @@
         <div class="main-title">
             <h1>深圳皇庭V酒店</h1>
         </div>
-        <div class="en-title"><span>Wongtee V Hotel</span></div>
-        <div class="location"><span title="金田路2028号皇岗商务中心26楼办理入住">地址：金田路2028号皇岗商务中心26楼办理入住...</span><a class="a-maps" href="/hotel/list_map.php?poiid=97816"><i class="icon-bg"></i>查看地图</a></div>
+        <div class="location"><span>地址：<%=hotel.getHotelAddress()%></span><a class="a-maps" href="/hotel/list_map.php?poiid=97816"></div>
     </div>
 
     <div class="intro-bd clearfix" data-cs-t="酒店详情页">
         <div class="img-big _j_album_trigger clickstat " data-id="862053914" data-is-top-album="1" data-cs-p="图片" data-cs-l="大图" data-cs-d="大图">
             <img src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotel.getOverPicture()%>.jpeg">
-            <span class="num"><em>84</em> 张图片</span>
+            <span class="num"></span>
         </div>
         <ul class="img-small">
             <%for(int hipl = 0;hipl < hotelInPictureList.size();hipl++){%>
-
             <li><img class="_j_album_trigger clickstat"
                      src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/inPicture/<%=hotelInPictureList.get(hipl)%>" data-id="16108332" data-cs-p="图片" data-cs-l="小图" data-cs-d="小图"></li>
             <%}%>

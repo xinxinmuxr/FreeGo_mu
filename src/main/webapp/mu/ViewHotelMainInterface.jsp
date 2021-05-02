@@ -149,7 +149,7 @@
 
     <!-----------根据地点推荐酒店----------->
     <!--标题-->
-    <div class="row">
+    <div class="row" style="margin-top: 40px;">
         <div class="col-md-5"></div>
         <div class="col-md-2"><h3>主题酒店</h3></div>
         <div class="col-md-5"></div>

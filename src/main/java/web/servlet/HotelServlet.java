@@ -80,7 +80,6 @@ public class HotelServlet extends HttpServlet {
             //System.out.println("overPicture:"+overPictureInt);
             //roomList = impl.queryRoomAll(hotelId);
             hs.setAttribute("hotelPicture",hotelPicture);
-            hs.setAttribute("userId",hotel);
             hs.setAttribute("userId",userId);
             hs.setAttribute("hotelInfo",hotelInfo);
             //hs.setAttribute("roomList",roomList);

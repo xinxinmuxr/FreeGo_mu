@@ -1,4 +1,5 @@
-<%--
+<%@ page import="domain.HotelInfo" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: hp
   Date: 2021/4/29

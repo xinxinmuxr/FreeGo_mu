@@ -61,10 +61,13 @@ public class insertValue {
             suiji.add(21);
             suiji.add(22);
             suiji.add(23);
+            suiji.add(24);
+            suiji.add(25);
+            suiji.add(26);
             //随机去掉几个
             /*想让标签少就把suiji.size()*?的倍数加大 */
             for (int k = 0; k < suiji.size()*3; k++) {
-                int value = (int) (random() * 24);
+                int value = (int) (random() * 26)+1;
                 System.out.println("随机数为:" + value);
                 for (int l = 0; l < suiji.size(); l++) {
                     if (value == suiji.get(l)) {
@@ -149,7 +152,7 @@ public class insertValue {
             System.out.println("失败");
         }
         for(int i= 0;i < userList.size();i++){
-            for(int j = 1;j <= 23;j++){
+            for(int j = 1;j <= 26;j++){
                 try {
                     //1.定义sql语句
                     String sql = "insert into userprefer(userId,tagId,preferWeight) values(?,?,?)";
@@ -215,7 +218,7 @@ public class insertValue {
 
         //其余插入
         //insertValue.insertRoomPicture();
-        insertValue.insertHotelPicture();
+        //insertValue.insertHotelPicture();
     }
     /*插入每个房间对应的小图片*/
     public static void insertRoomPicture(){
@@ -293,8 +296,8 @@ public class insertValue {
             }
             for(int kk = 0;kk < pictureList.size();kk++){
                     //1.定义sql语句
-                    String sql = "insert into hotelpicturerelation(hotelId,picturePath,order) values(?,?,?)";
-                    template.update(sql,hotelInfoList.get(i).getHotelId(),pictureList.get(kk)+".jpeg",kk+1);
+                    String sql = "insert into hotelpicturerelation(hotelId,picturePath,pictureOrder) values(?,?,?)";
+                    template.update(sql,hotelInfoList.get(i).getHotelId(),String.valueOf(pictureList.get(kk))+".jpeg",kk+1);
             }
         }
     }

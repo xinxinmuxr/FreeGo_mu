@@ -75,7 +75,7 @@ public class LocationServlet extends HttpServlet {
                 session.setAttribute("hotelList", hotelList);
                 session.setAttribute("locateList", locateList);
                 session.setAttribute("MapRoomList", MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
-                System.out.println("既有地点又有景点");
+                //System.out.println("既有地点又有景点");
                 request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request, response);
             }else if ((!ruzhu.equals("")) && (!likai.equals(""))) {  //离开 入住都有
                 System.out.println("成功");

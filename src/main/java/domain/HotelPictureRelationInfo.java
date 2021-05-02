@@ -19,6 +19,9 @@ public class HotelPictureRelationInfo {
     private String picturePath;
     private int order;
 
+    public HotelPictureRelationInfo() {
+    }
+
     public HotelPictureRelationInfo(int hotelId, String picturePath, int order) {
         this.hotelId = hotelId;
         this.picturePath = picturePath;
