@@ -94,55 +94,7 @@
     </div>
 </div>
 
-    <%--layui--%>
-    <!--第一部分  输入框部分-->
-    <form class="form-inline" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation" >
-        <!--出行目的地-->
-        <div class="form-group" style="margin-left: 5px;">
-            <input id="distinati" name="mudidi"  type="text" class="form-control"  placeholder="出行目的地">
-        </div>
-        <!--入住日期-->
-        <div class="form-group" style="margin-left: 5px;">
-            <input type="text" class="layui-input" id="ruzhu" placeholder="请选择日期">
-        </div>
-        <script>
-            layui.use('laydate', function(){
-                var laydate = layui.laydate;
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#ruzhu' //指定元素
-                });
-            });
-        </script>
-        <!--离店日期-->
-        <div class="form-group" style="margin-left: 5px;">
-            <input type="text" class="layui-input" id="likai" placeholder="请选择日期">
-        </div>
-        <script>
-            layui.use('laydate', function(){
-                var laydate = layui.laydate;
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#likai' //指定元素
-                });
-            });
-        </script>
-        <!--人数-->
-        <div class="form-group" style="margin-left: 5px;">
-            <h4>人数</h4>
-        </div>
-        <div class="form-group" style="margin-left: 5px;">
-            <select class="form-control" name="renshu">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-        </div>
 
-        <input type="submit" class="btn btn-warning" value="查询">
-    </form>
 
     <%--接收从servlet中的数据--%>
     <%
@@ -152,6 +104,7 @@
     List<HotelInfo> hotelInfoListClass = new ArrayList<HotelInfo>();  //根据用户的点击确定的
     Map<Integer,List<RoomInfo>> MapRoomList = (Map<Integer,List<RoomInfo>>)session.getAttribute("MapRoomList");
     List<RoomInfo> roomList = new ArrayList<RoomInfo>();
+
     String userId = request.getParameter("userId");
     //System.out.println("keySet:"+MapRoomList.keySet());
     String yeChuan = request.getParameter("ye");
@@ -191,6 +144,55 @@
         }
         //System.out.println("总页数"+length);
     %>
+    <%--layui--%>
+    <!--第一部分  输入框部分-->
+    <form class="form-inline" style="margin-top: 30px" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation&userId=<%=userId%>" >
+        <!--出行目的地-->
+        <div class="form-group" style="margin-left: 5px;">
+            <input id="distination" name="mudidi" style="width: 300px;" type="text" class="form-control"  placeholder="出行目的地">
+        </div>
+        <!--入住日期-->
+        <div class="form-group" style="margin-left: 5px;">
+            <input type="text" name="ruzhu"  class="layui-input" placeholder="请选择日期" id="inTime" style=" border-radius: 4px;height: 35px;width: 230px;">
+        </div>
+        <script>
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#inTime' //指定元素
+                });
+            });
+        </script>
+        <!--离店日期-->
+        <div class="form-group" style="margin-left: 5px;">
+            <input type="text" name="likai"  class="layui-input" placeholder="请选择日期" id="outTime" style="width:230px;border-radius: 4px;height: 35px">
+        </div>
+        <script>
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#outTime' //指定元素
+                });
+            });
+        </script>
+        <!--人数-->
+        <div class="form-group" style="margin-left: 5px;">
+            <h4>人数</h4>
+        </div>
+        <div class="form-group" style="margin-left: 5px;">
+            <select class="form-control" name="renshu"style="width: 100px;">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <%--<input type="hidden" id="methods" name="methods" value="queryLocation">--%>
+        <input type="submit" class="btn btn-warning" value="查询">
+    </form>
     <%--地图模块    展开--%>
     <%if(locateInfoList.size() == 1){%>
         <%--信息&地图模块--%>
@@ -204,12 +206,12 @@
                             <form class="form-inline" style="position: relative;float:left;margin-left: 45px;">
                                 <%if(county == null || county.equals("suoyou")){%>
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <a class="layui-font-orange" href="/HotelServlet?methods=Class&county=suoyou&ye=1">
+                                    <a class="layui-font-orange" href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=suoyou&ye=1&userId=<%=userId%>">
                                         <h5>全部</h5></a>
                                 </div>
                                 <%for (int i = 0;i < countyList.size();i++){%>
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <a href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
+                                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1&userId=<%=userId%>">
                                         <h5><%=countyList.get(i)%></h5>
                                     </a>
                                 </div>
@@ -217,19 +219,19 @@
                                 <%}%>
                                 <%}else{%>
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <a href="/HotelServlet?methods=Class&county=suoyou&ye=1">
+                                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=suoyou&ye=1&userId=<%=userId%>">
                                     <h5>全部</h5></a>
                                 </div>
                                 <%for (int i = 0;i < countyList.size();i++){
                                     if(county.equals(countyList.get(i))){%>
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <a class="layui-font-orange" href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
+                                    <a class="layui-font-orange" href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1&userId=<%=userId%>">
                                         <h5><%=countyList.get(i)%></h5>
                                     </a>
                                 </div>
                                 <%}else{%>
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <a href="/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1">
+                                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1&userId=<%=userId%>">
                                         <h5><%=countyList.get(i)%></h5>
                                     </a>
                                 </div>
@@ -248,7 +250,7 @@
                     </div>
                     <%--地图--%>
                     <div style="position: relative;margin-left: 420px;">
-                        <iframe name="my-iframe" id="baiduMap" src="/mu/baiduMapTest.jsp?lng=<%=locateInfoList.get(0).getLng()%>&lag=<%=locateInfoList.get(0).getLag()%>" frameborder="0" width="400px" height="200px" scrolling="no"></iframe>
+                        <iframe name="my-iframe" id="baiduMap" src="${pageContext.request.contextPath}/mu/baiduMapTest.jsp?lng=<%=locateInfoList.get(0).getLng()%>&lag=<%=locateInfoList.get(0).getLag()%>" frameborder="0" width="400px" height="200px" scrolling="no"></iframe>
                     </div>
 
                 </div>
@@ -269,7 +271,7 @@
                     for(int i = 0;i < limite;i++){%>
             <div style="margin-top: 20px;height: 250px;width: 1000px;">
                 <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
-                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
+                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoListClass.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                         <img style="border-radius:10px;height: 200px;width: 280px;"
                              src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>.jpeg" alt="">
                         <%--<%System.out.println("图片"+hotelInfoListClass.get((ye-1)*15+i).getOverPicture());%>--%>
@@ -277,7 +279,7 @@
                 </div>
                 <div style="float: left;height: 250px;width: 300px;">
                     <dl><div style="float: left;position: absolute;">
-                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
+                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoListClass.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                             <h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                     <dl><div style="float: left;position: relative;top:40px;left: 0px;">
                         <h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></div></dl>
@@ -285,8 +287,8 @@
                         <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
                 </div>
                 <div style="float: right;margin-top: 100px;">
-                <%for(int k = 0;k < MapRoomList.get(hotelInfoList.get(i).getHotelId()).size();k++){
-                roomList = MapRoomList.get(hotelInfoList.get(i).getHotelId());%>
+                <%for(int k = 0;k < MapRoomList.get(hotelInfoListClass.get(i).getHotelId()).size();k++){
+                roomList = MapRoomList.get(hotelInfoListClass.get(i).getHotelId());%>
                 <div style="float: right;width: 300px;margin-top: 35px;">
                     <div style="float: left;position: absolute;">
                         <div class="layui-font-18"><%=roomList.get(k).getRoomName()%></div></div>
@@ -302,14 +304,14 @@
                 for (int i = 0;i < hotelInfoListClass.size()-(ye-1)*limite;i++){%>
                 <div style="margin-top: 20px;height: 250px;width: 1000px;">
                     <div style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
-                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
+                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoListClass.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                             <img style="border-radius:10px;height: 200px;width: 280px;"
                                  src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>.jpeg" alt="">
                         </a>
                     </div>
                     <div style="float: left;height: 250px;width: 300px;">
                         <dl><div style="float: left;position: absolute;">
-                            <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
+                            <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoListClass.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                                 <h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                         <dl><div style="float: left;position: relative;top:40px;left: 0px;">
                             <h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></div></dl>
@@ -317,8 +319,8 @@
                             <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
                     </div>
                     <div style="float: right;margin-top: 100px;">
-                        <%for(int k = 0;k < MapRoomList.get(hotelInfoList.get(i).getHotelId()).size();k++){
-                            roomList = MapRoomList.get(hotelInfoList.get(i).getHotelId());%>
+                        <%for(int k = 0;k < MapRoomList.get(hotelInfoListClass.get(i).getHotelId()).size();k++){
+                            roomList = MapRoomList.get(hotelInfoListClass.get(i).getHotelId());%>
                         <div style="float: right;width: 300px;margin-top: 35px;">
                             <div style="float: left;position: absolute;">
                                 <div class="layui-font-18"><%=roomList.get(k).getRoomName()%></div></div>
@@ -335,14 +337,14 @@
             %>
             <div style="margin-top: 20px;height: 250px;width: 1000px;">
                 <div  style="float: left;width: 300px;height: 216px;position: relative;margin-right: 20px;">
-                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
+                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoListClass.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                         <img style="border-radius:10px;height: 200px;width: 280px;"
                          src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>.jpeg" alt="">
                     </a>
                 </div>
                 <div style="float: left;height: 250px;width: 300px;">
                     <dl><div style="float: left;position: absolute;">
-                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoList.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
+                        <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=hotelInfoListClass.get((ye-1)*15+i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=hotelInfoListClass.get((ye-1)*15+i).getOverPicture()%>">
                             <h3><%=hotelInfoListClass.get((ye-1)*15+i).getHotelName()%></h3></a></div></dl>
                     <dl><div style="float: left;position: relative;top:40px;left: 0px;">
                         <h6>电话:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelTele()%></h6></div></dl>
@@ -350,8 +352,8 @@
                         <h6>地址:<%=hotelInfoListClass.get((ye-1)*15+i).getHotelAddress()%></h6></div></dl>
                 </div>
                 <div style="float: right;margin-top: 100px;">
-                    <%for(int k = 0;k < MapRoomList.get(hotelInfoList.get(i).getHotelId()).size();k++){
-                        roomList = MapRoomList.get(hotelInfoList.get(i).getHotelId());%>
+                    <%for(int k = 0;k < MapRoomList.get(hotelInfoListClass.get(i).getHotelId()).size();k++){
+                        roomList = MapRoomList.get(hotelInfoListClass.get(i).getHotelId());%>
                     <div style="float: right;width: 300px;margin-top: 35px;">
                         <div style="float: left;position: absolute;">
                             <div class="layui-font-18"><%=roomList.get(k).getRoomName()%></div></div>

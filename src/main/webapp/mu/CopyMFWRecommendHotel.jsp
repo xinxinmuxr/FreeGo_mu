@@ -49,9 +49,9 @@
 </div>
 
 <%Map<String,List<HotelInfo>> returnMap = (Map<String, List<HotelInfo>>)session.getAttribute("returnMap");
-    Iterator<Map.Entry<String,List<HotelInfo>>> it = returnMap.entrySet().iterator();
-    /*System.out.println(returnMap.size());*/
-    String userId = (String)session.getAttribute("userId");
+  Iterator<Map.Entry<String,List<HotelInfo>>> it = returnMap.entrySet().iterator();
+/*System.out.println(returnMap.size());*/
+String userId = (String)session.getAttribute("userId");
 %>
 
 <%--广告--%>
@@ -64,7 +64,7 @@
         </div>
         <!--入住日期-->
         <div class="form-group" style="margin-left: 5px;">
-            <input type="text" name="ruzhu"  class="layui-input" placeholder="请选择日期" id="inTime" style=" border-radius: 4px;height: 35px;width: 230px;">
+            <input type="text" name="ruzhu"  class="layui-input" placeholder="请选择日期" id="inTime" style=" border-radius: 4px;height: 35px;width: 200px;">
         </div>
         <script>
             layui.use('laydate', function(){
@@ -77,7 +77,7 @@
         </script>
         <!--离店日期-->
         <div class="form-group" style="margin-left: 5px;">
-            <input type="text" name="likai"  class="layui-input" placeholder="请选择日期" id="outTime" style="width:230px;border-radius: 4px;height: 35px">
+            <input type="text" name="likai"  class="layui-input" placeholder="请选择日期" id="outTime" style="width:200px;border-radius: 4px;height: 35px">
         </div>
         <script>
             layui.use('laydate', function(){
@@ -89,11 +89,11 @@
             });
         </script>
         <!--人数-->
-        <div class="form-group" style="margin-left: 5px;">
+        <div class="form-group" style="margin-left: 5px;width: 140px;">
             <h4>人数</h4>
         </div>
         <div class="form-group" style="margin-left: 5px;">
-            <select class="form-control" name="renshu"style="width: 100px;">
+            <select class="form-control" name="renshu">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -150,9 +150,9 @@
                         Map.Entry<String,List<HotelInfo>> entry = it.next();
                         String tag = entry.getKey();%>
                 <%if(tagNum == 1){%>
-                <a href="javascript:;" data-id="<%=tagNum-1%>" class="on"><%=tag%></a>
+                    <a href="javascript:;" data-id="<%=tagNum-1%>" class="on"><%=tag%></a>
                 <%}else{%>
-                <a href="javascript:;" data-id="<%=tagNum-1%>"><%=tag%></a>
+                    <a href="javascript:;" data-id="<%=tagNum-1%>"><%=tag%></a>
                 <%}}%>
             </div>
             <div class="_j_tab_content">
@@ -167,7 +167,7 @@
                         String tag = entry.getKey();
                         List<HotelInfo> value = entry.getValue();
                         System.out.println("key:"+entry.getKey()+"  key:"+entry.getValue());
-                %>
+                    %>
                 <ul class="clearfix" style="" data-id="<%=num-1%>">
                     <% //System.out.println("有"+value.size()+"张图片");
                         for(int i = 0;i < value.size();i++){%>
@@ -194,6 +194,7 @@
             </div>
         </div>
     </div>
+
 </div>
 </body>
 </html>

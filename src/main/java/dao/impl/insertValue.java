@@ -66,7 +66,7 @@ public class insertValue {
             suiji.add(26);
             //随机去掉几个
             /*想让标签少就把suiji.size()*?的倍数加大 */
-            for (int k = 0; k < suiji.size()*3; k++) {
+            for (int k = 0; k < suiji.size()*8; k++) {
                 int value = (int) (random() * 26)+1;
                 System.out.println("随机数为:" + value);
                 for (int l = 0; l < suiji.size(); l++) {
@@ -212,9 +212,9 @@ public class insertValue {
     }
     public static void main(String[] arge){
         //insertValue.insertValue();  //给所有酒店插入它的tag
-        //insertValue.insertCollect();//给所有用户随机收藏20-40个酒店景点
-        //insertValue.insertUserPreferFirstValue();//给所用用户的tag设置成0
-        //insertValue.insertLikeWeigh();  //通过用户收藏更新用户对每个方向上的喜爱值
+        insertValue.insertCollect();//给所有用户随机收藏20-40个酒店景点
+        insertValue.insertUserPreferFirstValue();//给所用用户的tag设置成0
+        insertValue.insertLikeWeigh();  //通过用户收藏更新用户对每个方向上的喜爱值
 
         //其余插入
         //insertValue.insertRoomPicture();

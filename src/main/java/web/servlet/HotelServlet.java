@@ -9,6 +9,7 @@ package web.servlet;/**
  */
 
 import dao.impl.HotelInfoDaoImpl;
+import dao.impl.QueryLike;
 import domain.HotelInfo;
 import domain.LocateInfo;
 import domain.RoomInfo;
@@ -24,7 +25,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import static dao.impl.QueryLike.queryLike;
 
 /**
  * ClassName: HotelServlet <br/>
@@ -52,13 +57,23 @@ public class HotelServlet extends HttpServlet {
         if(methods.equals("Class")){ //酒店分地区
             String county = req.getParameter("county");
             String ye = req.getParameter("ye");
+            String userId = req.getParameter("userId");
+            req.setAttribute("userId",userId);
             req.setAttribute("county",county);
             req.setAttribute("ye",ye);
             req.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(req,resp);
         }else if(methods.equals("toHotel")){
             String userId = req.getParameter("userId");
+            Map<String,List<HotelInfo>> returnMap = queryLike(Integer.parseInt(userId));
+            //System.out.println("Map:"+returnMap.size());
+            //Iterator<Map.Entry<String,List<HotelInfo>>> it = returnMap.entrySet().iterator();
+            /*while(it.hasNext()){
+                Map.Entry<String,List<HotelInfo>> entry = it.next();
+                System.out.println("key:"+entry.getKey()+"  key:"+entry.getValue());
+            }*/
             HttpSession session = req.getSession();
             session.setAttribute("userId",userId);
+            session.setAttribute("returnMap",returnMap);
             req.getRequestDispatcher("/mu/ViewHotelMainInterface.jsp").forward(req,resp);
         }else if(methods.equals("toViewHotel")){
             HotelInfoDaoImpl hotelImpl = new HotelInfoDaoImpl();
@@ -67,6 +82,7 @@ public class HotelServlet extends HttpServlet {
             String overPicture = req.getParameter("overPicture");
             int hotelId = Integer.parseInt(hotelIdStr);
             int userId = Integer.parseInt(userIdStr);
+
             HotelInfo hotel = hotelImpl.queryOneHotel(hotelId);
             HotelInfoDaoImpl impl = new HotelInfoDaoImpl();
             //获得  酒店 信息
