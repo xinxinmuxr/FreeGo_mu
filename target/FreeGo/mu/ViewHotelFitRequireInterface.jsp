@@ -380,20 +380,19 @@
                 //System.out.println("页："+ye);%>
             <%if(ye <= 3 && length <5){/*System.out.println("输出123-limite");*/
                 for(int i = 1;i <= length;i++){%>
-            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>"><%=i%></a></li>
+            <li><a href="${pageContext.request.contextPath}/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>&userId=<%=userId%>"><%=i%></a></li>
             <%}}else if(ye <=3 && length >5){/*System.out.println("输出12345");*/
                 for(int i = 1;i <= 5;i++){%>
-            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>"><%=i%></a></li>
+            <li><a href="${pageContext.request.contextPath}/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>&userId=<%=userId%>"><%=i%></a></li>
             <%}}else if(ye >3 && ye+2<length){/*System.out.println("输出ye-1 y1-2 ye ye+1 ye+2");*/
                 for(int i = ye-2;i <= ye+2;i++){%>
-            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>"><%=i%></a></li>
+            <li><a href="${pageContext.request.contextPath}/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>&userId=<%=userId%>"><%=i%></a></li>
             <%}}else if(ye > 3 && ye +2>length){/*System.out.println("limite -1-2-3-4-5");*/
                 for(int i = length-4;i <= length;i++){%>
-            <li><a href="/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>"><%=i%></a></li>
+            <li><a href="${pageContext.request.contextPath}/LocationServlet?methods=updateFitInterface&ye=<%=i%>&county=<%=county%>&userId=<%=userId%>"><%=i%></a></li>
             <%}}%>
         </ul>
     </nav>
-
 </body>
 </html>
 <%--<nav aria-label="Page navigation">
