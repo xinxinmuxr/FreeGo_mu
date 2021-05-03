@@ -57,6 +57,14 @@ public class LocationServlet extends HttpServlet {
             String mudidi = request.getParameter("mudidi");
             String ruzhu = request.getParameter("ruzhu");
             String likai = request.getParameter("likai");
+            if(ruzhu==null){
+                System.out.println("空");
+            }else{
+                if(ruzhu.equals("")){
+                    System.out.println("\"\"");
+                }
+                System.out.println("入住日期是"+ruzhu);
+            }
             //System.out.println("userId:"+userId);
             locateList = queryLocation(mudidi);//查询地点
             HotelServlet hotelServlet = new HotelServlet();
@@ -108,6 +116,8 @@ public class LocationServlet extends HttpServlet {
                 session.setAttribute("MapRoomList", MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
                 session.setAttribute("hotelList", hotelList);       //符合输入的酒店列表
                 session.setAttribute("locateList",locateList);
+                session.setAttribute("ruzhu",ruzhu);
+                session.setAttribute("likai",likai);
                 //第几页
                 request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request, response);
             }

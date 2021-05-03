@@ -105,6 +105,10 @@
     Map<Integer,List<RoomInfo>> MapRoomList = (Map<Integer,List<RoomInfo>>)session.getAttribute("MapRoomList");
     List<RoomInfo> roomList = new ArrayList<RoomInfo>();
 
+    String likai = null;
+    likai = (String) session.getAttribute("likai");
+    String ruzhu = null;
+    ruzhu = (String) session.getAttribute("ruzhu");
     String userId = request.getParameter("userId");
     //System.out.println("keySet:"+MapRoomList.keySet());
     String yeChuan = request.getParameter("ye");
@@ -153,7 +157,9 @@
         </div>
         <!--入住日期-->
         <div class="form-group" style="margin-left: 5px;">
+            <%if(ruzhu!= null){%>
             <input type="text" name="ruzhu"  class="layui-input" placeholder="请选择日期" id="inTime" style=" border-radius: 4px;height: 35px;width: 230px;">
+            <%}%>
         </div>
         <script>
             layui.use('laydate', function(){
