@@ -7,7 +7,7 @@ import domain.HotelInfo;
 import domain.RoomInfo;
 import service.HotelInfoService;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 

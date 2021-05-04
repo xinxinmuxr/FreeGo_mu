@@ -6,7 +6,7 @@ import domain.RoomDateInfo;
 import domain.RoomInfo;
 import service.impl.LocationInfoServiceImpl;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 

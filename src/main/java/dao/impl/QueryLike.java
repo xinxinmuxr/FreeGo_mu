@@ -67,7 +67,7 @@ public class QueryLike {
             String sql = "select * from user where userId <> ?";
             //2.执行
             userList = template.query(sql, new BeanPropertyRowMapper<UserInfo>(UserInfo.class),userId);
-            System.out.println("userList:"+userList.size()+"first"+userList.get(0).getUserId());
+            //System.out.println("userList:"+userList.size()+"first"+userList.get(0).getUserId());
         }catch(Exception e){
             System.out.println("查询用户偏爱表失败");
         }
@@ -227,7 +227,7 @@ public class QueryLike {
         Iterator<Map.Entry<String,List<HotelInfo>>> it = returnMap.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry<String,List<HotelInfo>> entry = it.next();
-            System.out.println("key:"+entry.getKey()+"  key:"+entry.getValue());
+            //System.out.println("key:"+entry.getKey()+"  key:"+entry.getValue());
         }
     }
 }

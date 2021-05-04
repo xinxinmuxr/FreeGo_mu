@@ -57,20 +57,12 @@ public class LocationServlet extends HttpServlet {
             String mudidi = request.getParameter("mudidi");
             String ruzhu = request.getParameter("ruzhu");
             String likai = request.getParameter("likai");
-            if(ruzhu==null){
-                System.out.println("空");
-            }else{
-                if(ruzhu.equals("")){
-                    System.out.println("\"\"");
-                }
-                System.out.println("入住日期是"+ruzhu);
-            }
             //System.out.println("userId:"+userId);
             locateList = queryLocation(mudidi);//查询地点
             HotelServlet hotelServlet = new HotelServlet();
             hotelList = hotelServlet.queryHotel(mudidi);
             /*待更新因为景点信息并没有获取*/
-            if (ruzhu.equals("") || likai.equals("")) {
+            if (ruzhu.equals("") && likai.equals("")) {
                 //都为空 把所有房间都找出来
                 HttpSession session = request.getSession();
                 //获取其他信息
@@ -83,27 +75,31 @@ public class LocationServlet extends HttpServlet {
                 session.setAttribute("hotelList", hotelList);
                 session.setAttribute("locateList", locateList);
                 session.setAttribute("MapRoomList", MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
+                session.setAttribute("ruzhu",ruzhu);
+                session.setAttribute("likai",likai);
                 //System.out.println("既有地点又有景点");
                 request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request, response);
             }else if ((!ruzhu.equals("")) && (!likai.equals(""))) {  //离开 入住都有
-                System.out.println("成功");
+                //System.out.println("成功");
                 HttpSession session = request.getSession();
                 //已知道和用户输入的相同的酒店列表
                 //酒店已经存在了hotelList
                 //获取其他信息
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-                Date likaiDate = null;
-                Date ruzhuDate = null;
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+                java.util.Date likaiDate = null;
+                java.util.Date ruzhuDate = null;
                 try {
-                    ruzhuDate = (Date) formatter.parse(ruzhu);
+                    likaiDate = formatter.parse(likai);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 try {
-                    likaiDate = (Date) formatter.parse(likai);
-                } catch (ParseException e) {
+                    ruzhuDate = formatter.parse(ruzhu);
+                }catch (ParseException e) {
                     e.printStackTrace();
                 }
+
                 String renshu = request.getParameter("renshu");
                 //对所有酒店对应的可用的房间进行接收
                 HotelInfoServiceImpl hotelInfoImpl = new HotelInfoServiceImpl();
@@ -118,6 +114,7 @@ public class LocationServlet extends HttpServlet {
                 session.setAttribute("locateList",locateList);
                 session.setAttribute("ruzhu",ruzhu);
                 session.setAttribute("likai",likai);
+                session.setAttribute("renshu",renshu);
                 //第几页
                 request.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(request, response);
             }

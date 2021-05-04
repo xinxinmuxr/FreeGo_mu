@@ -2,6 +2,7 @@ package dao;
 
 import domain.*;
 
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public interface HotelInfoDao {
      * @param
      * @return Map<Integer,List<RoomDateInfo>> 酒店id对应的房间数量
      */
-    public Map<Integer,List<RoomInfo>> queryHotelofRoomByHotelId(List<HotelInfo> hotelList, java.util.Date ruzhu, Date likai);
+    public Map<Integer,List<RoomInfo>> queryHotelofRoomByHotelId(List<HotelInfo> hotelList, Date ruzhu, Date likai);
     /**
     * @Author:  李旺旺
     * @Date:    2021/4/3 10:26

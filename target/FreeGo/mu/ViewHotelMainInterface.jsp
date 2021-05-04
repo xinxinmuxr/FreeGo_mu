@@ -57,7 +57,8 @@
 <%--广告--%>
 <div class="hotel-main">
     <div class="h-title">订酒店</div>
-    <form class="form-inline" style="margin-top: 30px" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation&userId=<%=userId%>" >
+
+    <form class="form-inline" name="myForm" style="margin-top: 30px" id = "alignCenterOne"  method="post" action="/LocationServlet?methods=queryLocation&userId=<%=userId%>" >
         <!--出行目的地-->
         <div class="form-group" style="margin-left: 5px;">
             <input id="distination" name="mudidi" style="width: 300px;" type="text" class="form-control"  placeholder="出行目的地">
@@ -102,9 +103,33 @@
             </select>
         </div>
         <%--<input type="hidden" id="methods" name="methods" value="queryLocation">--%>
-        <input type="submit" class="btn btn-warning" value="查询">
+        <input type="submit" class="btn btn-warning" value="查询" onclick="return CheckPost()">
     </form>
+    <script>
+        function CheckPost()
+        {
+            var mudidi = document.getElementById("distination")
+            var ruzhuTime = document.getElementById("inTime")
+            var likaiTime = document.getElementById("outTime")
+            if(mudidi.value.length == 0){
+                alert("请输入目的地");
+                return false;
+            }else{
+                if (ruzhuTime.value.length == 0 || likaiTime.value.length == 0)
+                {
+                    if(ruzhuTime.value.length == 0 && likaiTime.value.length == 0){
+                        return true;
+                    }else{
+                        alert("请将入住与离开时间输入完整");
+                        return false;
+                    }
+                }else{
+                    return true;
+                }
+            }
 
+        }
+    </script>
     <div class="h-notice clearfix" style="margin-top: 20px;">
         <ul>
             <li>
