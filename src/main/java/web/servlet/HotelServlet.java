@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -82,6 +84,21 @@ public class HotelServlet extends HttpServlet {
             String overPicture = req.getParameter("overPicture");
             int hotelId = Integer.parseInt(hotelIdStr);
             int userId = Integer.parseInt(userIdStr);
+            String ruzhu = req.getParameter("ruzhu");
+            String likai = req.getParameter("likai");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//注意月份是MM
+            java.util.Date ruzhuDate = new java.util.Date();
+            try {
+                ruzhuDate = simpleDateFormat.parse(ruzhu);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            java.util.Date likaiDate = new java.util.Date();
+            try {
+                likaiDate = simpleDateFormat.parse(ruzhu);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             HotelInfo hotel = hotelImpl.queryOneHotel(hotelId);
             HotelInfoDaoImpl impl = new HotelInfoDaoImpl();
@@ -89,17 +106,21 @@ public class HotelServlet extends HttpServlet {
             HotelInfo hotelInfo = impl.queryOneHotel(hotelId);
             //获得  酒店 图片
             List<String> hotelPicture = impl.queryHotelInPicture(hotelId);
-
-            HttpSession hs = req.getSession();
             List<RoomInfo> roomList = new ArrayList<RoomInfo>();
+            HttpSession hs = req.getSession();
+            if(ruzhu.equals("") && likai.equals("")){
+                roomList = impl.queryAllRoomByHotelId(hotelId);
+            }else{
+                roomList = impl.queryOneHotelofRoomByHotelId(hotelId,ruzhuDate,likaiDate);
+            }
             //System.out.println("hotelId:"+hotelId);
             //System.out.println("overPicture:"+overPictureInt);
-            //roomList = impl.queryRoomAll(hotelId);
+
             hs.setAttribute("hotelPicture",hotelPicture);
             hs.setAttribute("userId",userId);
             hs.setAttribute("hotelInfo",hotelInfo);
-            //hs.setAttribute("roomList",roomList);
-            req.getRequestDispatcher("/mu/ViewHotelInfoInterface.jsp").forward(req,resp);
+            hs.setAttribute("roomList",roomList);
+            req.getRequestDispatcher("/mu/CopyMFWRoom.jsp").forward(req,resp);
         }
     }
     /*用户输入查询景点*/

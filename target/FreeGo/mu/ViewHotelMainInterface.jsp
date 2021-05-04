@@ -58,34 +58,34 @@
 <div class="hotel-main">
     <div class="h-title">订酒店</div>
 
-    <form class="form-inline" name="myForm" style="margin-top: 30px" id = "alignCenterOne"  method="post" action="/LocationServlet?methods=queryLocation&userId=<%=userId%>" >
+    <form class="form-inline" name="myForm" style="margin-top: 30px" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation&userId=<%=userId%>" >
         <!--出行目的地-->
         <div class="form-group" style="margin-left: 5px;">
             <input id="distination" name="mudidi" style="width: 300px;" type="text" class="form-control"  placeholder="出行目的地">
         </div>
         <!--入住日期-->
         <div class="form-group" style="margin-left: 5px;">
-            <input type="text" name="ruzhu"  class="layui-input" placeholder="请选择日期" id="inTime" style=" border-radius: 4px;height: 35px;width: 230px;">
+            <input type="text" name="ruzhu"  class="layui-input" placeholder="请选择日期" id="oneInTime" style=" border-radius: 4px;height: 35px;width: 230px;">
         </div>
         <script>
             layui.use('laydate', function(){
                 var laydate = layui.laydate;
                 //执行一个laydate实例
                 laydate.render({
-                    elem: '#inTime' //指定元素
+                    elem: '#oneInTime' //指定元素
                 });
             });
         </script>
         <!--离店日期-->
         <div class="form-group" style="margin-left: 5px;">
-            <input type="text" name="likai"  class="layui-input" placeholder="请选择日期" id="outTime" style="width:230px;border-radius: 4px;height: 35px">
+            <input type="text" name="likai"  class="layui-input" placeholder="请选择日期" id="oneOutTime" style="width:230px;border-radius: 4px;height: 35px">
         </div>
         <script>
             layui.use('laydate', function(){
                 var laydate = layui.laydate;
                 //执行一个laydate实例
                 laydate.render({
-                    elem: '#outTime' //指定元素
+                    elem: '#oneOutTime' //指定元素
                 });
             });
         </script>
@@ -102,21 +102,20 @@
                 <option>5</option>
             </select>
         </div>
-        <%--<input type="hidden" id="methods" name="methods" value="queryLocation">--%>
-        <input type="submit" class="btn btn-warning" value="查询" onclick="return CheckPost()">
+        <input type="submit" class="btn btn-warning" value="查询" onclick="return CheckPost();">
     </form>
     <script>
         function CheckPost()
         {
-            var mudidi = document.getElementById("distination")
-            var ruzhuTime = document.getElementById("inTime")
-            var likaiTime = document.getElementById("outTime")
+            var mudidi = document.getElementById("distination");
+            var ruzhuTime = document.getElementById("oneInTime");
+            var likaiTime = document.getElementById("oneOutTime");
+
             if(mudidi.value.length == 0){
                 alert("请输入目的地");
                 return false;
             }else{
-                if (ruzhuTime.value.length == 0 || likaiTime.value.length == 0)
-                {
+                if (ruzhuTime.value.length == 0 || likaiTime.value.length == 0){
                     if(ruzhuTime.value.length == 0 && likaiTime.value.length == 0){
                         return true;
                     }else{
@@ -124,10 +123,48 @@
                         return false;
                     }
                 }else{
-                    return true;
+                    var reg = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+                    var regExp = new RegExp(reg);
+                    //alert("进来了");
+                    if(!regExp.test(ruzhuTime.value) || !regExp.test(likaiTime.value)){
+                        alert("日期格式不正确，正确格式为：2014-01-01");
+                        return false;
+                    }else{
+                        var nowDate = new Date();
+                        var d1 = string2date(ruzhuTime.value);
+                        var d2 = string2date(likaiTime.value)
+                        var ruzhuyear = d1.getFullYear();
+                        var ruzhumonth = d1.getMonth();
+                        var ruzhudate = d1.getDate();
+                        var likaiyear = d2.getFullYear();
+                        var likaimonth = d2.getMonth();
+                        var likaidate = d2.getDate();
+                        if(likaiyear >= nowDate.getFullYear()
+                            && likaimonth >= nowDate.getMonth()
+                            && likaidate >= nowDate.getDate()
+                            && ruzhuyear >= nowDate.getFullYear()
+                            && ruzhumonth >= nowDate.getMonth()
+                            && ruzhudate >= nowDate.getDate()){
+
+                            if(ruzhuyear <= likaiyear
+                            && ruzhumonth <= likaimonth
+                            && ruzhudate <= likaidate){
+                                return true;
+                            }
+                            else{
+                                alert("请输入的入住日期小于等于离开日期");
+                                return false;
+                            }
+                        }else{
+                            alert("请输入的日期大于当前时间")
+                            return false;
+                        }
+                    }
                 }
             }
-
+            function string2date(str){
+                return new Date(Date.parse(str.replace(/-/g,  "/")));
+            }
         }
     </script>
     <div class="h-notice clearfix" style="margin-top: 20px;">

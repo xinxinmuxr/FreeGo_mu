@@ -13,7 +13,6 @@ import java.util.*;
 import static java.lang.Math.random;
 
 public class HotelInfoDaoImpl implements HotelInfoDao {
-
     JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
     JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtils.getDataSource());
     /*查询酒店
@@ -58,6 +57,92 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
         }
         ss.queryHotelofRoomByHotelId(sa,ruzhuDate,likaiDate);
     }
+    public List<RoomInfo> queryAllRoomByHotelId(int hotelId){
+        List<RoomInfo> roomList = new ArrayList<RoomInfo>();
+        try {
+            //1.定义sql语句
+            String sql = "select * from room where hotelId = ?";
+            //2.执行
+            //roomListOne中放了一个酒店id下面的所有房间号
+            roomList = template.query(sql, new BeanPropertyRowMapper<RoomInfo>(RoomInfo.class), hotelId);
+        } catch (Exception e) {
+            System.out.println("失败");
+        }
+        return roomList;
+    }
+
+    public List<RoomInfo> queryOneHotelofRoomByHotelId(int hotelId, java.util.Date ruzhu, java.util.Date likai){
+
+        List<RoomInfo> roomListOne = new ArrayList<RoomInfo>(); //每个酒店下面的总房间数
+        List<RoomInfo> roomListTwo = new ArrayList<RoomInfo>(); //还有余额的房间
+        List<RoomInfo> roomListEnd = new ArrayList<RoomInfo>(); //最后查询的房间数量
+        /*2.根据酒店id找到该酒店下面的总房间*/
+        try {
+            //1.定义sql语句
+            String sql = "select * from room where hotelId = ?";
+            //2.执行
+            //roomListOne中放了一个酒店id下面的所有房间号
+            roomListOne = template.query(sql, new BeanPropertyRowMapper<RoomInfo>(RoomInfo.class), hotelId);
+        } catch (Exception e) {
+            System.out.println("失败");
+        }
+        //有入住离开时间
+        /*3.根据房间id去查找对应的日子又多少房间*/
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        String begin = sdf.format(ruzhu);
+        // System.out.println(begin);
+        String end = sdf.format(likai);
+        DateCalculator dc = new DateCalculator();
+        List<String> dateList = dc.process(begin, end);
+        //System.out.println(dateList.size());
+        int n = 0;  //日期循环
+        int m = 0;  //roomListOne 循环
+        for (; n < dateList.size(); n++) {   //一天
+            RoomInfo room = null;
+            for (; m < roomListOne.size(); m++) {  //酒店所拥有的房间数量
+                try {
+                //1.定义sql语句
+                String sql = "select * from room where roomId in" +
+                        "(select roomId from roomDate where roomId = ? and roomdate = ? and roomNum > ?)";
+                //2.执行
+                int j = 0;
+                for (; j < roomListOne.size(); j++) {
+                    /*找出对应的房间日期关系*/
+                    //System.out.println("roomId:"+roomListOne.get(m).getRoomId()+" roomDate:"+ dateList.get(n));
+                    room = template.queryForObject(sql, new BeanPropertyRowMapper<RoomInfo>(RoomInfo.class), roomListOne.get(m).getRoomId(), dateList.get(n), 0);
+                    //System.out.println(room.getRoomId());
+                    roomListTwo.add(room);
+                }
+                //System.out.println(roomListTwo.size());
+               } catch (Exception e) {
+                    System.out.println("查询酒店-某时间-房间数量余额失败");
+                }
+            }
+        }
+        //System.out.println("id为" + hotelList.get(i).getHotelId() + "的酒店有" + roomListTwo.size() + "间可用房子");
+        int leijia = 0;
+        int pd = 0;
+    /*for(leijia = 0;leijia < roomListTwo.size();leijia++){
+        System.out.println(roomListTwo.get(leijia).getRoomId());
+    }*/
+        for (; leijia < roomListTwo.size(); leijia++) {
+            for (pd = leijia + 1; pd < roomListTwo.size(); pd++) {
+                if (roomListTwo.get(leijia).getRoomId() == -1) {
+                    break;
+                }
+                if (roomListTwo.get(leijia).getRoomId() == roomListTwo.get(pd).getRoomId()) {
+                    roomListTwo.get(pd).setRoomId(-1);
+                }
+            }
+        }
+        for (leijia = 0; leijia < roomListTwo.size(); leijia++) {
+            if (roomListTwo.get(leijia).getRoomId() != -1) {
+                roomListEnd.add(roomListTwo.get(leijia));
+            }
+        }
+        return MapRoomList;
+    }
+
     /*通过酒店id查询酒店所属房间     查询酒店房间第1方法*/
     public Map<Integer,List<RoomInfo>> queryHotelofRoomByHotelId(List<HotelInfo> hotelList, java.util.Date ruzhu, java.util.Date likai){
         Map<Integer,List<RoomInfo>> MapRoomList = new HashMap<Integer, List<RoomInfo>>();
@@ -101,6 +186,7 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
                             int j = 0;
                             for (; j < roomListOne.size(); j++) {
                                 /*找出对应的房间日期关系*/
+                                System.out.println("roomId:"+roomListOne.get(m).getRoomId()+" roomDate:"+ dateList.get(n));
                                 room = template.queryForObject(sql, new BeanPropertyRowMapper<RoomInfo>(RoomInfo.class), roomListOne.get(m).getRoomId(), dateList.get(n), 0);
                                 //System.out.println(room.getRoomId());
                                 roomListTwo.add(room);
@@ -111,7 +197,7 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
                         }*/
                     }
                 }
-                System.out.println("id为" + hotelList.get(i).getHotelId() + "的酒店有" + roomListTwo.size() + "间可用房子");
+                //System.out.println("id为" + hotelList.get(i).getHotelId() + "的酒店有" + roomListTwo.size() + "间可用房子");
                 int leijia = 0;
                 int pd = 0;
             /*for(leijia = 0;leijia < roomListTwo.size();leijia++){
@@ -161,8 +247,6 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
             }
         return MapRoomList;
     }
-
-
     /*下面是推荐所用到的算法*/
     public List<UserInfo> queryAllOtherUser(int userId){
         List<UserInfo> userInfoList= new ArrayList<UserInfo>();

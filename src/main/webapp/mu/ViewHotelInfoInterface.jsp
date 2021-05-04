@@ -118,10 +118,7 @@
             <div class="item cur"><strong title="深圳皇庭V酒店预订"><%=hotel.getHotelName()%>预订</strong></div>
         </div>
         <div class="weather-wrapper">
-
-
             <link href="https://css.mafengwo.net/weather/littleWeather.css?1530619858" rel="stylesheet" type="text/css">
-
             <div class="littleWeather">
                 <a href="/weather/10198.html" target="_blank">
                     <img src="http://images.mafengwo.net/images/mdd_weather/icon/icon25.png" width="25" height="25">
@@ -137,7 +134,7 @@
             <span class="divide"></span>
         </div>
         <div class="main-title">
-            <h1>深圳皇庭V酒店</h1>
+            <h1><%=hotel.getHotelName()%></h1>
         </div>
         <div class="location"><span>地址：<%=hotel.getHotelAddress()%></span><a class="a-maps" href="/hotel/list_map.php?poiid=97816"></div>
     </div>
@@ -164,7 +161,6 @@
             <div class="hs-item hs-item-date" id="_j_check_in_date">
                 <span>入住日期</span>
                 <input type="text" placeholder="入住日期" readonly="" id="dp1619694518550" class="hasDatepicker">
-
             </div>
             <div class="hs-item hs-item-date" id="_j_check_out_date">
                 <span>离店日期</span>

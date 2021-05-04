@@ -105,13 +105,14 @@ public class LocationServlet extends HttpServlet {
                 HotelInfoServiceImpl hotelInfoImpl = new HotelInfoServiceImpl();
                 //酒店id 对应下面可以入住的房间
                 MapRoomList = hotelInfoImpl.queryHotelofRoomByHotelId(hotelList, ruzhuDate, likaiDate);
-                System.out.println(hotelList.get(0).toString());
+                //System.out.println(hotelList.get(0).toString());
                 //System.out.println("MapList:" + MapRoomList.keySet());
                 int ye = 1;
                 session.setAttribute("userId", userId);
                 session.setAttribute("MapRoomList", MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
                 session.setAttribute("hotelList", hotelList);       //符合输入的酒店列表
                 session.setAttribute("locateList",locateList);
+                session.setAttribute("mudidi",mudidi);
                 session.setAttribute("ruzhu",ruzhu);
                 session.setAttribute("likai",likai);
                 session.setAttribute("renshu",renshu);
@@ -131,7 +132,14 @@ public class LocationServlet extends HttpServlet {
         //更新ViewHotelFitRequireInterface中的数据
         if(methods.equals("updateFitInterface")){
             int ye = Integer.parseInt(req.getParameter("ye"));
-            req.setAttribute("ye",ye);
+            String mudidi = req.getParameter("mudidi");
+            String likai = req.getParameter("likai");
+            String ruzhu = req.getParameter("ruzhu");
+            HttpSession session = req.getSession();
+            session.setAttribute("ye",ye);
+            session.setAttribute("mudidi",mudidi);
+            session.setAttribute("likai",likai);
+            session.setAttribute("ruzhu",ruzhu);
             req.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(req,resp);
         }
     }

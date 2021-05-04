@@ -17,45 +17,6 @@
         window.Env = {"poi_info":{"id":97816,"mddid":10198,"name":"\u6df1\u5733\u7687\u5eadV\u9152\u5e97 Wongtee V Hotel","zh_name":"\u6df1\u5733\u7687\u5eadV\u9152\u5e97","foreign_name":"Wongtee V Hotel","lat":22.53132,"lng":114.06396,"zoom":15,"num_comment":200,"num_inn_comment":null,"user_last_comment_id":0,"album_count":84,"has_ota":1,"price":931,"phone":"+86-755-88911111","url":""},"user_info":{"uid":37689243,"name":"\u4e09\u4e03","logo_w16":"https:\/\/n1-q.mafengwo.net\/s12\/M00\/35\/2C\/wKgED1uqImOAAxCCAAAeJTVWYJU680.png?imageMogr2%2Fthumbnail%2F%2132x32r%2Fgravity%2FCenter%2Fcrop%2F%2132x32%2Fquality%2F90"},"ota_conf":{"youyu":{"ota":"youyu","name":"\u6709\u9c7c\u8ba2\u623f","homepage":"http:\/\/www.youyudf.com","tel":"400 634 5678","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/youyu_w100h20_2x.png"},"youyu_pkg":{"ota":"youyu_pkg","name":"\u9a6c\u8702\u7a9d\u4f18\u9009","homepage":"http:\/\/www.mafengwo.cn\/hotel_zx\/order\/search.php","tel":"400 634 5678","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/newlogo\/mafengwo_2018@2x.png"},"youyu_booking":{"ota":"youyu_booking","name":"\u9a6c\u8702\u7a9d\u4f18\u9009","homepage":"http:\/\/www.mafengwo.cn\/hotel_zx\/order\/search.php","tel":"400 634 5678","slogan":"","is_show_logo":true,"img_w100h20":"http:\/\/images.mafengwo.net\/images\/hotel\/ota\/booking_w100h20_2x_2.png"},"mafengwo":{"ota":"mafengwo","name":"\u9a6c\u8702\u7a9d\u4f18\u9009","homepage":"","tel":"400 634 5678","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/newlogo\/mafengwo_2018@2x.png"},"hotelzd":{"ota":"hotelzd","name":"\u9a6c\u8702\u7a9d\u76f4\u8ba2","homepage":"http:\/\/www.mafengwo.cn\/hotel\/","tel":"400 634 5678","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/hotelzd_w100h20_2x_2.png"},"booking":{"ota":"booking","name":"Booking.com","homepage":"http:\/\/www.booking.com\/index.zh-cn.html?aid=391337","tel":"400 882 2810","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/booking_w100h20_2x_2.png"},"agoda":{"ota":"agoda","name":"agoda","homepage":"http:\/\/www.agoda.com\/zh-cn?cid=1610250","tel":"400 630 2838","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/agoda_w100h20_2x_2.png"},"ctrip":{"ota":"ctrip","name":"\u643a\u7a0b","homepage":"http:\/\/hotels.ctrip.com\/?sid=449929","tel":"10106666","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/ctrip_w100h20_2x_2.png"},"ppctrip":{"ota":"ctrip","name":"\u643a\u7a0b","homepage":"http:\/\/hotels.ctrip.com\/?sid=449929","tel":"10106666","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/ctrip_w100h20_2x_2.png"},"elong":{"ota":"elong","name":"\u827a\u9f99","homepage":"http:\/\/www.elong.com\/?banid=pcmafengwo&fparam=21","tel":"400 933 3333","slogan":"","is_show_logo":false,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/elong_w100h20_2x.png"},"airbnb":{"ota":"airbnb","name":"Airbnb","homepage":"","tel":"","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/airbnb_w100h20_2x_3.png"},"jtb":{"ota":"jtb","name":"JAPANICAN","homepage":"","tel":"","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/jtb_w100h20_2x.png"},"hotels":{"ota":"hotels","name":"Hotels.com","homepage":"","tel":"","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/hotels_w100h20_2x_2.png"},"zizaike":{"ota":"zizaike","name":"\u81ea\u5728\u5ba2","homepage":"","tel":"","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/zizaike_w100h20_2x.png"},"dujiake":{"ota":"dujiake","name":"\u5ea6\u5047\u5ba2","homepage":"","tel":"","slogan":"","is_show_logo":false,"img_w100h20":""},"onyx":{"ota":"onyx","name":"\u9152\u5e97\u5b98\u7f51","homepage":"","tel":"","slogan":"\u5b98\u7f51\u9884\u8ba2\uff0c\u6700\u4f4e\u4ef7\u4fdd\u8bc1\uff01","is_show_logo":false,"img_w100h20":""},"mbk":{"ota":"mbk","name":"\u9152\u5e97\u5b98\u7f51","homepage":"","tel":"","slogan":"","is_show_logo":true,"img_w100h20":"https:\/\/images.mafengwo.net\/images\/hotel\/ota\/mbk_w100h20_2x_2.png"},"geae":{"ota":"geae","name":"\u9152\u5e97\u4ee3\u7406","homepage":"","tel":"","slogan":"","is_show_logo":false,"img_w100h20":""}},"mddid":10198,"booking_flag":"hotel_new","country_mddid":21536,"is_cnmain":true,"is_test":0,"hotel_activity_type":0,"WWW_HOST":"www.mafengwo.cn","IMG_HOST":"images.mafengwo.net","W_HTTP":"https:\/\/w.mafengwo.cn","P_HOST":"passport.mafengwo.cn","P_HTTP":"https:\/\/passport.mafengwo.cn","PAGELET_HTTP":"https:\/\/pagelet.mafengwo.cn","JS_HOST":"js.mafengwo.net","TONGJI_HOST":"tongji.mafengwo.cn","UID":37689243,"CSTK":"ea7e6e221dce3942701215336bec1705_b3b26ce13a17b6d0b2becda2515f29ef","GOOGLE_MAP_KEY":"AIzaSyD-Su0x_rPy1xehlMBcMyTqWkU49Bk53nQ","MOBILE_BINDED":true};
     </script>
     <style>
-        .icon-sale0417 {
-            margin: 11px 0 0 5px;
-            display: inline-block;
-            width: 70px;
-            height: 20px;
-            background-image: url(http://images.mafengwo.net/images/hotel/hotel_index/20180417-icon.png);
-            background-position: bottom;
-            background-size: contain;
-            background-repeat: no-repeat;
-            overflow: hidden;
-            vertical-align: top;
-        }
-        .icon-sale0420 {
-            margin: 11px 0 0 5px;
-            display: inline-block;
-            width: 60px;
-            height: 20px;
-            background-image: url(http://images.mafengwo.net/images/hotel/activity/2018_0417/20180420-icon.png);
-            background-position: bottom;
-            background-size: contain;
-            background-repeat: no-repeat;
-            overflow: hidden;
-            vertical-align: top;
-        }
-        .hotel-new-icon {
-            position: absolute;
-            display: block;
-            width: 238px;
-            height: 210px;
-            bottom: -1px;
-            left: 5px;
-            z-index: -1;
-            background-image: url('http://css.mafengwo.net/images/hotel/new-customer-icon.gif');
-            background-size: 100% 100%;
-        }
-        .hotel-new-icon:hover {
-            z-index: 0;
-            background-image: url('http://css.mafengwo.net/images/hotel/new-customer-hover-icon.png');
-        }
         .hotel-new-icon .close {
             position: absolute;
             display: block;
@@ -64,21 +25,6 @@
             right: 0;
             bottom: 83px;
             border-radius: 50%;
-        }
-        .toolbar-item-top, .toolbar-item-feedback, .toolbar-item-code {
-            padding-left: 40px;
-        }
-        .comment-tail-info {
-            font-size: 12px;
-            color: #999999;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-        .time {
-            vertical-align: middle;
-        }
-        .hotel-navbar.fixed{
-            z-index: 1000;
         }
     </style>
     <script language="javascript" src="https://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:miniapp+js+sdk:js+M+Log:js+m.statistics:js+advert+inspector^YlRX^1619608995.js" type="text/javascript" crossorigin="anonymous"></script>
