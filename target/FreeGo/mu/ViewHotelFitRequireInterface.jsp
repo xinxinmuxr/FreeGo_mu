@@ -283,12 +283,12 @@
                             <form class="form-inline" style="position: relative;float:left;margin-left: 45px;">
                                 <%if(county == null || county.equals("suoyou")){%>
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <a class="layui-font-orange" href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=suoyou&ye=1&userId=<%=userId%>">
+                                    <a class="layui-font-orange" href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=suoyou&ye=1&userId=<%=userId%>&ruzhu=<%=ruzhu%>&likai=<%=likai%>">
                                         <h5>全部</h5></a>
                                 </div>
                                 <%for (int i = 0;i < countyList.size();i++){%>
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1&userId=<%=userId%>">
+                                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1&userId=<%=userId%>&ruzhu=<%=ruzhu%>&likai=<%=likai%>">
                                         <h5><%=countyList.get(i)%></h5>
                                     </a>
                                 </div>
@@ -296,19 +296,19 @@
                                 <%}%>
                                 <%}else{%>
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=suoyou&ye=1&userId=<%=userId%>">
+                                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=suoyou&ye=1&userId=<%=userId%>&ruzhu=<%=ruzhu%>&likai=<%=likai%>">
                                     <h5>全部</h5></a>
                                 </div>
                                 <%for (int i = 0;i < countyList.size();i++){
                                     if(county.equals(countyList.get(i))){%>
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <a class="layui-font-orange" href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1&userId=<%=userId%>">
+                                    <a class="layui-font-orange" href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1&userId=<%=userId%>&ruzhu=<%=ruzhu%>&likai=<%=likai%>">
                                         <h5><%=countyList.get(i)%></h5>
                                     </a>
                                 </div>
                                 <%}else{%>
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1&userId=<%=userId%>">
+                                    <a href="${pageContext.request.contextPath}/HotelServlet?methods=Class&county=<%=countyList.get(i)%>&ye=1&userId=<%=userId%>&ruzhu=<%=ruzhu%>&likai=<%=likai%>">
                                         <h5><%=countyList.get(i)%></h5>
                                     </a>
                                 </div>
@@ -327,7 +327,6 @@
                     </div>
                     <%--地图--%>
                     <div style="position: relative;margin-left: 420px;">
-                        <iframe name="my-iframe" id="baiduMap" src="${pageContext.request.contextPath}/mu/baiduMapTest.jsp?lng=<%=locateInfoList.get(0).getLng()%>&lag=<%=locateInfoList.get(0).getLag()%>" frameborder="0" width="400px" height="200px" scrolling="no"></iframe>
                     </div>
 
                 </div>

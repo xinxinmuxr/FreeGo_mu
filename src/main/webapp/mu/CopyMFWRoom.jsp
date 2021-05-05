@@ -1,6 +1,7 @@
 <%@ page import="domain.HotelInfo" %>
 <%@ page import="java.util.List" %>
 <%@ page import="domain.RoomInfo" %>
+<%@ page import="domain.RoomDateInfo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -45,13 +46,13 @@
     #allmap {overflow: hidden;margin:0;font-family:"微软雅黑";}
     </style>
     <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=MKmjSL6aurGZbHsmH7QZbHmU60ahLKsW"></script>
-<body style="position: relative;">
+    <body style="position: relative;">
 
 <%  int userId = (int) session.getAttribute("userId");
     //List<RoomInfo> roomList = new ArrayList<RoomInfo>();
-
     List<String> hotelInPictureList = (List<String>)session.getAttribute("hotelPicture");
     List<RoomInfo> roomList = (List<RoomInfo>)session.getAttribute("roomList");
+    List<Integer> roomNumList = (List<Integer>) session.getAttribute("roomNumList");
 %>
 
 <div class="container">
@@ -73,7 +74,8 @@
                         <i class="arrow"><b></b></i>
                     </div>
                 </div>
-                <em></em>                </div>
+                <em></em>
+            </div>
             <div class="item"><a target="_blank" title="深圳酒店查询"><%=hotel.getDowntown()%></a><em>&gt;</em></div>
             <div class="item cur"><strong title="深圳皇庭V酒店预订"><%=hotel.getHotelName()%>预订</strong></div>
         </div>
@@ -116,10 +118,9 @@
 </div>
 
 <div class="hotel-navbar" id="_j_navbar" data-cs-t="酒店详情页" style="transform: translateY(0px);"></div>
-
 <div class="container">
-  <div class="hotel-booking" id="_j_booking_date">
-        <div class="hotel-searchbar clearfix">
+  <div class="hotel-booking" >
+      <div class="hotel-searchbar clearfix">
             <form class="form-inline" name="myForm" id = "alignCenterOne" method="post" action="/LocationServlet?methods=queryLocation&userId=<%=userId%>" >
                 <!--入住日期-->
                 <div class="form-group" style="margin-left: 5px;">
@@ -215,76 +216,65 @@
                 }
             </script>
         </div>
-      <div class="book-list" id="_j_booking_info" style="width: 1050px;">
-          <div class="caption">
-              <div class="title">价格来源</div>
+      <div class="hotel-booking" id="_j_booking_date">
+          <div class="room-table" id="_j_booking_info" style="width: 1000px;">
+              <ul class="thd" style="transform: translateY(0px);">
+                  <li class="td-room" style="width: 250px;">房型</li>
+                  <li class="td-person">人数上限</li>
+                  <li class="td-policy">相关政策</li>
+                  <li class="td-price">价格
+                      <span class="not-tax" id="lbTaxInfo"></span>
+                  </li>
+                  <li class="td-action">预订房间数</li>
+              </ul>
 
-              <div class="low-room" style="margin-left:150px;width:400px;">最低价房型</div>
-              <div class="price">价格</div>
+              <%--for--%>
+              <%for(int i = 0;i < roomList.size();i++){%>
+              <div id="box_room_list" class="ota_room_box" data-ota="" style="display: block;">
+                  <div class="row-item clearfix" data-type_name="雅致大床房" data-type_id="0002">
+                      <div class="td-room" style="width: 250px;">
+                          <div class="room-name"><%=roomList.get(i).getRoomName()%></div>
+                          <div class="room-img" style="overflow:hidden;width:220px;height:132px;">
+                              <img class="_j_room_image" data-src="http://pavo.elongstatic.com/i/Hotel120_120/LOA7XlgFtC.jpg" style="position: relative; top: -49px; left: 0px; width: 220px;" src="http://pavo.elongstatic.com/i/Hotel120_120/LOA7XlgFtC.jpg">
+                          </div>
+                          <p>
+                      </div>
+                      <div class="sub-group clearfix" data-room_type="0002" data-room_id="20710625" data-maxguest="2">
+                          <div class="td-person">
+                          <div>
+                              <i class="icon-bg icon-person icon-p2"></i> <%=roomList.get(i).getPeopleLimite()%>住客
+                          </div>
+                          </div>
+                          <ul class="td-policy">
+                              <li class="c-red">不可取消和变更</li>
+                              <li>在线付款</li>
+                              <li>二次确认</li>
+                          </ul>
+                          <div class="td-price">
+                              <strong>￥<%=roomList.get(i).getRoomPrice()%></strong>
+                              <strong style="font-size: 12px; font-style: normal;font-weight: normal; display: inline-block; margin-left: 5px; vertical-align: 1px;">(已含税)</strong>
+                          </div>
+                          <div class="td-action">
+                              <a class="btn-action btn_booking" data-ota="" data-type_id="0002" data-price="1122" data-type_name="雅致大床房" data-room_id="20710625" data-remain_num="8" data-max_p_num="2" data-max_c_num="-1" data-ext_info="{&quot;customer_type&quot;:&quot;All&quot;,&quot;CurrencyCode&quot;:&quot;RMB&quot;,&quot;TotalRate&quot;:1122,&quot;room_type_id&quot;:&quot;0549&quot;,&quot;detail_cancel&quot;:&quot;预付规则：在21.05.06 到00.01.01期间入住，需要提供信用卡预付全额房费。一经预订成功不可变更/取消。&quot;,&quot;youyu_search_key&quot;:&quot;aef986513d22e6c7cd15bf6d4af52880.1620191461&quot;,&quot;hotel_code&quot;:&quot;91022091&quot;,&quot;RoomId&quot;:&quot;0002&quot;,&quot;Littlemajiaid&quot;:&quot;0_0_0_00#00_a5b653b80a47ef19573e5f5d447dc175&amp;13:11:01&quot;,&quot;GoodsUniqId&quot;:&quot;91022091A549A20710625A0A5abc21cdaab3aaf36e1cc07e416f246f&quot;,&quot;IsPromotion&quot;:false,&quot;confirm_type&quot;:2,&quot;invoice_type&quot;:3,&quot;o_breakfast&quot;:&quot;不含早&quot;}" data-activity="" data-extdata="" href="javascript:void(0);">预订</a>
+                          </div>
+                          <div class="surplus" style="float: right">剩余<%=roomNumList.get(i)%>间</div>
+                      </div>
+                  </div>
+                  <div class="hotel-loading" id="room_loading" style="display: none;">
+                      <i class="loading-m"></i>
+                  </div>
+              </div>
+              <%}%>
           </div>
-          <%for(int i = 0;i < roomList.size();i++){%>
-          <a class="item _j_booking_item" href="javascript:;" target="_blank" data-ota="booking" data-url="/hotel/booking/go2booking.php?from=hotel_new&amp;mddid=10198&amp;poi_id=97816&amp;to=booking&amp;j=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fcn%2Fshenzhen-huangtin.zh-cn.html%3Fno_rooms%3D1%26group_adults%3D2%26group_children%3D0%26label%3Dhotel-340184_nrm-01_gstadt-02_gstkid-00_logid-%7Bbooking_log_id%7D" data-price="931" data-is-cache-price="1" data-is-sold-out="1" data-pay-type="" style="height: 50px;line-height: 20px;">
-              <div class="title">
-                  <img src="https://images.mafengwo.net/images/hotel/ota/booking_w100h20_2x_2.png" width="100" height="20">
-              </div>
-              <div class="low-room _j_booking_room" style="margin-left:150px;width:400px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">雅致双床房 - 免费取消</div>
-              <div class="price _j_booking_price_wrapper" style="width:120px;">
-                    <span class="total" style="width:115px;">
-                        <strong class="_j_booking_price">￥1030</strong>
-                        <strong class="_j_booking_price_text" style="font-size: 12px;color: #666;padding-left: 2px;vertical-align: 1px;">起</strong>
-                        <span style="margin-left:5px;font-size:14px;color:#999;text-decoration:line-through;"></span>
-                    </span>
-                  <i class="icon-bg icon-arrow"></i>
-              </div>
-              <div class="loading _j_booking_loading" style="display:none;">
-                  <img class="loading_price" src="http://css.mafengwo.net/images/home/loading3.gif">
-              </div>
-          </a>
-          <a class="item _j_booking_item" href="javascript:;" target="_blank" data-ota="youyu_pkg" data-url="/hotel/booking/go2booking.php?from=hotel_new&amp;mddid=10198&amp;poi_id=97816&amp;to=youyu_pkg&amp;j=http%3A%2F%2Fwww.mafengwo.cn%2Fhotel_zx%2Fhotel%2Findex.php%3FiId%3D48996%26sRoom%3D2" data-price="1120" data-is-cache-price="0" data-is-sold-out="0" data-pay-type="0" data-ota-id="16" style="height: 50px;line-height: 20px;">
-              <div class="title">
-                  <img src="https://images.mafengwo.net/images/hotel/newlogo/mafengwo_2018@2x.png" width="100" height="20">
-                  <i class="icon-bg icon-alipay" style=""></i>
-                  <i class="icon-bg icon-wxpay" style=""></i>
-              </div>
-              <div class="low-room _j_booking_room" style="margin-left:150px;width:400px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">雅致大床房</div>
-              <div class="price _j_booking_price_wrapper" style="width:120px;">
-                    <span class="total" style="width:115px;">
-                        <strong class="_j_booking_price">￥1120</strong>
-                        <strong class="_j_booking_price_text" style="font-size: 12px;color: #666;padding-left: 2px;vertical-align: 1px;">起</strong>
-                        <span style="margin-left:5px;font-size:14px;color:#999;text-decoration:line-through;"></span>
-                    </span>
-                  <i class="icon-bg icon-arrow"></i>
-              </div>
-              <div class="loading _j_booking_loading" style="display:none;">
-                  <img class="loading_price" src="http://css.mafengwo.net/images/home/loading3.gif">
-              </div>
-          </a>
-          <a class="item _j_booking_item" href="javascript:;" target="_blank" data-ota="ctrip" data-url="/hotel/booking/go2booking.php?from=hotel_new&amp;mddid=10198&amp;poi_id=97816&amp;to=ctrip&amp;j=http://hotels.ctrip.com/hotel/385210.html" data-price="1106" data-is-cache-price="1" data-is-sold-out="0" data-pay-type="" style="height: 50px;line-height: 20px;">
-              <div class="title">
-                  携程
-              </div>
-              <div class="low-room _j_booking_room" style="margin-left:150px;width:400px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">雅致大床房</div>
-              <div class="price _j_booking_price_wrapper" style="width:120px;">
-                    <span class="total" style="width:115px;">
-                        <strong class="_j_booking_price">￥1106</strong>
-                        <strong class="_j_booking_price_text" style="font-size: 12px;color: #666;padding-left: 2px;vertical-align: 1px;">起</strong>
-                        <span style="margin-left:5px;font-size:14px;color:#999;text-decoration:line-through;"></span>
-                    </span>
-                  <i class="icon-bg icon-arrow"></i>
-              </div>
-              <div class="loading _j_booking_loading" style="display:none;">
-                  <img class="loading_price" src="http://css.mafengwo.net/images/home/loading3.gif">
-              </div>
-          </a>
       </div>
-    </div>
-    <div class="hotel-maps clearfix" id="_j_map_wrapper" data-cs-t="酒店详情页">
+  </div>
+  <div class="hotel-maps clearfix" id="_j_map_wrapper" data-cs-t="酒店详情页">
         <div class="maps-cont" id="_j_map">
             <div class="map-container amap-container" id="_j_map_container_32F506F6" style="position: relative; background: rgb(252, 249, 242) none repeat scroll 0%">
                 <object style="display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;" type="text/html" data="about:blank"></object>
                 <div class="amap-maps">
                     <div class="amap-drags" style=""><div class="amap-layers" style="transform: translateZ(0px);">
-                    <div id="allmap" style="width:680px;height:380px;position: absolute; z-index: 0; top: 0px; left: 0px;"></div>
+                        <div id="allmap" style="width:680px;height:380px;position: absolute; z-index: 0; top: 0px; left: 0px;"></div>
                         <script type="text/javascript">
                             // 百度地图API功能
                             var map = new BMap.Map("allmap");    // 创建Map实例
@@ -304,12 +294,11 @@
             </div>
         </div>
     </div>
-    <div class="hotel-info" id="_j_hotel_info">
+  <div class="hotel-info" id="_j_hotel_info">
         <div class="info-section">
             <dl class="clearfix">
                 <dt>基本信息</dt>
                 <dd class="clearfix">
-
                     <div class="cell" style="width: 200px;">
                         <span class="label">入住时间: </span>
                         <span class="content" style="width: 200px;"><strong>14:00 - 12:00</strong></span>
@@ -615,45 +604,14 @@
         }
     });
 </script>
-
-
-
-
 <link href="https://css.mafengwo.net/css/mfw-toolbar.css?1537192876" rel="stylesheet" type="text/css">
-
-<div class="mfw-toolbar" id="_j_mfwtoolbar" style="display: block;">
-    <div class="toolbar-item-top" style="display: none;">
-        <a role="button" class="btn _j_gotop">
-            <i class="icon_top"></i>
-            <em>返回顶部</em>
-        </a>
-    </div>
-    <div class="toolbar-item-feedback">
-        <a role="button" data-japp="feedback" class="btn">
-            <i class="icon_feedback"></i>
-            <em>意见反馈</em>
-        </a>
-    </div>
-    <div class="toolbar-item-code">
-        <a role="button" class="btn">
-            <i class="icon_code"></i>
-        </a>
-        <a role="button" class="mfw-code _j_code">
-            <img src="https://p1-q.mafengwo.net/s1/M00/6C/51/wKgIC1t_6TuASybrAADGUPUHjr021.jpeg?imageMogr2%2Fthumbnail%2F%21450x192r%2Fgravity%2FCenter%2Fcrop%2F%21450x192%2Fquality%2F90" width="450" height="192">
-        </a>
-        <!--<div class="wx-official-pop"><img src="http://images.mafengwo.net/images/qrcode-weixin.gif"><i class="_j_closeqrcode"></i></div>-->
-    </div>
-</div>
-
 <div id="_j_layer_0" class="layer _j_layer" style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; z-index: 5000; display: none;">
     <div class="layer_mask _j_mask" style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; background: rgb(0, 0, 0) none repeat scroll 0% 0%; opacity: 0.8; z-index: -1;"></div>
     <div class="layer_content _j_content" style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; z-index: 0; overflow: hidden;"><div class="_j_dialog" style="position: absolute; opacity: 0; display: none; background: rgb(255, 255, 255) none repeat scroll 0% 0%; z-index: 0;">
         <div class="_j_content"><div class="pop-box _j_album_box"><div class="h-close _j_album_close">
-
         </div><div class="photo-gallery _j_album_image">
             <img style="display:none;" width="680" height="470"><div class="aload">
             <div class="aload1"></div><div class="aload2">
-
         </div>
         </div>
             <a class="btn-left" href="javascript:;">

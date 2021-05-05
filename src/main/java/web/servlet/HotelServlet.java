@@ -67,12 +67,7 @@ public class HotelServlet extends HttpServlet {
         }else if(methods.equals("toHotel")){
             String userId = req.getParameter("userId");
             Map<String,List<HotelInfo>> returnMap = queryLike(Integer.parseInt(userId));
-            //System.out.println("Map:"+returnMap.size());
-            //Iterator<Map.Entry<String,List<HotelInfo>>> it = returnMap.entrySet().iterator();
-            /*while(it.hasNext()){
-                Map.Entry<String,List<HotelInfo>> entry = it.next();
-                System.out.println("key:"+entry.getKey()+"  key:"+entry.getValue());
-            }*/
+
             HttpSession session = req.getSession();
             session.setAttribute("userId",userId);
             session.setAttribute("returnMap",returnMap);
@@ -108,19 +103,24 @@ public class HotelServlet extends HttpServlet {
             List<String> hotelPicture = impl.queryHotelInPicture(hotelId);
             List<RoomInfo> roomList = new ArrayList<RoomInfo>();
             HttpSession hs = req.getSession();
-            if(ruzhu.equals("") && likai.equals("")){
+            if(ruzhu.equals("") && likai.equals("")){  //用户没输入日期
                 roomList = impl.queryAllRoomByHotelId(hotelId);
-            }else{
+            }else{//用户输入日期
                 roomList = impl.queryOneHotelofRoomByHotelId(hotelId,ruzhuDate,likaiDate);
             }
+            List<Integer> roomNumList = impl.queryRoomNumByHotelId(hotelId,ruzhuDate,likaiDate);
             //System.out.println("hotelId:"+hotelId);
             //System.out.println("overPicture:"+overPictureInt);
 
             hs.setAttribute("hotelPicture",hotelPicture);
             hs.setAttribute("userId",userId);
+            hs.setAttribute("ruzhu",ruzhu);
+            hs.setAttribute("likai",likai);
             hs.setAttribute("hotelInfo",hotelInfo);
             hs.setAttribute("roomList",roomList);
-            req.getRequestDispatcher("/mu/CopyMFWRoom.jsp").forward(req,resp);
+            hs.setAttribute("roomNumList",roomNumList);
+            //hs.setAttribute("");
+            req.getRequestDispatcher("/mu/ViewHotelInfoInterface.jsp").forward(req,resp);
         }
     }
     /*用户输入查询景点*/
