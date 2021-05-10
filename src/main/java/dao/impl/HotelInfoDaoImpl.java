@@ -209,15 +209,20 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
             //有入住离开时间
             if (ruzhu != null && likai != null) {
                 /*3.根据房间id去查找对应的日子又多少房间*/
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String begin = sdf.format(ruzhu);
-               // System.out.println(begin);
+                System.out.println("begin"+begin);
+
                 String end = sdf.format(likai);
+                System.out.println("end"+end);
                 DateCalculator dc = new DateCalculator();
                 List<String> dateList = dc.process(begin, end);
                 //System.out.println(dateList.size());
                 int n = 0;  //日期循环
                 int m = 0;  //roomListOne 循环
+                for(int ii = 0;ii < dateList.size();ii++){
+                    System.out.println(dateList.get(ii));
+                }
                 for (n = 0; n < dateList.size(); n++) {   //一天
                     RoomInfo room = null;
                     for (m = 0; m < roomListOne.size(); m++) {  //酒店所拥有的房间数量
@@ -229,7 +234,7 @@ public class HotelInfoDaoImpl implements HotelInfoDao {
                             int j = 0;
                             for (; j < roomListOne.size(); j++) {
                                 /*找出对应的房间日期关系*/
-                                System.out.println("roomId:"+roomListOne.get(m).getRoomId()+" roomDate:"+ dateList.get(n));
+                                //System.out.println("roomId:"+roomListOne.get(m).getRoomId()+" roomDate:"+ dateList.get(n));
                                 room = template.queryForObject(sql, new BeanPropertyRowMapper<RoomInfo>(RoomInfo.class), roomListOne.get(m).getRoomId(), dateList.get(n), 0);
                                 //System.out.println(room.getRoomId());
                                 roomListTwo.add(room);

@@ -28,8 +28,8 @@ public class DateCalculator {
     public static void main(String[] args) {
         DateCalculator t = new DateCalculator();
 
-        String date1 = "2012-02-25";
-        String date2 = "2012-02-25";
+        String date1 = "2021-05-18";
+        String date2 = "2021-05-21";
         List<String> dateList;
         dateList = t.process(date1, date2);
         int i=0;
@@ -68,7 +68,7 @@ public class DateCalculator {
         return dateList;
     }
 
-    private Date str2Date(String str) {
+    private java.util.Date str2Date(String str) {
         if (str == null) return null;
 
         try {

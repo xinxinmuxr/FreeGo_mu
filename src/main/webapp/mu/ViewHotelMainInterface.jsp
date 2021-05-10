@@ -235,7 +235,7 @@
                         for(int i = 0;i < value.size();i++){%>
                     <li>
                         <div class="fc-item" style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);">
-                            <a href="" target="_blank" data-type="mdd">
+                            <a href="${pageContext.request.contextPath}/HotelServlet?methods=toViewHotel&hotelId=<%=value.get(i).getHotelId()%>&userId=<%=userId%>&overPicture=<%=value.get(i).getOverPicture()%>&ruzhu=&likai=" target="_blank" data-type="mdd">
                                 <div class="pic">
                                     <img style="width:318px;height:240px;"
                                          src="${pageContext.request.contextPath}/FreegoImg/mu/hotelPicture/overPicture/<%=value.get(i).getOverPicture()%>.jpeg"

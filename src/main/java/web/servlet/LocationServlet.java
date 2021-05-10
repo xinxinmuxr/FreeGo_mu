@@ -62,7 +62,7 @@ public class LocationServlet extends HttpServlet {
             HotelServlet hotelServlet = new HotelServlet();
             hotelList = hotelServlet.queryHotel(mudidi);
             /*待更新因为景点信息并没有获取*/
-            if (ruzhu.equals("") && likai.equals("")) {
+            if ((ruzhu.equals("") && likai.equals(""))) {
                 //都为空 把所有房间都找出来
                 HttpSession session = request.getSession();
                 //获取其他信息
@@ -75,6 +75,7 @@ public class LocationServlet extends HttpServlet {
                 session.setAttribute("hotelList", hotelList);
                 session.setAttribute("locateList", locateList);
                 session.setAttribute("MapRoomList", MapRoomList);   //每个酒店对应的在规定时间内可以住的房间
+                session.setAttribute("mudidi",mudidi);
                 session.setAttribute("ruzhu",ruzhu);
                 session.setAttribute("likai",likai);
                 //System.out.println("既有地点又有景点");
@@ -85,8 +86,9 @@ public class LocationServlet extends HttpServlet {
                 //已知道和用户输入的相同的酒店列表
                 //酒店已经存在了hotelList
                 //获取其他信息
-
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+                System.out.println("非空时likai:"+likai);
+                System.out.println("非空时ruzhu:"+ruzhu);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 java.util.Date likaiDate = null;
                 java.util.Date ruzhuDate = null;
                 try {
@@ -99,7 +101,7 @@ public class LocationServlet extends HttpServlet {
                 }catch (ParseException e) {
                     e.printStackTrace();
                 }
-
+                System.out.println("ruzhuDate:"+ruzhuDate.toString());
                 String renshu = request.getParameter("renshu");
                 //对所有酒店对应的可用的房间进行接收
                 HotelInfoServiceImpl hotelInfoImpl = new HotelInfoServiceImpl();
@@ -135,12 +137,59 @@ public class LocationServlet extends HttpServlet {
             String mudidi = req.getParameter("mudidi");
             String likai = req.getParameter("likai");
             String ruzhu = req.getParameter("ruzhu");
+
             HttpSession session = req.getSession();
             session.setAttribute("ye",ye);
             session.setAttribute("mudidi",mudidi);
             session.setAttribute("likai",likai);
             session.setAttribute("ruzhu",ruzhu);
             req.getRequestDispatcher("/mu/ViewHotelFitRequireInterface.jsp").forward(req,resp);
+        }else if(methods.equals("updateRoomInfo")){
+            HotelInfoDaoImpl hotelImpl = new HotelInfoDaoImpl();
+            String hotelIdStr = req.getParameter("hotelId");
+            String userIdStr = req.getParameter("userId");
+            int hotelId = Integer.parseInt(hotelIdStr);
+            int userId = Integer.parseInt(userIdStr);
+            String ruzhu = req.getParameter("ruzhu");
+            String likai = req.getParameter("likai");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//注意月份是MM
+            java.util.Date ruzhuDate = new java.util.Date();
+            try {
+                ruzhuDate = simpleDateFormat.parse(ruzhu);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            java.util.Date likaiDate = new java.util.Date();
+            try {
+                likaiDate = simpleDateFormat.parse(ruzhu);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            HotelInfoDaoImpl impl = new HotelInfoDaoImpl();
+            //获得  酒店 信息
+            HotelInfo hotelInfo = impl.queryOneHotel(hotelId);
+            //获得  酒店 图片
+            List<String> hotelPicture = impl.queryHotelInPicture(hotelId);
+            List<RoomInfo> roomList = new ArrayList<RoomInfo>();
+            HttpSession hs = req.getSession();
+            if(ruzhu.equals("") && likai.equals("")){  //用户没输入日期
+                roomList = impl.queryAllRoomByHotelId(hotelId);
+            }else{//用户输入日期
+                roomList = impl.queryOneHotelofRoomByHotelId(hotelId,ruzhuDate,likaiDate);
+            }
+            List<Integer> roomNumList = impl.queryRoomNumByHotelId(hotelId,ruzhuDate,likaiDate);
+            //System.out.println("hotelId:"+hotelId);
+            //System.out.println("overPicture:"+overPictureInt);
+
+            hs.setAttribute("hotelPicture",hotelPicture);
+            hs.setAttribute("userId",userId);
+            hs.setAttribute("ruzhu",ruzhu);
+            hs.setAttribute("likai",likai);
+            hs.setAttribute("hotelInfo",hotelInfo);
+            hs.setAttribute("roomList",roomList);
+            hs.setAttribute("roomNumList",roomNumList);
+            //hs.setAttribute("");
+            req.getRequestDispatcher("/mu/ViewHotelInfoInterface.jsp").forward(req,resp);
         }
     }
 

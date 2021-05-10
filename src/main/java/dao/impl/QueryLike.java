@@ -37,14 +37,14 @@ public class QueryLike {
             2.2若喜欢的方向<6 找出当前已拥有的x个方向 并随机分配6-x个方向
         * */
     public static Map<String, List<HotelInfo>> queryLike(int userId){
-        Boolean pd = judgeNewUser(userId);
-        Map<String,List<HotelInfo>> listHotel = new HashMap<String,List<HotelInfo>>();
-        if(pd == true){ //新用户
-            listHotel = recommendNewUser();
-        }else{//老用户
-            listHotel = recommendOldUser(userId);
-        }
-        return listHotel;
+            Boolean pd = judgeNewUser(userId);
+            Map<String,List<HotelInfo>> listHotel = new HashMap<String,List<HotelInfo>>();
+            if(pd == true){ //新用户
+                listHotel = recommendNewUser();
+            }else{//老用户
+                listHotel = recommendOldUser(userId);
+            }
+            return listHotel;
     }
 
     public static Map<String,List<HotelInfo>> recommendNewUser(){

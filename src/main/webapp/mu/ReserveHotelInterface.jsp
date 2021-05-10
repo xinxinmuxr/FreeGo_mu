@@ -364,33 +364,7 @@
         .coupon-panel em{
             font-style: normal;
         }
-        @media (min-resolution: 1.25dppx), (-webkit-min-device-pixel-ratio: 1.25), not all {
-            .invoice-panel .radio.current::after,
-            .form-panel .radio.current::after {
-                background-image: url(http://images.mafengwo.net/images/youyu/order/sprites-v2.5@2x.png);
-                background-size: 300px auto;
-            }
-        }
-        .header-wrapper .head-logo a {
-            background-image: url(http://images.mafengwo.net/images/hotel/newlogo/form-up-logo@2x.png);
-            background-size: 170px auto;
-        }
-        .youyu-footer .foot-logo {
-            background-image: url(http://images.mafengwo.net/images/hotel/newlogo/form-down-logo@2x.png);
-            background-size: 128px auto;
-            background-position: 0 0;
-        }
-        @media (min-resolution: 1.25dppx), (-webkit-min-device-pixel-ratio: 1.25), not all {
-            .header-wrapper .head-logo a {
-                background-image: url(http://images.mafengwo.net/images/hotel/newlogo/form-up-logo@2x.png);
-                background-size: 170px auto;
-            }
-            .youyu-footer .foot-logo {
-                background-image: url(http://images.mafengwo.net/images/hotel/newlogo/form-down-logo@2x.png);
-                background-size: 128px auto;
-                background-position: 0 0;
-            }
-        }
+
 
         .phone-ex-container {
             float: left;
@@ -469,14 +443,15 @@
     <link href="${pageContext.request.contextPath}/mu/css/reserveHotelCss/reserveHotelCssOne.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/mu/css/reserveHotelCss/reserveHotelCssTwo.css" rel="stylesheet" type="text/css">
     <script language="javascript" src="${pageContext.request.contextPath}/mu/js/reserveHotelJs/reserveHotelJsOne.js" type="text/javascript" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/mu/layui/css/layui.css">
-    <script type="application/javascript" src="${pageContext.request.contextPath}/mu/layui/layui.js"></script>
+
     <script type="text/javascript"></script>
     <link href="${pageContext.request.contextPath}/mu/css/recommendCss/recommendOne.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/mu/css/recommendCss/recommendTwo.css" rel="stylesheet" type="text/css">
     <script language="javascript" src="${pageContext.request.contextPath}/mu/js/recommendJs/tuijianOne.js" type="text/javascript" crossorigin="anonymous"></script>
     <script async="" src="${pageContext.request.contextPath}/mu/js/recommendJs/tuijianTwo.js" crossorigin="anonymous"></script>
     <script async="" src="${pageContext.request.contextPath}/mu/js/recommendJs/tuijianThree.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/mu/layui/css/layui.css">
+    <script type="application/javascript" src="${pageContext.request.contextPath}/mu/layui/layui.js"></script>
 </head>
 <body>
 <div class="container">
@@ -489,11 +464,12 @@
                 <li><i></i>4. 预订完成</li>
             </ul>
         </div>
-        <div class="order-main">
+        <form action="">
+            <div class="order-main">
             <!-- 酒店信息 S -->
             <div class="hotel-panel">
                 <div class="img">
-                    <img src="https://p1-q.mafengwo.net/s7/M00/EB/A9/wKgB6lPNiziAeUMeAAOQIkZ8o6c04.jpeg?imageMogr2%2Fthumbnail%2F%21484x484r%2Fgravity%2FCenter%2Fcrop%2F%21484x484%2Fquality%2F90"></a></div>
+                    <img src="https://p1-q.mafengwo.net/s7/M00/EB/A9/wKgB6lPNiziAeUMeAAOQIkZ8o6c04.jpeg?imageMogr2%2Fthumbnail%2F%21484x484r%2Fgravity%2FCenter%2Fcrop%2F%21484x484%2Fquality%2F90"></div>
                 <div class="info">
                     <a href="http://www.mafengwo.cn/hotel/97816.html">
                         <h2>深圳皇庭V酒店</h2>
@@ -615,39 +591,63 @@
             </div>
             <!-- 填写表单 E -->
             <!-- 特殊要求 S -->
-            <div class="special-panel mod-wrap" id="_j_special_panel_container" name="special" style="height: 26px;">
-                <div class="mod-title special">特殊要求<i class="i-arrow"></i></div>
-                <div class="mod-bd">
+            <div class="form-panel" name="special" style="height: 240px;">
+                <div class="mod-title special" style="margin-left: 10px;">特殊要求<i class="i-arrow"></i></div>
+                <div class="mod-bd" style="margin-left: 10px;">
                     <div class="f-row" id="_j_special_panel_list">
-                        <span class="radio" data-value="quiet_room">安静的房间</span><span class="radio" data-value="higher_floor">高楼层</span><span class="radio" data-value="connected_room">相邻的房间</span></div>
-                    <div class="f-row select-container show" id="_j_arrivetime_select_container"><div class="ui-select ui-select-long">
-                        <input type="hidden" name="select" data-id="">
-                        <div class="trigger"><em class="name">预计到店时间</em><i></i></div>
-                        <ul class="sel-bd ui-hide"><li data-id="不确定到店时间">不确定到店时间</li><li data-id="06:00-07:00">06:00-07:00</li><li data-id="07:00-08:00">07:00-08:00</li><li data-id="08:00-09:00">08:00-09:00</li><li data-id="09:00-10:00">09:00-10:00</li><li data-id="10:00-11:00">10:00-11:00</li><li data-id="11:00-12:00">11:00-12:00</li><li data-id="12:00-13:00">12:00-13:00</li><li data-id="13:00-14:00">13:00-14:00</li><li data-id="14:00-15:00">14:00-15:00</li><li data-id="15:00-16:00">15:00-16:00</li><li data-id="16:00-17:00">16:00-17:00</li><li data-id="17:00-18:00">17:00-18:00</li><li data-id="18:00-19:00">18:00-19:00</li><li data-id="19:00-20:00">19:00-20:00</li><li data-id="20:00-21:00">20:00-21:00</li><li data-id="21:00-22:00">21:00-22:00</li><li data-id="22:00-23:00">22:00-23:00</li><li data-id="23:00-24:00">23:00-24:00</li><li data-id="次日 00:00-01:00">次日 00:00-01:00</li><li data-id="次日 01:00-02:00">次日 01:00-02:00</li><li data-id="次日 02:00-03:00">次日 02:00-03:00</li><li data-id="次日 03:00-04:00">次日 03:00-04:00</li><li data-id="次日 04:00-05:00">次日 04:00-05:00</li><li data-id="次日 05:00-06:00">次日 05:00-06:00</li></ul>
-                    </div></div>
-                    <div class="f-row" id="_j_special_input_notice">
-                        <div class="ui-input">
-                            <textarea class="input-name"></textarea>
-                        </div>
-                        <span class="tips-err" style="display: none;"><i></i><em class="tips-err-text"></em></span>
+<%--                        <span class="radio" data-value="quiet_room">安静的房间</span><span class="radio" data-value="higher_floor">高楼层</span><span class="radio" data-value="connected_room">相邻的房间</span>--%>
                     </div>
-                    <div class="tips" id="_j_arrive_time">*酒店办理入住时间为14:00-12:00，请您做好出行安排。</div>
-                    <div class="tips" id="_j_special_tips">*酒店无法保证满足您的特殊要求，但会尽力安排</div>
+            <select name="city" lay-verify="" style="height: 33px;width: 310px;">
+                <option value="">预计到店时间</option>
+                <option value="00:00~01:00">00:00~01:00</option>
+                <option value="01:00~02:00">01:00~02:00</option>
+                <option value="02:00~03:00">02:00~03:00</option>
+                <option value="03:00~04:00">03:00~04:00</option>
+                <option value="04:00~05:00">04:00~05:00</option>
+                <option value="05:00~06:00">05:00~06:00</option>
+                <option value="06:00~07:00">06:00~07:00</option>
+                <option value="07:00~08:00">07:00~08:00</option>
+                <option value="08:00~09:00">08:00~09:00</option>
+                <option value="09:00~10:00">09:00~10:00</option>
+                <option value="11:00~12:00">11:00~12:00</option>
+                <option value="12:00~13:00">12:00~13:00</option>
+                <option value="13:00~14:00">13:00~14:00</option>
+                <option value="15:00~16:00">15:00~16:00</option>
+                <option value="16:00~17:00">16:00~17:00</option>
+                <option value="17:00~18:00">17:00~18:00</option>
+                <option value="18:00~19:00">18:00~19:00</option>
+                <option value="19:00~20:00">19:00~20:00</option>
+                <option value="20:00~21:00">20:00~21:00</option>
+                <option value="21:00~22:00">21:00~22:00</option>
+                <option value="22:00~23:00">22:00~23:00</option>
+                <option value="23:00~24:00">23:00~24:00</option>
+            </select>
+            <div class="f-row" id="_j_special_input_notice">
+                <div class="ui-input">
+                    <textarea class="input-name" style="width: 310px;"placeholder="请填写特殊要求"></textarea>
                 </div>
+                <span class="tips-err" style="display: none;"><i></i><em class="tips-err-text"></em></span>
+            </div>
+            <div class="tips" id="_j_arrive_time">*酒店办理入住时间为14:00-12:00，请您做好出行安排。</div>
+            <div class="tips" id="_j_special_tips">*酒店无法保证满足您的特殊要求，但会尽力安排</div>
+        </div>
             </div>
             <!-- 特殊要求 E -->
             <!-- 报销凭证 S -->
             <div class="invoice-panel mod-wrap" id="_j_invoice_panel_container" name="invoice">
                 <div class="mod-title">需要发票</div>
                 <div class="invoice-switch-btn-container _j_invoice_switch_btn_container">
-                    <input type="checkbox" name="invoice-switch-btn" id="invoice-btn" class="invoice-switch-btn">
-                    <label for="invoice-btn" class="invoice-switch-btn-label _j_invoice_switch_btn"></label>
+                    <input type="checkbox" name="zzz" id="zzz" lay-skin="switch" lay-text="开启|关闭" onclick="change_div(this)">
                 </div>
-                <div class="mod-bd" style="display: none"><div class="f-row frequent" id="_j_invoicei_title_type_list">
-                    <span class="radio current" type="2">公司</span>
-                    <span class="radio" type="1">个人</span>
-                    <span class="radio" type="3">政府机关行政单位</span>
-                </div>
+                <div id="displayDiv" style="display: none;margin-top: 20px;">
+                    <div class="f-row frequent">
+                        <select name="city" lay-verify="" style="height: 33px;width: 310px;">
+                            <option value="">选择发票类型</option>
+                            <option value="公司">公司</option>
+                            <option value="个人">个人</option>
+                            <option value="政府机关行政单位">政府机关行政单位</option>
+                        </select>
+                    </div>
                     <div class="f-row">
                         <div class="ui-input ui-input-long">
                             <input type="text" class="input-name invoice-title">
@@ -665,9 +665,22 @@
                         <span class="tips-err" style="display: none;"><i></i><em class="tips-err-text">请填写纳税人识别号</em></span>
                     </div>
                     <div class="f-row">
-                        <label><i class="icon-checkbox"></i><b style="display: inline-block;line-height: 24px;">发票注明入住离店日期</b></label>
+                        <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭" value="发票注明入住离店时间">发票注明入住离店时间
                     </div>
                 </div>
+                <script type="text/javascript">
+                    function change_div(obj){
+                        //alert(obj.checked)
+                        if (obj.checked == true)
+                        {
+                            document.getElementById("displayDiv").style.display = 'block' ;
+                        }
+                        else
+                        {
+                            document.getElementById("displayDiv").style.display = 'none' ;
+                        }
+                    }
+                </script>
                 <div class="tips">此订单由供应商开具增值税普通发票。电子发票将在入住完成后1周内发送至联系人的邮箱。成功入住后6个月内仍可以申请补开发票。</div>
             </div>
             <!-- 报销凭证 E -->
@@ -695,12 +708,13 @@
             <!-- 信用卡类型 E -->
             <a class="btn-action" href="javascript:void(0);">提交订单（¥ <span id="_j_final_confirm_price">1418.00</span>）</a>
         </div>
+        </form>
         <div class="order-side-wrap show" id="_j_order_side">
             <!-- 全部费用明细 S -->
             <div class="order-side" id="_j_expense_container"><div class="expense-detail">
                 <div class="hd">预订费用明细</div>
-                <ul class="bd"><li>1间客房 x 1晚<em style="font-style: normal; padding-left: 10px;">不含早餐</em><span class="price">￥1418.00</span></li><li class="insure-container">酒店取消险<span class="price"></span></li><li class="honey-container">蜂蜜抵现<span class="price price-minus"></span></li><li class="coupon-container">优惠券<span class="price price-minus">-￥<em class="coupon-num"></em></span></li><li class="total">总价 (含税)<span class="price price-minus">￥1418.00</span></li></ul>
-            </div><div class="state ">北京时间 2021年06月11日 23:00:00前 该订单可免费取消</div><div class="tips">执行方: 艺龙</div></div>
+                <ul class="bd"><li>1间客房 x ？晚<em style="font-style: normal; padding-left: 10px;">不含早餐</em><span class="price">￥1418.00</span></li><li class="insure-container">酒店取消险<span class="price"></span></li><li class="honey-container">蜂蜜抵现<span class="price price-minus"></span></li><li class="coupon-container">优惠券<span class="price price-minus">-￥<em class="coupon-num"></em></span></li><li class="total">总价 (含税)<span class="price price-minus">￥1418.00</span></li></ul>
+            </div><div class="state ">入住前24小时 该订单可免费取消</div><div class="tips">执行方: Freego</div></div>
             <!-- 全部费用明细 E -->
             <!-- 有房保障 S -->
             <div class="order-side" id="_j_hotel_insure_container">
@@ -709,7 +723,7 @@
                     <ul class="bd">
                         <li class="hotel-insure-tit-wrap">
                             <p class="hotel-insure-tit">有房保障 订单无忧</p>
-                            <span class="hotel-insure-desc">为您的订单负责，确认订单后发生无房，经马蜂窝协调处理，仍无法安排原订单入住，最高承担原订单首晚房费。</span>
+                            <span class="hotel-insure-desc">为您的订单负责，确认订单后发生无房，Freego，仍无法安排原订单入住，最高承担原订单首晚房费。</span>
                         </li>
                         <li class="hotel-insure-tit-wrap">
                             <p class="hotel-insure-tit">专业服务 安心出行</p>
@@ -725,49 +739,39 @@
 <!-- 有房保障弹窗 -->
 <div class="popup-layer hide-popup" id="_j_hotel_insure_popup">
     <div class="popup-container">
-        <div class="pop-hd insuer-pop-hd">马蜂窝有房保障</div>
+        <div class="pop-hd insuer-pop-hd">Freego有房保障</div>
         <div class="pop-desc-wrap">
             <dl class="pop-desc">
                 <dt>入住日期前被告知无房</dt>
                 <dd>如您的已确认订单在入住日期前，酒店无法为您安排入住：</dd>
-                <dd>1. 马蜂窝会第一时间通知您，与酒店协调争取为您安排原标准或以上级别的房间入住，承担由此产生的差价，差价金额上限为马蜂窝原订单首晚的30% 房费。</dd>
-                <dd>2. 若无法安排您入住原酒店任何房型，我们会建议您预订附近酒店，并承担由此产生的差价，差价金额上限为马蜂窝原订单首晚的30% 房费。</dd>
-                <dd>3. 经核查情况属实后，马蜂窝会联系您履行保障承诺，请您保留好入住发票及水单。</dd>
+                <dd>1. Freego会第一时间通知您，与酒店协调争取为您安排原标准或以上级别的房间入住，承担由此产生的差价，差价金额上限为Freego原订单首晚的30% 房费。</dd>
+                <dd>2. 若无法安排您入住原酒店任何房型，我们会建议您预订附近酒店，并承担由此产生的差价，差价金额上限为Freego原订单首晚的30% 房费。</dd>
+                <dd>3. 经核查情况属实后，Freego会联系您履行保障承诺，请您保留好入住发票及水单。</dd>
             </dl>
             <dl class="pop-desc">
                 <dt>入住当天被告知无房</dt>
                 <dd>若订单已得到酒店方确认，您在约定时间到店发现无房：</dd>
-                <dd>1. 请立即拨打24小时服务热线通知马蜂窝。</dd>
-                <dd>2. 马蜂窝会第一时间与酒店协调争取为您安排原标准或以上级别的房间入住，并承担由此产生的差价，差价金额上限为马蜂窝原订单的首晚房费。</dd>
-                <dd>3. 若无法安排您入住原酒店任何房型，我们会建议您预订附近酒店，并承担由此产生的差价，差价金额上限为马蜂窝原订单的首晚房费。</dd>
-                <dd>4. 经核查情况属实后，马蜂窝会联系您履行保障承诺，请您保留好入住发票及=水单。</dd>
+                <dd>1. 请立即拨打24小时服务热线通知Freego。</dd>
+                <dd>2. Freego会第一时间与酒店协调争取为您安排原标准或以上级别的房间入住，并承担由此产生的差价，差价金额上限为Freego原订单的首晚房费。</dd>
+                <dd>3. 若无法安排您入住原酒店任何房型，我们会建议您预订附近酒店，并承担由此产生的差价，差价金额上限为Freego原订单的首晚房费。</dd>
+                <dd>4. 经核查情况属实后，Freego会联系您履行保障承诺，请您保留好入住发票及=水单。</dd>
             </dl>
             <dl class="pop-desc">
                 <dt>注意事项</dt>
                 <dd>1. 请您注意，以下情况不包含在“有房保障”范畴：</dd>
                 <dd>a. 当您的订单未被确认，酒店告知无房时，订单被取消的；</dd>
                 <dd>b. 未实际入住或者您未能提供真实有效入住凭证(发票+水单)，或您的入住凭证中入住人、城市、日期与原订单不符的；</dd>
-                <dd>c. 非马蜂窝、酒店（代理商）原因造成的无法入住，包括由于您自身原因导致，或不可抗力等；</dd>
-                <dd>d. 订单存在安全交易风险行为的，包括但不限于恶意购买行为的订单，以马蜂窝核实结果为准；</dd>
-                <dd>e. 在您预定入住其它酒店前，请务必与马蜂窝联系确认，否则将被视为自动放弃了“有房保障”赔付的权利。</dd>
+                <dd>c. 非Freego、酒店（代理商）原因造成的无法入住，包括由于您自身原因导致，或不可抗力等；</dd>
+                <dd>d. 订单存在安全交易风险行为的，包括但不限于恶意购买行为的订单，以Freego核实结果为准；</dd>
+                <dd>e. 在您预定入住其它酒店前，请务必与Freego联系确认，否则将被视为自动放弃了“有房保障”赔付的权利。</dd>
                 <dd>2. 保障只针对实际经济损失，且保障金额不超过“有房保障”的相关标准；</dd>
                 <dd>3. 为保障您的利益，对于已核实确认的保障申请，款项将汇款至原支付银行卡或入住人的银行卡，因此无法汇款至其它账户。</dd>
-                <dd>4. 发生纠纷后，当您已取得保障金或已与供应商协商解决，如再向马蜂窝及供应商以同一事由主张其他赔偿的，将不再予以受理。</dd>
+                <dd>4. 发生纠纷后，当您已取得保障金或已与供应商协商解决，如再向Freego及供应商以同一事由主张其他赔偿的，将不再予以受理。</dd>
             </dl>
         </div>
         <div class="pop-ft no-border">
             <a class="close" id="_j_close_hotel_insure_popup" href="javascript:void(0);">关闭</a>
         </div>
-    </div>
-</div>
-<!-- 取消险详情弹窗 S -->
-<!-- 取消险详情弹窗 E -->
-
-<div class="youyu-footer">
-    <p class="copyright"><i class="foot-logo"></i>© 2019 mafengwo.cn </p>
-    <div class="foot-info">
-        <p class="foot-address"> 北京蚂蜂窝网络科技有限公司 </p>
-        <p class="foot-contact"><a style="color:#8c9ba5" target="_blank" href="http://www.miibeian.gov.cn">京ICP备11015476号</a></p>
     </div>
 </div>
 
